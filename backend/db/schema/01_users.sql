@@ -1,10 +1,9 @@
 -- Drop and recreate Users table (Example)
-
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Messages CASCADE;
 
 CREATE TABLE Users (
-    id PRIMARY KEY NOT NULL
+    id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
@@ -15,9 +14,9 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Messages(
-    id PRIMARY KEY NOT NULL,
-    sender_id SERIAL NOT NULL,
-    recipient_id SERIAL NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
+    sender_id INTEGER REFERENCES Users(id) ON DELETE CASCADE,
+    recipient_id INTEGER REFERENCES Users(id) ON DELETE CASCADE,
     content VARCHAR(255) NOT NULL,
     created_at TIMESTAMP(0) WITH TIME zone NOT NULL
 );
