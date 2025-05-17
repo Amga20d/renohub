@@ -86,7 +86,14 @@ router.post('/:user_id/create', (req, res) => {
 
 // Update a bid
 router.post('/:bid_id/update', (req, res) => {
-const user_id = 2;
+
+  const user_id = 2;
+  const updatedBid = {
+    project_id: 1,
+    amount: 100,
+    notes:'fixing that roof for cheap now',
+    created_at :'2025-07-29 07:35:40'
+  };
 bidsQueries
 .getBidById(req.params.bid_id)
 .then((bid) => {
@@ -101,18 +108,17 @@ bidsQueries
           .status(401)
           .json({ message: 'Bid does not belongs to you!' });
   }
-  // return bidsQueries.updateBid(req.body)
-  return bidsQueries.getBidById(req.params.bid_id)
+  return bidsQueries.updateBid(req.params.bid_id, updatedBid)
 })
-//  .then((updatedBid) => {
-//       res.status(201).json({ message: 'Bid updated!', note: updatedBid });
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error updating Bid', error: err.message });
-//     });
-}); // UPDATE/UNCOMMENT WHEN POST FROM IS READY
+ .then((updatedBid) => {
+      res.status(201).json({ message: 'Bid updated!', note: updatedBid });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating Bid', error: err.message });
+    });
+}); 
 
 // Remove a Bid
 router.post('/:bid_id/delete', (req, res) => {

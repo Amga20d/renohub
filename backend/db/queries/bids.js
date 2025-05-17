@@ -34,17 +34,16 @@ const getBidsByUserId = (user_id) => {
   .then((data) => data.rows);
 };
 
-const updateBid = (updatedBid) => {
+const updateBid = (id, updatedBid) => {
   const {
-    id,
     amount,
     status,
     notes
   } = updatedBid;
 
   return db
-  .query('UPDATE Bids SET amount = $2, status = 3, notes = $4 WHERE id = $1 RETURNING *;',
-    [id, amount, status, notes]
+  .query('UPDATE Bids SET amount = $2, notes = $3 WHERE id = $1 RETURNING *;',
+    [id, amount, notes]
   ).then((data) => data.rows[0]);
 }
 
