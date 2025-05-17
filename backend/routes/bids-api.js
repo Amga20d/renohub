@@ -2,8 +2,39 @@ const express = require('express');
 const router = express.Router();
 const bidsQueries = require('../db/queries/bids');
 
+// Create New Bid
+router.post('/:user_id/create', (req, res) => {
+
+  // const newBid = req.body;
+  const user_id = 1;
+  const newBid = {
+    project_id: 1,
+    amount: 100,
+    status: true,
+    notes:'testing note',
+    created_at :'2025-07-29 07:35:40'
+  };
+
+  for (const field in newBid){
+    if (!newBid[field]){
+      return res
+      .status(400)
+      .json({ message: 'All properties must be provided to create a bid' });
+    }
+  }
+  bidsQueries.createBid(user_id, newBid)
+  .then((bid) => {
+    res.status(201).json({message: 'Bid Created!', bid})
+  })
+  .catch((err) => {
+    res
+    .status(500)
+    .json({message:'Error creating Bid', error: err.message});
+  });
+});
+
 // Read All bids
-router.get('/', (req, res) => {
+router.get('/index', (req, res) => {
   bidsQueries
   .getAllBids()
   .then((bids) => {
@@ -52,37 +83,6 @@ router.get('/user/:user_id', (req, res) => {
         .json({ message: 'Error reading bid', error: err.message });
     });
 })
-
-// Create New Bid
-router.post('/:user_id/create', (req, res) => {
-
-  // const newBid = req.body;
-  const user_id = 1;
-  const newBid = {
-    project_id: 1,
-    amount: 100,
-    status: true,
-    notes:'testing note',
-    created_at :'2025-07-29 07:35:40'
-  };
-
-  for (const field in newBid){
-    if (!newBid[field]){
-      return res
-      .status(400)
-      .json({ message: 'All properties must be provided to create a note' });
-    }
-  }
-  bidsQueries.createBid(user_id, newBid)
-  .then((bid) => {
-    res.status(201).json({message: 'Bid Created!', bid})
-  })
-  .catch((err) => {
-    res
-    .status(500)
-    .json({message:'Error creating Bid', error: err.message});
-  });
-});
 
 // Update a bid
 router.post('/:bid_id/update', (req, res) => {
@@ -145,7 +145,7 @@ bidsQueries
     .catch((err) => {
       res
         .status(500)
-        .json({ message: 'Error deleting note', error: err.message });
+        .json({ message: 'Error deleting bid', error: err.message });
     });
 });
 

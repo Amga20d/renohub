@@ -7,19 +7,19 @@ const register = (newUser) => {
     password_hash,
     phone_number,
     role,
-    verifaction_status,
+    verification_status,
     created_at
   } = newUser;
 
   return db
-    .query('INSERT INTO Users (name, email, password_hash, phone_number, role, verifaction_status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
-       [name, email, password_hash, phone_number, role, verifaction_status, created_at])
+    .query('INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
+       [name, email, password_hash, phone_number, role, verification_status, created_at])
     .then((data) => data.rows[0]);
 };
 
-const login = (name,) => {
+const getUserById = (user_id) => {
   return db
-    .query('SELECT * FROM Users WHERE name = $1;', [name])
+    .query('SELECT * FROM Users WHERE id = $1;', [user_id])
     .then((data) => data.rows[0]);
 };
 
@@ -27,19 +27,18 @@ const getAllUsers = () => {
   return db.query('SELECT * FROM Users;').then((data) => data.rows);
 };
 
-const updateUser = (updatedUser) => {
+const updateUser = (id, updatedUser) => {
   const {
-    id,
     name,
     email,
     phone_number,
     role,
-    verifaction_status
+    verification_status
   } = updatedUser;
 
   return db
-    .query('UPDATE Users SET name = $2, email = $3, phone_number = $4, role = $5, verifaction_status = $6  WHERE id = $1 RETURNING *;',
-    [ id, name, email, phone_number, role, verifaction_status])
+    .query('UPDATE Users SET name = $2, email = $3, phone_number = $4, role = $5, verification_status = $6  WHERE id = $1 RETURNING *;',
+    [ id, name, email, phone_number, role, verification_status])
     .then((data) => data.rows[0]);
 };
 
@@ -49,6 +48,6 @@ const removeUser = (id) => {
     .then((data) => data.rows);
 };
 
-module.exports = { register, login, getAllUsers, updateUser, removeUser };
+module.exports = { register, getUserById, getAllUsers, updateUser, removeUser };
 
 

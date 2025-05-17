@@ -37,7 +37,6 @@ const getBidsByUserId = (user_id) => {
 const updateBid = (id, updatedBid) => {
   const {
     amount,
-    status,
     notes
   } = updatedBid;
 

@@ -10,65 +10,127 @@ const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
 
-// router.post('/register', (req, res) => {
-//   const {
-//     name,
-//     email,
-//     password_hash,
-//     phone_number,
-//     role,
-//     verifaction_status,
-//     created_at
-//   } = req.body;
-  
-//   if (!name) {
-//     return res
-//       .status(403)
-//       .render('error', { message: 'Provide name to register!' });
-//   }
+// Create New user
+router.post('/register', (req, res) => {
 
-//   const newUser = { name };
-//   userQueries
-//     .register(newUser)
-//     .then(() => {
-//       res.redirect('/login');
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .render('error', { message: `Error registering user: ${err.message}` });
-//     });
-// });
+  const newUser = {
+    name: 'Sally Mally',
+    email: 'salmal@email.com',
+    password_hash :'pass123',
+    phone_number : '123456789',
+    role : 'HomeOwner',
+    verification_status: true,
+    created_at :'2025-07-29 07:35:40'
+  };
 
-// router.post('/login', (req, res) => {
-//   const { name } = req.body;
-//   if (!name) {
-//     return res
-//       .status(403)
-//       .render('error', { message: 'Provide name property to login!' });
-//   }
+  for (const field in newUser){
+    if (!newUser[field]){
+      return res
+      .status(400)
+      .json({ message: 'All properties must be provided to create a account' });
+    }
+  }
+  userQueries.register(newUser)
+  .then((user) => {
+    res.status(201).json({message: 'User Created!', user})
+  })
+  .catch((err) => {
+    res
+    .status(500)
+    .json({message:'Error creating User', error: err.message});
+  });
+});
 
-//   userQueries
-//     .login(name)
-//     .then((user) => {
-//       console.log('user', user);
-//       if (!user) {
-//         return res
-//           .status(403)
-//           .render('error', { message: 'Invalid credentials!' });
-//       }
+// Read All users
+router.get('/index', (req, res) => {
+  userQueries
+  .getAllUsers()
+  .then((users) => {
+    if (!users) {
+      return res.status(400).json({ message: 'users not found!' });
+    }
+    res.status(201).json({ message: 'Heres all the users!', users })
+  })
+  .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error reading users', error: err.message });
+    });
+})
 
-//       req.session.user_id = user.id;
-//       res.redirect('/notes');
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ error: err.message });
-//     });
-// });
+// read/get one user by user_id
+router.get('/:user_id', (req, res) => {
+  userQueries
+  .getUserById(req.params.user_id)
+  .then((user) => {
+    if (!user) {
+      return res.status(400).json({ message: 'User not found!' });
+    }
+    res.status(201).json({ message: 'Heres the user!', user })
+  })
+  .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error reading user', error: err.message });
+    });
+})
 
-// router.post('/logout', (req, res) => {
-//   req.session = null;
-//   res.redirect('/login');
-// });
+// Update a User
+router.post('/:user_id/update', (req, res) => {
+  const updatedUser = {
+    name: 'Jude Dude',
+    email: 'Jdude@email.com',
+    password_hash :'pass123',
+    phone_number : '123456789',
+    role : 'Contractor',
+    verification_status: true,
+  };
+
+  for (const field in updatedUser){
+    if (!updatedUser[field]){
+      return res
+      .status(400)
+      .json({ message: 'All properties must be provided to create a account' });
+    }
+  }
+userQueries
+.getUserById(req.params.user_id)
+.then((user) => {
+  if (!user) {
+    return res.status(404).json({ message: 'User not found!' });
+  }
+
+  return userQueries.updateUser(req.params.user_id, updatedUser)
+})
+ .then((updatedUser) => {
+      res.status(201).json({ message: 'User updated!', note: updatedUser });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating user', error: err.message });
+    });
+}); 
+
+ // Remove a user
+ router.post('/:user_id/delete', (req, res) => {
+ userQueries
+ .getUserById(req.params.user_id)
+ .then((user) => {
+   if (!user) {
+     return res.status(404).json({ message: 'User not found!' });
+   } 
+   console.log(user)
+   return userQueries.removeUser(req.params.user_id)
+ })
+  .then(() => {
+       res.status(204).json();
+     })
+     .catch((err) => {
+       res
+         .status(500)
+         .json({ message: 'Error deleting user', error: err.message });
+     });
+ });
 
 module.exports = router;

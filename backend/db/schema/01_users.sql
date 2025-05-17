@@ -9,7 +9,7 @@ CREATE TABLE Users (
     password_hash VARCHAR(255) NOT NULL,
     phone_number VARCHAR(255) NOT NULL,
     role CHAR(255) NOT NULL,
-    verifacation_status BOOLEAN NOT NULL,
+    verification_status BOOLEAN NOT NULL,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
