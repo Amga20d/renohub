@@ -1,7 +1,5 @@
--- Drop and recreate notes table (Example)
-
 DROP TABLE IF EXISTS Projects CASCADE;
-DROP TABLE IF EXISTS Project_images CASCADE;
+
 
 CREATE TABLE Projects(
     id SERIAL PRIMARY KEY NOT NULL,
@@ -11,13 +9,5 @@ CREATE TABLE Projects(
     budget BIGINT NOT NULL,
     address VARCHAR(255) NOT NULL,
     status BOOLEAN NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
-);
-
-CREATE TABLE Project_images(
-    id SERIAL PRIMARY KEY NOT NULL,
-    project_id INTEGER REFERENCES Projects(id) ON DELETE CASCADE,
-    image_url VARCHAR(255) NOT NULL,
-    alt_text VARCHAR(255) NOT NULL,
     created_at TIMESTAMP(0) WITH TIME zone NOT NULL
 );

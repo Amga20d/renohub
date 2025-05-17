@@ -1,6 +1,4 @@
 DROP TABLE IF EXISTS Bids CASCADE;
-DROP TABLE IF EXISTS Payments CASCADE;
-
 
 CREATE TABLE Bids(
     id SERIAL PRIMARY KEY NOT NULL,
@@ -9,12 +7,6 @@ CREATE TABLE Bids(
     amount BIGINT NOT NULL,
     status BOOLEAN NOT NULL,
     notes VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
+    created_at TIMESTAMP(0) WITH TIME zone NOT NULL -- created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP refactor
 );
-
-CREATE TABLE Payments(
-    id SERIAL PRIMARY KEY NOT NULL,
-    bid_id INTEGER REFERENCES Bids(id) ON DELETE CASCADE,
-    status BOOLEAN NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
-);
+-- split into seperate files

@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS Project_images CASCADE;
+
+CREATE TABLE Project_images(
+    id SERIAL PRIMARY KEY NOT NULL,
+    project_id INTEGER REFERENCES Projects(id) ON DELETE CASCADE,
+    image_url VARCHAR(255) NOT NULL,
+    alt_text VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
+);
