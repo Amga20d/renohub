@@ -10,56 +10,65 @@ const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
 
-router.post('/register', (req, res) => {
-  const { name } = req.body;
-  if (!name) {
-    return res
-      .status(403)
-      .render('error', { message: 'Provide name to register!' });
-  }
+// router.post('/register', (req, res) => {
+//   const {
+//     name,
+//     email,
+//     password_hash,
+//     phone_number,
+//     role,
+//     verifaction_status,
+//     created_at
+//   } = req.body;
+  
+//   if (!name) {
+//     return res
+//       .status(403)
+//       .render('error', { message: 'Provide name to register!' });
+//   }
 
-  const newUser = { name };
-  userQueries
-    .register(newUser)
-    .then(() => {
-      res.redirect('/login');
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .render('error', { message: `Error registering user: ${err.message}` });
-    });
-});
+//   const newUser = { name };
+//   userQueries
+//     .register(newUser)
+//     .then(() => {
+//       res.redirect('/login');
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .render('error', { message: `Error registering user: ${err.message}` });
+//     });
+// });
 
-router.post('/login', (req, res) => {
-  const { name } = req.body;
-  if (!name) {
-    return res
-      .status(403)
-      .render('error', { message: 'Provide name property to login!' });
-  }
+// router.post('/login', (req, res) => {
+//   const { name } = req.body;
+//   if (!name) {
+//     return res
+//       .status(403)
+//       .render('error', { message: 'Provide name property to login!' });
+//   }
 
-  userQueries
-    .login(name)
-    .then((user) => {
-      console.log('user', user);
-      if (!user) {
-        return res
-          .status(403)
-          .render('error', { message: 'Invalid credentials!' });
-      }
+//   userQueries
+//     .login(name)
+//     .then((user) => {
+//       console.log('user', user);
+//       if (!user) {
+//         return res
+//           .status(403)
+//           .render('error', { message: 'Invalid credentials!' });
+//       }
 
-      req.session.user_id = user.id;
-      res.redirect('/notes');
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
+//       req.session.user_id = user.id;
+//       res.redirect('/notes');
+//     })
+//     .catch((err) => {
+//       res.status(500).json({ error: err.message });
+//     });
+// });
 
-router.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/login');
-});
+// router.post('/logout', (req, res) => {
+//   req.session = null;
+//   res.redirect('/login');
+// });
 
 module.exports = router;

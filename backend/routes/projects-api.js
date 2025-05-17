@@ -13,149 +13,148 @@ const projectQueries = require('../db/queries/projects');
 
 // CRUD
 // Create - POST
-router.post('/', (req, res) => {
-  const user_id = 1;
+// router.post('/', (req, res) => {
+//   const user_id = 1;
 
-  
-  // const { user_id } = req.session;
-  // if (!user_id) {
-  //   return res.status(401).json({ message: 'User is not logged in' });
-  // }
-
+//   // const { user_id } = req.session;
+//   // if (!user_id) {
+//   //   return res.status(401).json({ message: 'User is not logged in' });
+//   // }
 
 
-  const { content } = req.body;
-  if (!content) {
-    return res
-      .status(400)
-      .json({ message: 'All properties must be provided to create a note' });
-  }
 
-  const newProject = { user_id, content };
-  projectQueries
-    .create(newProject)
-    .then((project) => {
-      res.status(201).json({ message: 'Project created!', project });
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error creating note', error: err.message });
-    });
-});
+//   const { content } = req.body;
+//   if (!content) {
+//     return res
+//       .status(400)
+//       .json({ message: 'All properties must be provided to create a note' });
+//   }
 
-// Read all - GET
-router.get('/', (req, res) => {
-  let query = projectQueries.getAll();
+//   const newProject = { user_id, content };
+//   projectQueries
+//     .create(newProject)
+//     .then((project) => {
+//       res.status(201).json({ message: 'Project created!', project });
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ message: 'Error creating note', error: err.message });
+//     });
+// });
 
-  const { user_id } = req.query;
-  if (user_id) {
-    query = projectQueries.getByUserId(user_id);
-  }
+// // Read all - GET
+// router.get('/', (req, res) => {
+//   let query = projectQueries.getAll();
 
-  query
-    .then((notes) => {
-      res.status(201).json({ message: 'Here all notes!', notes });
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading notes', error: err.message });
-    });
-});
+//   const { user_id } = req.query;
+//   if (user_id) {
+//     query = projectQueries.getByUserId(user_id);
+//   }
 
-// Read one - GET
-router.get('/:id', (req, res) => {
-  projectQueries
-    .getById(req.params.id)
-    .then((note) => {
-      if (!note) {
-        return res.status(400).json({ message: 'Note not found!' });
-      }
+//   query
+//     .then((notes) => {
+//       res.status(201).json({ message: 'Here all notes!', notes });
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ message: 'Error reading notes', error: err.message });
+//     });
+// });
 
-      res.status(201).json({ message: 'Here is your note!', note });
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading note', error: err.message });
-    });
-});
+// // Read one - GET
+// router.get('/:id', (req, res) => {
+//   projectQueries
+//     .getById(req.params.id)
+//     .then((note) => {
+//       if (!note) {
+//         return res.status(400).json({ message: 'Note not found!' });
+//       }
 
-// Update - POST
-router.post('/:id/edit', (req, res) => {
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.status(401).json({ message: 'User is not logged in' });
-  }
+//       res.status(201).json({ message: 'Here is your note!', note });
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ message: 'Error reading note', error: err.message });
+//     });
+// });
 
-  const { content } = req.body;
-  if (!content) {
-    return res
-      .status(400)
-      .json({ message: 'All properties must be provided to update a note' });
-  }
+// // Update - POST
+// router.post('/:id/edit', (req, res) => {
+//   const { user_id } = req.session;
+//   if (!user_id) {
+//     return res.status(401).json({ message: 'User is not logged in' });
+//   }
 
-  const { id } = req.params;
-  projectQueries
-    .getById(id)
-    .then((note) => {
-      if (!note) {
-        return res.status(404).json({ message: 'Note not found!' });
-      }
+//   const { content } = req.body;
+//   if (!content) {
+//     return res
+//       .status(400)
+//       .json({ message: 'All properties must be provided to update a note' });
+//   }
 
-      console.log(note);
-      const noteBelongsToUser = note.user_id === user_id;
-      if (!noteBelongsToUser) {
-        return res
-          .status(401)
-          .json({ message: 'Note does not belongs to you!' });
-      }
+//   const { id } = req.params;
+//   projectQueries
+//     .getById(id)
+//     .then((note) => {
+//       if (!note) {
+//         return res.status(404).json({ message: 'Note not found!' });
+//       }
 
-      return projectQueries.update({ id, content });
-    })
-    .then((updatedNote) => {
-      res.status(201).json({ message: 'Note updated!', note: updatedNote });
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error updating note', error: err.message });
-    });
-});
+//       console.log(note);
+//       const noteBelongsToUser = note.user_id === user_id;
+//       if (!noteBelongsToUser) {
+//         return res
+//           .status(401)
+//           .json({ message: 'Note does not belongs to you!' });
+//       }
 
-// Delete - POST
-router.post('/:id/delete', (req, res) => {
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.status(401).json({ message: 'User is not logged in' });
-  }
+//       return projectQueries.update({ id, content });
+//     })
+//     .then((updatedNote) => {
+//       res.status(201).json({ message: 'Note updated!', note: updatedNote });
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ message: 'Error updating note', error: err.message });
+//     });
+// });
 
-  const { id } = req.params;
-  projectQueries
-    .getById(id)
-    .then((note) => {
-      if (!note) {
-        return res.status(404).json({ message: 'Note not found!' });
-      }
+// // Delete - POST
+// router.post('/:id/delete', (req, res) => {
+//   const { user_id } = req.session;
+//   if (!user_id) {
+//     return res.status(401).json({ message: 'User is not logged in' });
+//   }
 
-      const noteBelongsToUser = note.user_id === user_id;
-      if (!noteBelongsToUser) {
-        return res
-          .status(401)
-          .json({ message: 'Note does not belongs to you!' });
-      }
+//   const { id } = req.params;
+//   projectQueries
+//     .getById(id)
+//     .then((note) => {
+//       if (!note) {
+//         return res.status(404).json({ message: 'Note not found!' });
+//       }
 
-      return projectQueries.remove(id);
-    })
-    .then(() => {
-      res.status(204).json();
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error deleting note', error: err.message });
-    });
-});
+//       const noteBelongsToUser = note.user_id === user_id;
+//       if (!noteBelongsToUser) {
+//         return res
+//           .status(401)
+//           .json({ message: 'Note does not belongs to you!' });
+//       }
+
+//       return projectQueries.remove(id);
+//     })
+//     .then(() => {
+//       res.status(204).json();
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ message: 'Error deleting note', error: err.message });
+//     });
+// });
 
 module.exports = router;

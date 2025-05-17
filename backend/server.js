@@ -15,17 +15,28 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersApiRoutes = require('./routes/users-api');
+const messagesApiRoutes = require ('./routes/messages-api');
+const projectApiRoutes = require('./routes/projects-api');
+const projectImagesApiRoutes = require('./routes/project_images-api');
+const bidsApiRoutes = require('./routes/bids-api');
+const paymentsApiRoutes = require('./routes/payments-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
+
 app.use('/api/users', usersApiRoutes);
+app.use('/api/messages', messagesApiRoutes);
+app.use('/api/projects', projectApiRoutes);
+app.use('/api/project_images', projectImagesApiRoutes);
+app.use('/api/bids', bidsApiRoutes);
+app.use('/api/payments', paymentsApiRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -34,8 +45,6 @@ app.use('/api/users', usersApiRoutes);
 app.get('/', (req, res) => {
   res.send('Hello RenoHub!')
 });
-
-
 
 
 // Catch all route

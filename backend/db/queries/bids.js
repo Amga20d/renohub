@@ -3,10 +3,9 @@ const db = require('../connection');
 
 // CRUD - Create, Read, Update, Delete
 
-const createBid = (newBid) => {
+const createBid = (user_id, newBid) => {
   const {
     project_id,
-    user_id,
     amount,
     status,
     notes,
@@ -32,7 +31,7 @@ const getBidById = (id) => {
 const getBidsByUserId = (user_id) => {
   return db
   .query('SELECT * FROM Bids WHERE user_id = $1;', [user_id])
-  .them((data) => data.rows[0]);
+  .then((data) => data.rows);
 };
 
 const updateBid = (updatedBid) => {
