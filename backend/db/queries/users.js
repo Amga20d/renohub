@@ -8,7 +8,8 @@ const register = (newUser) => {
     phone_number,
     role,
     verifaction_status,
-    created_at} = newUser;
+    created_at
+  } = newUser;
 
   return db
     .query('INSERT INTO Users (name, email, password_hash, phone_number, role, verifaction_status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;',
@@ -37,7 +38,7 @@ const updateUser = (updatedUser) => {
   } = updatedUser;
 
   return db
-    .query('UPDATE notes SET name = $2, email = $3, phone_number = $4, role = $5, verifaction_status = $6  WHERE id = $1 RETURNING *;',
+    .query('UPDATE Users SET name = $2, email = $3, phone_number = $4, role = $5, verifaction_status = $6  WHERE id = $1 RETURNING *;',
     [ id, name, email, phone_number, role, verifaction_status])
     .then((data) => data.rows[0]);
 };
