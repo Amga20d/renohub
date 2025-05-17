@@ -9,5 +9,5 @@ CREATE TABLE Projects(
     budget BIGINT NOT NULL,
     address VARCHAR(255) NOT NULL,
     status BOOLEAN NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );

@@ -7,6 +7,5 @@ CREATE TABLE Bids(
     amount BIGINT NOT NULL,
     status BOOLEAN NOT NULL,
     notes VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL -- created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP refactor
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
--- split into seperate files

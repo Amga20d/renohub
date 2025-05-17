@@ -10,7 +10,7 @@ CREATE TABLE Users (
     phone_number VARCHAR(255) NOT NULL,
     role CHAR(255) NOT NULL,
     verifacation_status BOOLEAN NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL -- 
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 

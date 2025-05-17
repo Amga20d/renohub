@@ -5,5 +5,5 @@ CREATE TABLE Project_images(
     project_id INTEGER REFERENCES Projects(id) ON DELETE CASCADE,
     image_url VARCHAR(255) NOT NULL,
     alt_text VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP(0) WITH TIME zone NOT NULL
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
