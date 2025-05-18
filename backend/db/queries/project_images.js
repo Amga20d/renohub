@@ -21,17 +21,11 @@ const getImageById = (id) => {
 }
 const getAllImagesByProjectId = (project_id) => {
   return db.query('SELECT * FROM Project_images WHERE project_id = $1;',[project_id])
-  .then((data) => data.rows[0]);
+  .then((data) => data.rows);
 };
 
-const getAllImagesByUserId = (user_id) => {
-  return db.query('SELECT * FROM Project_images WHERE user_id = $1;',[user_id])
-  .then((data) => data.rows[0]);
-};
-
-const updateImage = (updatedImage) => {
+const updateImage = (id, updatedImage) => {
   const {
-    id,
     project_id,
     image_url,
     alt_text
@@ -49,4 +43,5 @@ const removeImage = (id) => {
   .then((data) => data.rows[0]);
 };
 
-module.exports = {createImage, getImageById, getAllImagesByProjectId, getAllImagesByUserId, updateImage, removeImage};   
+
+module.exports = {createImage, getImageById, getAllImagesByProjectId, updateImage, removeImage};   
