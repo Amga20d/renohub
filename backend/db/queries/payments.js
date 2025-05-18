@@ -14,15 +14,25 @@ const createPayment = (newPayment) => {
   .then((data) => data.rows[0]);
 };
 
-const getPaymentByBidId = (bid_id) => {
+const getPaymentById = (id) => {
+  return db.query('SELECT * FROM Payments WHERE id = $1;', [id])
+  .then((data) => data.rows[0]);
+};
+
+const getAllPaymentByBidId = (bid_id) => {
   return db.query('SELECT * FROM Payments WHERE bid_id = $1;', [bid_id])
   .then((data) => data.rows);
 };
 
-const updatePayment = (updatedPayment) => {
-  return db.query('UPDATE Payments SET status = $1;',[updatedPayment])
+const invalidatePayment = (id) => {
+  return db.query('UPDATE Payments SET status = FALSE WHERE id =$1;',[id])
+  .then((data) => data.rows[0]);
+};
+
+const validatePayment = (id) => {
+  return db.query('UPDATE Payments SET status = TRUE WHERE id =$1;',[id])
   .then((data) => data.rows[0]);
 };
 
 
-module.exports = {createPayment, getPaymentByBidId, updatePayment};
+module.exports = {createPayment, getAllPaymentByBidId, validatePayment, invalidatePayment, getPaymentById};
