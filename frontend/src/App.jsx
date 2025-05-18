@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <a href="https://RenoHub" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite " />
         </a>
@@ -29,7 +29,7 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
       <Routes>
         <Route path="/login" element={<LoginPage />} /> 
       </Routes>
