@@ -33,13 +33,12 @@ const getProjectById = (id) => {
 
 const getProjectsByUserId = (user_id) => {
   return db
-    .query('SELECT * FROM Project WHERE user_id = $1;', [user_id])
+    .query('SELECT * FROM Projects WHERE user_id = $1;', [user_id])
     .then((data) => data.rows);
 };
 
-const updateProject = (updatedProject) => {
+const updateProject = (id, updatedProject) => {
   const {
-    id,
     title,
     description,
     budget,
@@ -48,9 +47,9 @@ const updateProject = (updatedProject) => {
   } = updatedProject;
 
   return db
-    .query('UPDATE Projects SET title = $2, description = $3, budget = $4, address = $5, status = $6  WHERE id = $1 RETURNING *;', [
-       id, title, description, budget, address, status
-    ])
+    .query('UPDATE Projects SET title = $2, description = $3, budget = $4, address = $5  WHERE id = $1 RETURNING *;', 
+      [id, title, description, budget, address]
+    )
     .then((data) => data.rows[0]);
 };
 

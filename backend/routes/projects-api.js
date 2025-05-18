@@ -1,160 +1,151 @@
-/*
- * All routes for User Data are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /api/users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-// comment out req.session
-// add place holders for users id
-
 const express = require('express');
 const router = express.Router();
 const projectQueries = require('../db/queries/projects');
 
-// CRUD
-// Create - POST
-// router.post('/', (req, res) => {
-//   const user_id = 1;
+// Create New project
+router.post('/create', (req, res) => {
 
-//   // const { user_id } = req.session;
-//   // if (!user_id) {
-//   //   return res.status(401).json({ message: 'User is not logged in' });
-//   // }
+  const newProject = {
+    user_id: 1,
+    title: 'Window Repair',
+    description: 'Please fix me window',
+    budget:2000,
+    address:'Somewhere 123 street',
+    status: true,
+    created_at :'2025-07-29 07:35:40'
+  };
 
+  for (const field in newProject){
+    if (!newProject[field]){
+      return res
+      .status(400)
+      .json({ message: 'All properties must be provided to create a project' });
+    }
+  }
+  projectQueries.createProject(newProject)
+  .then((project) => {
+    res.status(201).json({message: 'Project Created!', project})
+  })
+  .catch((err) => {
+    res
+    .status(500)
+    .json({message:'Error creating project', error: err.message});
+  });
+});
 
+// Read All projects
+router.get('/index', (req, res) => {
+  projectQueries
+  .getAllProjects()
+  .then((projects) => {
+    if (!projects) {
+      return res.status(400).json({ message: 'Projects not found!' });
+    }
+    res.status(201).json({ message: 'Heres all the projects!', projects })
+  })
+  .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error reading projects', error: err.message });
+    });
+})
 
-//   const { content } = req.body;
-//   if (!content) {
-//     return res
-//       .status(400)
-//       .json({ message: 'All properties must be provided to create a note' });
-//   }
+// Read one by id
+router.get('/:project_id', (req, res) => {
+  projectQueries
+  .getProjectById(req.params.project_id)
+  .then((project) => {
+    if (!project) {
+      return res.status(400).json({ message: 'project not found!' });
+    }
+    res.status(201).json({ message: 'Heres the project!', project })
+  })
+  .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error reading project', error: err.message });
+    });
+})
 
-//   const newProject = { user_id, content };
-//   projectQueries
-//     .create(newProject)
-//     .then((project) => {
-//       res.status(201).json({ message: 'Project created!', project });
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error creating note', error: err.message });
-//     });
-// });
+// Read All projects from user
+router.get('/user/:user_id', (req, res) => {
+  projectQueries
+  .getProjectsByUserId(req.params.user_id)
+  .then((project) => {
+    if (!project) {
+      return res.status(400).json({ message: 'project not found!' });
+    }
+    res.status(201).json({ message: 'Heres all the projects!', project })
+  })
+  .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error reading project', error: err.message });
+    });
+})
 
-// // Read all - GET
-// router.get('/', (req, res) => {
-//   let query = projectQueries.getAll();
+// Update a Project
+router.post('/:project_id/update', (req, res) => {
+  
+  const user_id = 1;
+  const updatedProject = {
+    title: 'Floor repairs',
+    description: 'Need my floor fixed now',
+    budget: 4000,
+    address:'Somewhere 123 street',
+  };
+projectQueries
+.getProjectById(req.params.project_id)
+.then((project) => {
+  if (!project) {
+    return res.status(404).json({ message: 'Project not found!' });
+  }
 
-//   const { user_id } = req.query;
-//   if (user_id) {
-//     query = projectQueries.getByUserId(user_id);
-//   }
+  console.log(project)
+  const projectBelongsToUser = project.user_id === user_id;
+  if (!projectBelongsToUser) {
+     return res
+          .status(401)
+          .json({ message: 'This project does not belongs to you!' });
+  }
+  return projectQueries.updateProject(req.params.project_id, updatedProject)
+})
+ .then((updatedProject) => {
+      res.status(201).json({ message: 'Project updated!', note: updatedProject });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating project', error: err.message });
+    });
+}); 
 
-//   query
-//     .then((notes) => {
-//       res.status(201).json({ message: 'Here all notes!', notes });
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error reading notes', error: err.message });
-//     });
-// });
-
-// // Read one - GET
-// router.get('/:id', (req, res) => {
-//   projectQueries
-//     .getById(req.params.id)
-//     .then((note) => {
-//       if (!note) {
-//         return res.status(400).json({ message: 'Note not found!' });
-//       }
-
-//       res.status(201).json({ message: 'Here is your note!', note });
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error reading note', error: err.message });
-//     });
-// });
-
-// // Update - POST
-// router.post('/:id/edit', (req, res) => {
-//   const { user_id } = req.session;
-//   if (!user_id) {
-//     return res.status(401).json({ message: 'User is not logged in' });
-//   }
-
-//   const { content } = req.body;
-//   if (!content) {
-//     return res
-//       .status(400)
-//       .json({ message: 'All properties must be provided to update a note' });
-//   }
-
-//   const { id } = req.params;
-//   projectQueries
-//     .getById(id)
-//     .then((note) => {
-//       if (!note) {
-//         return res.status(404).json({ message: 'Note not found!' });
-//       }
-
-//       console.log(note);
-//       const noteBelongsToUser = note.user_id === user_id;
-//       if (!noteBelongsToUser) {
-//         return res
-//           .status(401)
-//           .json({ message: 'Note does not belongs to you!' });
-//       }
-
-//       return projectQueries.update({ id, content });
-//     })
-//     .then((updatedNote) => {
-//       res.status(201).json({ message: 'Note updated!', note: updatedNote });
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error updating note', error: err.message });
-//     });
-// });
-
-// // Delete - POST
-// router.post('/:id/delete', (req, res) => {
-//   const { user_id } = req.session;
-//   if (!user_id) {
-//     return res.status(401).json({ message: 'User is not logged in' });
-//   }
-
-//   const { id } = req.params;
-//   projectQueries
-//     .getById(id)
-//     .then((note) => {
-//       if (!note) {
-//         return res.status(404).json({ message: 'Note not found!' });
-//       }
-
-//       const noteBelongsToUser = note.user_id === user_id;
-//       if (!noteBelongsToUser) {
-//         return res
-//           .status(401)
-//           .json({ message: 'Note does not belongs to you!' });
-//       }
-
-//       return projectQueries.remove(id);
-//     })
-//     .then(() => {
-//       res.status(204).json();
-//     })
-//     .catch((err) => {
-//       res
-//         .status(500)
-//         .json({ message: 'Error deleting note', error: err.message });
-//     });
-// });
+// Remove a project
+router.post('/:project_id/delete', (req, res) => {
+const user_id = 1;
+projectQueries
+.getProjectById(req.params.project_id)
+.then((project) => {
+  if (!project) {
+    return res.status(404).json({ message: 'Project not found!' });
+  }
+  console.log(project)
+ const projectBelongsToUser = project.user_id === user_id;
+  if (!projectBelongsToUser) {
+     return res
+          .status(401)
+          .json({ message: 'This project does not belongs to you!' });
+  }
+  return projectQueries.removeProject(req.params.project_id)
+})
+ .then(() => {
+      res.status(204).json();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error deleting project', error: err.message });
+    });
+});
 
 module.exports = router;

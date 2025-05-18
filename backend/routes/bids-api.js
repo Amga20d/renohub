@@ -75,7 +75,7 @@ router.get('/user/:user_id', (req, res) => {
     if (!bids) {
       return res.status(400).json({ message: 'bid not found!' });
     }
-    res.status(201).json({ message: 'Heres the bids!', bids })
+    res.status(201).json({ message: 'Heres all the bids!', bids })
   })
   .catch((err) => {
       res

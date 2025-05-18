@@ -58,7 +58,7 @@ router.get('/index', (req, res) => {
     });
 })
 
-// read/get one user by user_id
+// Read one user by user_id
 router.get('/:user_id', (req, res) => {
   userQueries
   .getUserById(req.params.user_id)
