@@ -15,11 +15,12 @@ router.post('/create', (req, res) => {
     created_at :'2025-07-29 07:35:40'
   };
 
-  for (const field in newProject){
-    if (!newProject[field]){
+   const validateValues = Object.values(newProject);
+  for (const value of validateValues){
+    if (!value){
       return res
       .status(400)
-      .json({ message: 'All properties must be provided to create a project' });
+      .json({ message: 'All properties must be provided to create a payment' });
     }
   }
   projectQueries.createProject(newProject)

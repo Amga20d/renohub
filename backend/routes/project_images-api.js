@@ -13,11 +13,12 @@ router.post('/create', (req, res) => {
     created_at :'2025-07-29 07:35:40'
   };
 
-  for (const field in newProjectImage){
-    if (!newProjectImage[field]){
+   const validateValues = Object.values(newProjectImage);
+  for (const value of validateValues){
+    if (!value){
       return res
       .status(400)
-      .json({ message: 'All properties must be provided to create a project image' });
+      .json({ message: 'All properties must be provided to create a payment' });
     }
   }
   projectImagesQueries.createImage(newProjectImage)

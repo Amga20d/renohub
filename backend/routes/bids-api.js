@@ -15,11 +15,12 @@ router.post('/:user_id/create', (req, res) => {
     created_at :'2025-07-29 07:35:40'
   };
 
-  for (const field in newBid){
-    if (!newBid[field]){
+   const validateValues = Object.values(newBid);
+  for (const value of validateValues){
+    if (!value){
       return res
       .status(400)
-      .json({ message: 'All properties must be provided to create a bid' });
+      .json({ message: 'All properties must be provided to create a payment' });
     }
   }
   bidsQueries.createBid(user_id, newBid)

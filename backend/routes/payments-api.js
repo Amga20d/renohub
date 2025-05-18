@@ -8,11 +8,12 @@ router.post('/:bid_id/create', (req, res) => {
   const newPayment = {
     bid_id: 1,
     status: true,
-    created_at :'2025-07-29 07:35:40'
+    created_at : null
   };
 
-  for (const field in newPayment){
-    if (!newPayment[field]){
+  const validateValues = Object.values(newPayment);
+  for (const value of validateValues){
+    if (!value){
       return res
       .status(400)
       .json({ message: 'All properties must be provided to create a payment' });
