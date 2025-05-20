@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 // Lazy-loaded page components
 // const HomePage = lazy(() => import("./pages/HomePage"));
@@ -11,7 +13,7 @@ import { Suspense, lazy } from "react";
 // const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
 // const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
-const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
+// const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
 // const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
 // const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 // const ChatPage = lazy(() => import("./pages/ChatPage"));
@@ -26,8 +28,8 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          {/* <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} /> */}
+          {/* {<Route path="/" element={<HomePage />} /> */}
+          {/* <Route path="/register" element={<RegisterPage />} />  */}
           {/* <Route path="/login" element={<LoginPage />} /> */}
           {/* <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage />} />
@@ -36,7 +38,7 @@ function App() {
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} /> */}
-          <Route path="/bids" element={<MyBidsPage />} />
+          {/* <Route path="/bids" element={<MyBidsPage />} /> */}
           {/* <Route path="/messages" element={<MessagesPage />} />
           <Route path="/messages/:id" element={<ChatPage />} />
           <Route path="/payments" element={<PaymentsPage />} />
