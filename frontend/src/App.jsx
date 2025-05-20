@@ -7,7 +7,7 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 // const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 // const ProfilePage = lazy(() => import("./pages/ProfilePage"));
-// const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
 // const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
@@ -30,9 +30,9 @@ function App() {
           {/* <Route path="/register" element={<RegisterPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
           {/* <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} /> */}
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/new" element={<NewProjectPage />} />
+          {/* <Route path="/projects/new" element={<NewProjectPage />} />
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
