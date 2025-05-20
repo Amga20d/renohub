@@ -87,6 +87,7 @@ function RegisterForm() {
           feedbackType="invalid"
         />
       </Form.Group>
+      
       <Button type="submit">Submit form</Button>
     </Form>
     </div>
