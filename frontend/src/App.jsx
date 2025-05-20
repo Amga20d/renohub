@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 
 // Lazy-loaded page components
 const HomePage = lazy(() => import("./pages/HomePage"));
-// const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 // const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 // const ProfilePage = lazy(() => import("./pages/ProfilePage"));
@@ -27,7 +27,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           {/* <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage />} /> */}
