@@ -19,7 +19,7 @@ const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const InspectionsPage = lazy(() => import("./pages/InspectionsPage"));
 // const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
 // const AdminLogsPage = lazy(() => import("./pages/AdminLogsPage"));
-// const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
   return (
@@ -31,8 +31,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           {/* <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage />} /> */}
-          <Route path="/projects" element={<ProjectsPage />} />
-          {/* <Route path="/projects/new" element={<NewProjectPage />} />
+          {/* <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/new" element={<NewProjectPage />} />
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
@@ -42,8 +42,8 @@ function App() {
           <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/inspections" element={<InspectionsPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
-          <Route path="/admin/logs" element={<AdminLogsPage />} />
-          <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="/admin/logs" element={<AdminLogsPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
