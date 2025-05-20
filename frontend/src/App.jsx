@@ -5,7 +5,7 @@ import { Suspense, lazy } from "react";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
-// const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 // const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
@@ -29,8 +29,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfilePage />} /> */}
+          <Route path="/dashboard" element={<DashboardPage />} />
+          {/* <Route path="/profile" element={<ProfilePage />} /> */}
           {/* <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/new" element={<NewProjectPage />} />
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
