@@ -11,10 +11,10 @@ import './App.scss';
 // const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 // const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
-const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
+// const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
 // const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
-// const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
+const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
 // const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 // const ChatPage = lazy(() => import("./pages/ChatPage"));
 // const PaymentsPage = lazy(() => import("./pages/PaymentsPage"));
@@ -34,10 +34,10 @@ function App() {
           {/* { <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage />} /> */}
           {/* <Route path="/projects" element={<ProjectsPage />} /> */}
-          <Route path="/projects/new" element={<NewProjectPage />} />
-          {/* // <Route path="/projects/:id" element={<ProjectDetailsPage />} />
-          // <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
-          // <Route path="/projects/:id/review" element={<SubmitReviewPage />} />  */}
+          {/* <Route path="/projects/new" element={<NewProjectPage />} /> */}
+            {/* <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+           <Route path="/projects/:id/bids" element={<BidPlacementPage />} /> */}
+          <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
           {/* <Route path="/bids" element={<MyBidsPage />} /> */}
           {/* <Route path="/messages" element={<MessagesPage />} />
           <Route path="/messages/:id" element={<ChatPage />} />
