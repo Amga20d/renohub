@@ -14,8 +14,8 @@ import './App.scss';
 // const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
 // const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
-const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
-// const MessagesPage = lazy(() => import("./pages/MessagesPage"));
+// const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
+const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 // const ChatPage = lazy(() => import("./pages/ChatPage"));
 // const PaymentsPage = lazy(() => import("./pages/PaymentsPage"));
 // const InspectionsPage = lazy(() => import("./pages/InspectionsPage"));
@@ -37,15 +37,15 @@ function App() {
           {/* <Route path="/projects/new" element={<NewProjectPage />} /> */}
             {/* <Route path="/projects/:id" element={<ProjectDetailsPage />} />
            <Route path="/projects/:id/bids" element={<BidPlacementPage />} /> */}
-          <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
+          {/* <Route path="/projects/:id/review" element={<SubmitReviewPage />} /> */}
           {/* <Route path="/bids" element={<MyBidsPage />} /> */}
-          {/* <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/messages/:id" element={<ChatPage />} />
-          <Route path="/payments" element={<PaymentsPage />} />
-          <Route path="/inspections" element={<InspectionsPage />} />
-          <Route path="/admin/users" element={<AdminUsersPage />} />
-          <Route path="/admin/logs" element={<AdminLogsPage />} />
-          <Route path="*" element={<NotFoundPage />} /> */}
+          { <Route path="/messages" element={<MessagesPage />} /> }
+          {/* <Route path="/messages/:id" element={<ChatPage />} /> */}
+          {/* <Route path="/payments" element={<PaymentsPage />} /> */}
+          {/* <Route path="/inspections" element={<InspectionsPage />} /> */}
+          {/* <Route path="/admin/users" element={<AdminUsersPage />} /> */}
+          {/* <Route path="/admin/logs" element={<AdminLogsPage />} /> */}
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </Suspense>
     </BrowserRouter>
