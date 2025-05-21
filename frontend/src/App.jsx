@@ -13,8 +13,8 @@ const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
 // const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
 // const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
-// const MessagesPage = lazy(() => import("./pages/MessagesPage"));
-// const ChatPage = lazy(() => import("./pages/ChatPage"));
+const MessagesPage = lazy(() => import("./pages/MessagesPage"));
+const ChatPage = lazy(() => import("./pages/ChatPage"));
 // const PaymentsPage = lazy(() => import("./pages/PaymentsPage"));
 // const InspectionsPage = lazy(() => import("./pages/InspectionsPage"));
 // const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
@@ -36,10 +36,10 @@ function App() {
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
-          <Route path="/bids" element={<MyBidsPage />} />
+          <Route path="/bids" element={<MyBidsPage />} /> */}
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/messages/:id" element={<ChatPage />} />
-          <Route path="/payments" element={<PaymentsPage />} />
+          {/* <Route path="/payments" element={<PaymentsPage />} />
           <Route path="/inspections" element={<InspectionsPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/logs" element={<AdminLogsPage />} /> */}
