@@ -15,11 +15,11 @@ const createMessage = (newMessage) => {
   .then((data) => data.rows[0]);
 };
 
-const getMessagesBySenderId = (sender_id) => {
-  return db.query('SELECT * FROM Messages WHERE sender_id = $1;', [sender_id])
+const getChatLogMessages = (sender_id, recipient_id) => {
+  return db.query('SELECT * FROM Messages WHERE sender_id = $1 AND recipient_id = $2 ORDER BY created_at DESC;', [sender_id, recipient_id])
   .then((data) => data.rows[0]); 
 }
 
 
 
-module.exports = {};
+module.exports = {createMessage, getChatLogMessages};
