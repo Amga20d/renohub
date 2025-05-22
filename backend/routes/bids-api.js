@@ -3,9 +3,8 @@ const router = express.Router();
 const bidsQueries = require('../db/queries/bids');
 
 // Create New Bid
-router.post('/:user_id/create', (req, res) => {
+router.post('/', (req, res) => {
 
-  // const newBid = req.body;
   const user_id = 1;
   const newBid = {
     project_id: 1,
@@ -35,7 +34,7 @@ router.post('/:user_id/create', (req, res) => {
 });
 
 // Read All bids
-router.get('/index', (req, res) => {
+router.get('/', (req, res) => {
   bidsQueries
   .getAllBids()
   .then((bids) => {
@@ -52,9 +51,9 @@ router.get('/index', (req, res) => {
 })
 
 // Read one by id
-router.get('/:bid_id', (req, res) => {
+router.get('/:id', (req, res) => {
   bidsQueries
-  .getBidById(req.params.bid_id)
+  .getBidById(req.params.id)
   .then((bid) => {
     if (!bid) {
       return res.status(400).json({ message: 'bid not found!' });
@@ -69,9 +68,9 @@ router.get('/:bid_id', (req, res) => {
 })
 
 // Read All bids from user
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/id', (req, res) => {
   bidsQueries
-  .getBidsByUserId(req.params.user_id)
+  .getBidsByUserId(req.params.id)
   .then((bids) => {
     if (!bids) {
       return res.status(400).json({ message: 'bid not found!' });
@@ -86,7 +85,7 @@ router.get('/user/:user_id', (req, res) => {
 })
 
 // Update a bid
-router.post('/:bid_id/update', (req, res) => {
+router.put('/:id', (req, res) => {
 
   const user_id = 2;
   const updatedBid = {
@@ -96,7 +95,7 @@ router.post('/:bid_id/update', (req, res) => {
     created_at :'2025-07-29 07:35:40'
   };
 bidsQueries
-.getBidById(req.params.bid_id)
+.getBidById(req.params.id)
 .then((bid) => {
   if (!bid) {
     return res.status(404).json({ message: 'Bid not found!' });
@@ -109,7 +108,7 @@ bidsQueries
           .status(401)
           .json({ message: 'Bid does not belongs to you!' });
   }
-  return bidsQueries.updateBid(req.params.bid_id, updatedBid)
+  return bidsQueries.updateBid(req.params.id, updatedBid)
 })
  .then((updatedBid) => {
       res.status(201).json({ message: 'Bid updated!', note: updatedBid });
@@ -122,10 +121,10 @@ bidsQueries
 }); 
 
 // Remove a Bid
-router.post('/:bid_id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
 const user_id = 2;
 bidsQueries
-.getBidById(req.params.bid_id)
+.getBidById(req.params.id)
 .then((bid) => {
   if (!bid) {
     return res.status(404).json({ message: 'Bid not found!' });
@@ -138,7 +137,7 @@ bidsQueries
           .status(401)
           .json({ message: 'Bid does not belongs to you!' });
   }
-  return bidsQueries.removeBid(req.params.bid_id)
+  return bidsQueries.removeBid(req.params.id)
 })
  .then(() => {
       res.status(204).json();

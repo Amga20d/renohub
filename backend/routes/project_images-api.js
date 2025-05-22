@@ -4,7 +4,7 @@ const projectImagesQueries = require('../db/queries/project_images');
 const projectQueries = require('../db/queries/projects')
 
 // Create New project image
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
 
   const newProjectImage = {
     project_id: 1,
@@ -33,9 +33,9 @@ router.post('/create', (req, res) => {
 });
 
 // Read All projects images by project id
-router.get('/project/:project_id', (req, res) => {
+router.get('/project/:id', (req, res) => {
   projectImagesQueries
-  .getAllImagesByProjectId(req.params.project_id)
+  .getAllImagesByProjectId(req.params.id)
   .then((project_images) => {
     if (!project_images) {
       return res.status(400).json({ message: 'project images not found!' });
@@ -51,9 +51,9 @@ router.get('/project/:project_id', (req, res) => {
 
 
 // Read one by id
-router.get('/:project_image_id', (req, res) => {
+router.get('/:id', (req, res) => {
   projectImagesQueries
-  .getImageById(req.params.project_image_id)
+  .getImageById(req.params.id)
   .then((project_image) => {
     if (!project_image) {
       return res.status(400).json({ message: 'project image not found!' });
@@ -69,7 +69,7 @@ router.get('/:project_image_id', (req, res) => {
 
 // Update project image
 
-router.post('/:project_image_id/update', (req, res) => {
+router.put('/:id', (req, res) => {
   
   const user_id = 1;
   const updatedProjectImage = {
@@ -79,7 +79,7 @@ router.post('/:project_image_id/update', (req, res) => {
   };
 
 projectImagesQueries
-.getImageById(req.params.project_image_id)
+.getImageById(req.params.id)
 .then((project_image) => {
   if (!project_image) {
     return res.status(404).json({ message: 'Project image not found!' });
@@ -95,7 +95,7 @@ projectImagesQueries
     } 
   });
 
-  return projectImagesQueries.updateImage(req.params.project_image_id, updatedProjectImage)
+  return projectImagesQueries.updateImage(req.params.id, updatedProjectImage)
 })
  .then((updatedProject) => {
       res.status(201).json({ message: 'Project image updated!', note: updatedProject });
@@ -108,11 +108,11 @@ projectImagesQueries
 }); 
 
 // Remove a project image
-router.post('/:project_image_id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
 
 const user_id = 1;
 projectImagesQueries
-.getImageById(req.params.project_image_id)
+.getImageById(req.params.id)
 .then((project_image) => {
   if (!project_image) {
     return res.status(404).json({ message: 'Project image not found!' });
@@ -127,7 +127,7 @@ projectImagesQueries
     } 
   });
 
-  return projectImagesQueries.removeImage(req.params.project_image_id)
+  return projectImagesQueries.removeImage(req.params.id)
 })
  .then(() => {
       res.status(204).json();

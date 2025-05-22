@@ -3,7 +3,7 @@ const router = express.Router();
 const paymentQueries = require('../db/queries/payments');
 
 // Create New Payment
-router.post('/:bid_id/create', (req, res) => {
+router.post('/:bid_id/', (req, res) => {
 
   const newPayment = {
     bid_id: 1,
@@ -31,9 +31,9 @@ router.post('/:bid_id/create', (req, res) => {
 });
 
 // Read one by id
-router.get('/:payment_id', (req, res) => {
+router.get('/:id', (req, res) => {
   paymentQueries
-  .getPaymentById(req.params.payment_id)
+  .getPaymentById(req.params.id)
   .then((payment) => {
     if (!payment) {
       return res.status(400).json({ message: 'Payment not found!' });
@@ -48,7 +48,7 @@ router.get('/:payment_id', (req, res) => {
 })
 
 // Read all payments for bid
-router.get('/:bid_id/index', (req, res) => {
+router.get('/:bid_id/', (req, res) => {
   paymentQueries
   .getAllPaymentByBidId(req.params.bid_id)
   .then((payments) => {
@@ -65,10 +65,10 @@ router.get('/:bid_id/index', (req, res) => {
 })
 
 // Validate a payment
-router.post('/:payment_id/validate', (req, res) => {
+router.put('/:id/validate', (req, res) => {
   const role = 'Admin';
 paymentQueries
-.getPaymentById(req.params.payment_id)
+.getPaymentById(req.params.id)
 .then((payment) => {
   if (!payment) {
     return res.status(404).json({ message: 'Payment not found!' });
@@ -94,10 +94,10 @@ paymentQueries
 }); 
 
 // Invalidate a payment
-router.post('/:payment_id/invalidate', (req, res) => {
+router.put('/:id/invalidate', (req, res) => {
   const role = 'Admin';
 paymentQueries
-.getPaymentById(req.params.payment_id)
+.getPaymentById(req.params.id)
 .then((payment) => {
   if (!payment) {
     return res.status(404).json({ message: 'Payment not found!' });

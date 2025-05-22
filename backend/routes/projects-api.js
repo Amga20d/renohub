@@ -3,7 +3,7 @@ const router = express.Router();
 const projectQueries = require('../db/queries/projects');
 
 // Create New project
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
 
   const newProject = {
     user_id: 1,
@@ -35,7 +35,7 @@ router.post('/create', (req, res) => {
 });
 
 // Read All projects
-router.get('/index', (req, res) => {
+router.get('/', (req, res) => {
   projectQueries
   .getAllProjects()
   .then((projects) => {
@@ -52,9 +52,9 @@ router.get('/index', (req, res) => {
 })
 
 // Read one by id
-router.get('/:project_id', (req, res) => {
+router.get('/:id', (req, res) => {
   projectQueries
-  .getProjectById(req.params.project_id)
+  .getProjectById(req.params.id)
   .then((project) => {
     if (!project) {
       return res.status(400).json({ message: 'project not found!' });
@@ -69,9 +69,9 @@ router.get('/:project_id', (req, res) => {
 })
 
 // Read All projects from user
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   projectQueries
-  .getProjectsByUserId(req.params.user_id)
+  .getProjectsByUserId(req.params.id)
   .then((project) => {
     if (!project) {
       return res.status(400).json({ message: 'project not found!' });
@@ -86,8 +86,7 @@ router.get('/user/:user_id', (req, res) => {
 })
 
 // Update a Project
-router.post('/:project_id/update', (req, res) => {
-  
+router.put('/:id', (req, res) => {
   const user_id = 1;
   const updatedProject = {
     title: 'Floor repairs',
@@ -96,7 +95,7 @@ router.post('/:project_id/update', (req, res) => {
     address:'Somewhere 123 street',
   };
 projectQueries
-.getProjectById(req.params.project_id)
+.getProjectById(req.params.id)
 .then((project) => {
   if (!project) {
     return res.status(404).json({ message: 'Project not found!' });
@@ -109,7 +108,7 @@ projectQueries
           .status(401)
           .json({ message: 'This project does not belongs to you!' });
   }
-  return projectQueries.updateProject(req.params.project_id, updatedProject)
+  return projectQueries.updateProject(req.params.id, updatedProject)
 })
  .then((updatedProject) => {
       res.status(201).json({ message: 'Project updated!', note: updatedProject });
@@ -122,10 +121,10 @@ projectQueries
 }); 
 
 // Remove a project
-router.post('/:project_id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
 const user_id = 1;
 projectQueries
-.getProjectById(req.params.project_id)
+.getProjectById(req.params.id)
 .then((project) => {
   if (!project) {
     return res.status(404).json({ message: 'Project not found!' });
@@ -137,7 +136,7 @@ projectQueries
           .status(401)
           .json({ message: 'This project does not belongs to you!' });
   }
-  return projectQueries.removeProject(req.params.project_id)
+  return projectQueries.removeProject(req.params.id)
 })
  .then(() => {
       res.status(204).json();

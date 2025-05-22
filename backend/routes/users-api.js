@@ -11,7 +11,7 @@ const router = express.Router();
 const userQueries = require('../db/queries/users');
 
 // Create New user
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
 
   const newUser = {
     name: 'Sally Mally',
@@ -43,7 +43,7 @@ router.post('/register', (req, res) => {
 });
 
 // Read All users
-router.get('/index', (req, res) => {
+router.get('/', (req, res) => {
   userQueries
   .getAllUsers()
   .then((users) => {
@@ -60,7 +60,7 @@ router.get('/index', (req, res) => {
 })
 
 // Read one user by user_id
-router.get('/:user_id', (req, res) => {
+router.get('/:id', (req, res) => {
   userQueries
   .getUserById(req.params.user_id)
   .then((user) => {
@@ -77,7 +77,7 @@ router.get('/:user_id', (req, res) => {
 })
 
 // Update a User
-router.post('/:user_id/update', (req, res) => {
+router.put('/:id', (req, res) => {
   const updatedUser = {
     name: 'Jude Dude',
     email: 'Jdude@email.com',
@@ -95,13 +95,13 @@ router.post('/:user_id/update', (req, res) => {
     }
   }
 userQueries
-.getUserById(req.params.user_id)
+.getUserById(req.params.id)
 .then((user) => {
   if (!user) {
     return res.status(404).json({ message: 'User not found!' });
   }
 
-  return userQueries.updateUser(req.params.user_id, updatedUser)
+  return userQueries.updateUser(req.params.id, updatedUser)
 })
  .then((updatedUser) => {
       res.status(201).json({ message: 'User updated!', note: updatedUser });
@@ -114,15 +114,15 @@ userQueries
 }); 
 
  // Remove a user
- router.post('/:user_id/delete', (req, res) => {
+ router.delete('/:id', (req, res) => {
  userQueries
- .getUserById(req.params.user_id)
+ .getUserById(req.params.id)
  .then((user) => {
    if (!user) {
      return res.status(404).json({ message: 'User not found!' });
    } 
    console.log(user)
-   return userQueries.removeUser(req.params.user_id)
+   return userQueries.removeUser(req.params.id)
  })
   .then(() => {
        res.status(204).json();
