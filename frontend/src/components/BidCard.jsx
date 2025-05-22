@@ -11,7 +11,6 @@ const BidCard = () => {
         <Card.Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, dolore ex neque ipsam consectetur excepturi nostrum laboriosam vel eveniet suscipit voluptatum ipsa, illo cumque, dolorem repellat consequatur omnis? Voluptates, temporibus!
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>
   );
