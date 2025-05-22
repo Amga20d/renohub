@@ -31,8 +31,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           {/* <Route path="/profile" element={<ProfilePage />} /> */}
-          {/* <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/new" element={<NewProjectPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          {/* <Route path="/projects/new" element={<NewProjectPage />} />
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
