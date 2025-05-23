@@ -4,16 +4,16 @@ const bidsQueries = require('../db/queries/bids');
 
 // Create New Bid
 router.post('/', (req, res) => {
-
+  const {amount, notes} = req.body;
   const user_id = 1;
   const newBid = {
     project_id: 1,
-    amount: 100,
+    amount: amount,
     status: true,
-    notes:'testing note',
-    created_at :'2025-07-29 07:35:40'
+    notes: notes,
+    created_at: new Date()
   };
-
+    
    const validateValues = Object.values(newBid);
   for (const value of validateValues){
     if (!value){
@@ -86,12 +86,12 @@ router.get('/user/id', (req, res) => {
 
 // Update a bid
 router.put('/:id', (req, res) => {
-
+  const {amount, notes} = req.body;
   const user_id = 2;
   const updatedBid = {
     project_id: 1,
-    amount: 100,
-    notes:'fixing that roof for cheap now',
+    amount: amount,
+    notes: notes,
     created_at :'2025-07-29 07:35:40'
   };
 bidsQueries
