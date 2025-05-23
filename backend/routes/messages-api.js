@@ -3,13 +3,16 @@ const router = express.Router();
 const messageQueries = require('../db/queries/messages');
 
 // Create Message
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
 
+  const user_id = 1;
+
+  const {content} = req.body
   const newMessage = {
-    sender_id: 1,
-    recipient_id: 2,
-    content: 'Howdy there!',
-    created_at: '2025-07-29 07:35:40'
+    sender_id: user_id,
+    recipient_id: req.params.id,
+    content: content,
+    created_at: new Date()
   };
 
   const validateValues = Object.values(newMessage);
@@ -32,10 +35,10 @@ router.post('/', (req, res) => {
 });
 
 // Read messages between users
-router.get('/:recipient_id/chat', (req, res) => {
+router.get('/:id/chat', (req, res) => {
 
   const user_id = 2;
-  messageQueries.getChatLogMessages(user_id, req.params.recipient_id)
+  messageQueries.getChatLogMessages(user_id, req.params. vid)
     .then((chat) => {
       if (!chat) {
         return res.status(400).json({ message: 'Chat log not found!' });
@@ -68,9 +71,9 @@ router.get('/:id', (req, res) => {
 
 // Update a Message
 router.put('/:id', (req, res) => {
-
+  const {content} = req.body;
   const user_id = 1;
-  const updatedMessage = { content: 'How do you do!' };
+  const updatedMessage = { content: content };
   messageQueries
     .getMessageById(req.params.id)
     .then((message) => {

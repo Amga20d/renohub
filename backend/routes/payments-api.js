@@ -6,9 +6,9 @@ const paymentQueries = require('../db/queries/payments');
 router.post('/:bid_id/', (req, res) => {
 
   const newPayment = {
-    bid_id: 1,
+    bid_id: req.params.bid_id,
     status: true,
-    created_at : null
+    created_at : new Date()
   };
 
   const validateValues = Object.values(newPayment);
@@ -66,6 +66,7 @@ router.get('/:bid_id/', (req, res) => {
 
 // Validate a payment
 router.put('/:id/validate', (req, res) => {
+  
   const role = 'Admin';
 paymentQueries
 .getPaymentById(req.params.id)

@@ -4,13 +4,14 @@ const projectImagesQueries = require('../db/queries/project_images');
 const projectQueries = require('../db/queries/projects')
 
 // Create New project image
-router.post('/', (req, res) => {
+router.post('/:project_id', (req, res) => {
 
+  const {image_url, alt_text} = req.body
   const newProjectImage = {
-    project_id: 1,
-    image_url: 'url link',
-    alt_text: 'test text',
-    created_at :'2025-07-29 07:35:40'
+    project_id: req.params.project_id,
+    image_url: image_url,
+    alt_text: alt_text,
+    created_at : new Date()
   };
 
    const validateValues = Object.values(newProjectImage);
@@ -70,12 +71,12 @@ router.get('/:id', (req, res) => {
 // Update project image
 
 router.put('/:id', (req, res) => {
-  
+  const {image_url, alt_text} = req.body;
   const user_id = 1;
   const updatedProjectImage = {
     project_id: 1,
-    image_url: 'url link',
-    alt_text: 'test text',
+    image_url: image_url,
+    alt_text: alt_text,
   };
 
 projectImagesQueries
@@ -109,7 +110,6 @@ projectImagesQueries
 
 // Remove a project image
 router.delete('/:id', (req, res) => {
-
 const user_id = 1;
 projectImagesQueries
 .getImageById(req.params.id)

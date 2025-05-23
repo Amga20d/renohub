@@ -12,15 +12,21 @@ const userQueries = require('../db/queries/users');
 
 // Create New user
 router.post('/', (req, res) => {
+  const {
+    name,
+    email,
+    phone_number,
+    role
+  } = req.body;
 
   const newUser = {
-    name: 'Sally Mally',
-    email: 'salmal@email.com',
+    name: name,
+    email: email,
     password_hash :'pass123',
-    phone_number : '123456789',
-    role : 'HomeOwner',
+    phone_number : phone_number,
+    role : role,
     verification_status: true,
-    created_at :'2025-07-29 07:35:40'
+    created_at: new Date()
   };
 
     const validateValues = Object.values(newUser);
@@ -78,12 +84,18 @@ router.get('/:id', (req, res) => {
 
 // Update a User
 router.put('/:id', (req, res) => {
+  const {
+    name,
+    email,
+    phone_number,
+    role
+  } = req.body
   const updatedUser = {
-    name: 'Jude Dude',
-    email: 'Jdude@email.com',
+    name: name,
+    email: email,
     password_hash :'pass123',
-    phone_number : '123456789',
-    role : 'Contractor',
+    phone_number : phone_number,
+    role : role,
     verification_status: true,
   };
 

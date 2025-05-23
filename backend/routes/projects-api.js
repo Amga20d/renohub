@@ -4,15 +4,21 @@ const projectQueries = require('../db/queries/projects');
 
 // Create New project
 router.post('/', (req, res) => {
-
+  const {
+    title,
+    description,
+    budget,
+    address
+  } = req.body;
+  const user_id = 1;
   const newProject = {
-    user_id: 1,
-    title: 'Window Repair',
-    description: 'Please fix me window',
-    budget:2000,
-    address:'Somewhere 123 street',
+    user_id: user_id,
+    title: title,
+    description: description,
+    budget:budget,
+    address: address,
     status: true,
-    created_at :'2025-07-29 07:35:40'
+    created_at : new Date()
   };
 
    const validateValues = Object.values(newProject);
@@ -87,12 +93,18 @@ router.get('/user/:id', (req, res) => {
 
 // Update a Project
 router.put('/:id', (req, res) => {
+  const {
+    title,
+    description,
+    budget,
+    address
+  } = req.body;
   const user_id = 1;
   const updatedProject = {
-    title: 'Floor repairs',
-    description: 'Need my floor fixed now',
-    budget: 4000,
-    address:'Somewhere 123 street',
+    title: title,
+    description: description,
+    budget: budget,
+    address: address,
   };
 projectQueries
 .getProjectById(req.params.id)
