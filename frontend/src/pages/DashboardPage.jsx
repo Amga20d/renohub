@@ -1,4 +1,6 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
+
 
 const DashboardPage = () => {
   const projects = [
@@ -60,6 +62,7 @@ const DashboardPage = () => {
 
   return (
     <div style={containerStyle}>
+      <Navbar />
       <h1 style={{ marginBottom: '20px' }}>Ongoing Projects</h1>
       {projects.map((project) => (
         <div key={project.id} style={cardStyle}>
