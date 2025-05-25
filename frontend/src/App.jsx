@@ -6,10 +6,10 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
-// const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 // const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
-// const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
+const NewProjectPage = lazy(() => import("./pages/NewProjectPage"));
 // const BidPlacementPage = lazy(() => import("./pages/BidPlacementPage"));
 // const MyBidsPage = lazy(() => import("./pages/MyBidsPage"));
 // const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
@@ -20,6 +20,7 @@ const ChatPage = lazy(() => import("./pages/ChatPage"));
 // const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
 // const AdminLogsPage = lazy(() => import("./pages/AdminLogsPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const ContractorPage = lazy(() => import("./pages/ContractorPage"));
 
 function App() {
   return (
@@ -30,10 +31,10 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          {/* <Route path="/profile" element={<ProfilePage />} /> */}
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          {/* <Route path="/projects/new" element={<NewProjectPage />} />
-          <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+          <Route path="/projects/new" element={<NewProjectPage />} />
+          {/* <Route path="/projects/:id" element={<ProjectDetailsPage />} />
           <Route path="/projects/:id/bids" element={<BidPlacementPage />} />
           <Route path="/projects/:id/review" element={<SubmitReviewPage />} />
           <Route path="/bids" element={<MyBidsPage />} /> */}
@@ -43,6 +44,7 @@ function App() {
           <Route path="/inspections" element={<InspectionsPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/logs" element={<AdminLogsPage />} /> */}
+          <Route path="/contractors" element={<ContractorPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
