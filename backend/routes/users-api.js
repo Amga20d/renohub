@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     name,
     email,
     password
-    // phone_number, // uncomment when feilds added
+    // phone_number, // uncomment when fields added
     // role
   } = req.body;
   const hash = bcrypt.hashSync(password, salt);

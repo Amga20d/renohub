@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
     description,
     budget,
     address
-  } = req.body;
+  } = req.body;   
   const user_id = 1;
   const newProject = {
     user_id: user_id,
