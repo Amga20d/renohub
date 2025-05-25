@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
 
 const MessagesPage = () => {
   // Mock chat preview data
@@ -30,6 +31,7 @@ const MessagesPage = () => {
 
   return (
     <div style={containerStyle}>
+      <Navbar />
       {chats.map(chat => (
         <div key={chat.id} style={chatPreviewStyle}>
           <div style={nameStyle}>{chat.name}</div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 const ContractorPage = () => {
   const [filter, setFilter] = useState('All');
@@ -49,6 +50,7 @@ const ContractorPage = () => {
 
   return (
     <div style={containerStyle}>
+      <Navbar />
       <h2>Contractors</h2>
       <div style={filterStyle}>
         {roles.map((role) => (

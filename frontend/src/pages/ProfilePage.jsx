@@ -1,8 +1,10 @@
 import React from "react";
+import Navbar from '../components/Navbar';
 
 const ProfilePage = () => {
 return(
 <div class="card">
+  <Navbar />
   <div class="card-body">
     <h5 class="card-title">My Profile</h5>
     <h6 class="card-subtitle mb-2 text-muted">Account Details</h6>
