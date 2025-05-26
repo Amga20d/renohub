@@ -8,15 +8,8 @@ function ProjectsPage() {
   const [filter, setFilter] = useState('All');
 
   const projectTypes = [
-    'All',
-    'Roofing',
-    'Siding',
-    'Framing',
-    'Painting',
-    'Flooring',
-    'HVAC',
-    'Plumbing',
-    'Electrical'
+    'All', 'Roofing', 'Siding', 'Framing', 'Painting',
+    'Flooring', 'HVAC', 'Plumbing', 'Electrical'
   ];
 
   const filteredProjects = filter === 'All'
@@ -28,52 +21,6 @@ function ProjectsPage() {
     fontFamily: 'Arial, sans-serif'
   };
 
-  const headingStyle = {
-    textAlign: 'center',
-    marginBottom: '20px'
-  };
-
-  const filterContainerStyle = {
-    marginBottom: '20px',
-    textAlign: 'center'
-  };
-
-  const filterButtonStyle = {
-    margin: '0 5px',
-    padding: '8px 12px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    backgroundColor: '#007BFF',
-    color: '#fff'
-  };
-
-  const projectCardStyle = {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '16px',
-    marginBottom: '16px',
-    backgroundColor: '#f9f9f9'
-  };
-
-  const titleStyle = {
-    margin: '0 0 8px 0'
-  };
-
-  const descriptionStyle = {
-    margin: '8px 0'
-  };
-
-  const budgetStyle = {
-    fontWeight: 'bold'
-  };
-
-  const createdAtStyle = {
-    fontStyle: 'italic',
-    color: '#555',
-    marginBottom: '8px'
-  };
-
   const buttonStyle = {
     marginRight: '8px',
     padding: '8px 12px',
@@ -82,37 +29,24 @@ function ProjectsPage() {
     cursor: 'pointer'
   };
 
-  const viewButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: '#007BFF',
-    color: '#fff'
-  };
-
-  const messageButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: '#FFC107',
-    color: '#fff'
-  };
-
-  const bidButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: '#28A745',
-    color: '#fff'
-  };
+  const viewButtonStyle = { ...buttonStyle, backgroundColor: '#007BFF', color: '#fff' };
+  const messageButtonStyle = { ...buttonStyle, backgroundColor: '#FFC107', color: '#fff' };
+  const bidButtonStyle = { ...buttonStyle, backgroundColor: '#28A745', color: '#fff' };
 
   return (
     <div style={pageStyles}>
       <Navbar />
-      <h1 style={headingStyle}>Browse Projects</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Browse Projects</h1>
 
-      <div style={filterContainerStyle}>
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
         {projectTypes.map((type) => (
           <button
             key={type}
             onClick={() => setFilter(type)}
             style={{
-              ...filterButtonStyle,
-              backgroundColor: filter === type ? '#0056b3' : '#007BFF'
+              ...buttonStyle,
+              backgroundColor: filter === type ? '#0056b3' : '#007BFF',
+              color: '#fff'
             }}
           >
             {type}
@@ -121,11 +55,19 @@ function ProjectsPage() {
       </div>
 
       {filteredProjects.map(project => (
-        <div key={project.id} style={projectCardStyle}>
-          <h3 style={titleStyle}>{project.title}</h3>
-          <p style={descriptionStyle}>{project.description}</p>
-          <p style={budgetStyle}>Budget: {project.budget}</p>
-          <p style={createdAtStyle}>Posted: {getDaysAgo(project.created_at)}</p>
+        <div key={project.id} style={{
+          border: '1px solid #ccc',
+          borderRadius: '8px',
+          padding: '16px',
+          marginBottom: '16px',
+          backgroundColor: '#f9f9f9'
+        }}>
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <p><strong>Budget:</strong> {project.budget}</p>
+          <p style={{ fontStyle: 'italic', color: '#555' }}>
+            Posted: {getDaysAgo(project.created_at)}
+          </p>
           <div>
             <Link to={`/projects/${project.id}`}>
               <button style={viewButtonStyle}>View</button>
@@ -133,7 +75,9 @@ function ProjectsPage() {
             <Link to={`/messages/${project.user_id}`}>
               <button style={messageButtonStyle}>Message Homeowner</button>
             </Link>
-            <button style={bidButtonStyle}>Bid</button>
+            <Link to={`/projects/${project.id}/bids`}>
+              <button style={bidButtonStyle}>Bid</button>
+            </Link>
           </div>
         </div>
       ))}

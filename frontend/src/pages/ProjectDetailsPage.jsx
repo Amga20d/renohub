@@ -27,10 +27,16 @@ const ProjectDetailsPage = () => {
       <p><strong>Budget:</strong> {project.budget}</p>
       <p><strong>Posted:</strong> {getDaysAgo(project.created_at)}</p>
       <p><strong>Project ID:</strong> #{project.id}</p>
+
       <div style={{ marginTop: '20px' }}>
         <Link to={`/messages/${project.user_id}`}>
           <button style={{ marginRight: '10px', padding: '10px', backgroundColor: '#ffc107', border: 'none', color: '#fff', borderRadius: '4px' }}>
             Message Homeowner
+          </button>
+        </Link>
+        <Link to={`/projects/${project.id}/bids`}>
+          <button style={{ marginRight: '10px', padding: '10px', backgroundColor: '#28a745', border: 'none', color: '#fff', borderRadius: '4px' }}>
+            Bid on Project
           </button>
         </Link>
         <Link to="/projects">
