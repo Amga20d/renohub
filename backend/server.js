@@ -25,6 +25,7 @@ const projectApiRoutes = require('./routes/projects-api');
 const projectImagesApiRoutes = require('./routes/project_images-api');
 const bidsApiRoutes = require('./routes/bids-api');
 const paymentsApiRoutes = require('./routes/payments-api');
+const reviewsApiRoutes = require('./routes/reviews-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -36,7 +37,7 @@ app.use('/api/projects', projectApiRoutes);
 app.use('/api/project_images', projectImagesApiRoutes);
 app.use('/api/bids', bidsApiRoutes);
 app.use('/api/payments', paymentsApiRoutes);
-
+app.use('/api/reviews', reviewsApiRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
