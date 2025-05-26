@@ -1,62 +1,70 @@
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const BidFormPage = () => {
+  const { id } = useParams(); // from /projects/:id/bids
+
   const [formData, setFormData] = useState({
-    amount:0,
+    project_id: id,
+    amount: 0,
     notes: ''
-  })
+  });
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData(prevState => ({...prevState, [name]:value}));
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/bids', formData)
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
-  }
+    axios.post('/api/bids', {
+      ...formData,
+      project_id: parseInt(id),
+      user_id: 6 // mock contractor user
+    })
+    .then(res => console.log('Bid submitted:', res.data))
+    .catch(err => console.error('Submission error:', err));
+  };
+
   return (
-    <div>
-      <h1>Bid Submission</h1>
+    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+      <h1>Submit a Bid</h1>
       <form onSubmit={handleSubmit}>
-        <h3>Bid form</h3>
+        <h3>Bid for Project #{id}</h3>
         <div>
-          <label>Budget Proposal for Client</label>
+          <label>Budget Proposal</label>
           <InputGroup className="mb-3">
             <InputGroup.Text>$</InputGroup.Text>
-            <Form.Control 
-            aria-label="Amount (to the nearest dollar)"
-            placeholder=""
-            name="amount"
-            type="number"
-            value={formData.amount}
-            onChange={handleChange}
+            <Form.Control
+              type="number"
+              name="amount"
+              value={formData.amount}
+              onChange={handleChange}
             />
             <InputGroup.Text>.00</InputGroup.Text>
           </InputGroup>
         </div>
         <div>
           <label>Notes</label>
-          <FloatingLabel controlId="floatingTextarea2" label="Extra notes for client">
+          <FloatingLabel controlId="floatingTextarea2" label="Additional Notes">
             <Form.Control
               as="textarea"
-              placeholder=""
               name="notes"
-              type="text"
+              style={{ height: "100px" }}
               value={formData.notes}
               onChange={handleChange}
-              style={{ height: "100px" }}
             />
           </FloatingLabel>
         </div>
-        <Button as="input" type="submit" value="Submit" />
+        <Button type="submit" className="mt-3">Submit</Button>
       </form>
     </div>
   );

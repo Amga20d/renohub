@@ -1,18 +1,28 @@
-import React from "react";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from 'react';
+import { getUserName } from '../helpers/utils';
+import { Link } from 'react-router-dom';
 
-const BidCard = () => {
+const BidCard = ({ bid, users, onAccept, isAccepted }) => {
+  const contractor = getUserName(bid.user_id, users);
+
   return (
- <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Title</Card.Title>
-        <Card.Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, dolore ex neque ipsam consectetur excepturi nostrum laboriosam vel eveniet suscipit voluptatum ipsa, illo cumque, dolorem repellat consequatur omnis? Voluptates, temporibus!
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <div style={{ marginLeft: '15px', marginBottom: '10px' }}>
+      <p>
+        <strong>Contractor:</strong> {contractor} |
+        <strong> Cost:</strong> ${bid.amount} |
+        <strong> Notes:</strong> {bid.notes} |
+        <strong> Status:</strong> {bid.status}
+      </p>
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <Link to={`/messages/${bid.user_id}`}>
+          <button>Message Contractor</button>
+        </Link>
+        {bid.status === 'Sent' && (
+          <button onClick={() => onAccept(bid.id)}>Accept Bid</button>
+        )}
+        {isAccepted && <span style={{ color: 'green', marginLeft: '10px' }}>✓ Accepted</span>}
+      </div>
+    </div>
   );
 };
 

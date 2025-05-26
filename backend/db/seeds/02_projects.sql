@@ -1,9 +1,20 @@
--- Widgets table seeds here (Example)
-INSERT INTO Projects (user_id, title, description, budget, address, status, created_at) VALUES ( 1,'Help fix my roof','My roof needs fixing', 2000, '123 place steet', True, '2025-06-13 11:10:50');
-INSERT INTO Projects (user_id, title, description, budget, address, status, created_at) VALUES ( 1,'Help fix my wall','Now my wall needs fixing', 1500, '456 place steet ', True, '2025-07-19 12:01:20');
-
-INSERT INTO Project_images(project_id, image_url, alt_text, created_at) VALUES ( 1, 'url/path/project1/image1','image text', '2025-06-13 11:01:20');
-INSERT INTO Project_images (project_id, image_url, alt_text, created_at) VALUES ( 1, 'url/path/project1/image2','image text', '2025-06-13 11:05:20');
- 
-INSERT INTO Project_images (project_id, image_url, alt_text, created_at) VALUES ( 2, 'url/path/project2/image1', 'image text', '2025-07-19 12:01:20');
-INSERT INTO Project_images (project_id, image_url, alt_text, created_at) VALUES ( 2, 'url/path/project2/image2', 'image text', '2025-07-19 12:05:50');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 1', 'Description 1', 6804, 'Address 1', 'Completed', 'Painting', '2025-06-16 23:48:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 2', 'Description 2', 5085, 'Address 2', 'Completed', 'Roofing', '2025-06-12 12:09:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 3', 'Description 3', 1867, 'Address 3', 'Bidding', 'Flooring', '2025-07-31 22:32:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 4', 'Description 4', 5047, 'Address 4', 'Ongoing', 'Plumbing', '2025-07-31 11:00:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 5', 'Description 5', 8558, 'Address 5', 'Ongoing', 'Framing', '2025-06-24 14:39:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 6', 'Description 6', 5276, 'Address 6', 'Ongoing', 'HVAC', '2025-07-08 01:11:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 7', 'Description 7', 9865, 'Address 7', 'Bidding', 'Siding', '2025-07-09 16:07:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 8', 'Description 8', 1623, 'Address 8', 'Completed', 'Plumbing', '2025-06-10 06:24:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 9', 'Description 9', 3629, 'Address 9', 'Ongoing', 'HVAC', '2025-07-28 12:15:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 10', 'Description 10', 1023, 'Address 10', 'Completed', 'Plumbing', '2025-06-04 17:30:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 11', 'Description 11', 2686, 'Address 11', 'Ongoing', 'Electrical', '2025-06-30 08:55:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 12', 'Description 12', 6892, 'Address 12', 'Bidding', 'Flooring', '2025-07-07 00:22:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 13', 'Description 13', 1283, 'Address 13', 'Completed', 'Plumbing', '2025-07-19 12:04:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 14', 'Description 14', 1319, 'Address 14', 'Bidding', 'Roofing', '2025-07-20 14:26:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 15', 'Description 15', 7581, 'Address 15', 'Bidding', 'Painting', '2025-07-10 08:27:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 16', 'Description 16', 2849, 'Address 16', 'Completed', 'Electrical', '2025-06-26 14:02:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 17', 'Description 17', 5705, 'Address 17', 'Bidding', 'Framing', '2025-06-24 16:31:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 18', 'Description 18', 4527, 'Address 18', 'Bidding', 'Siding', '2025-07-27 13:00:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 19', 'Description 19', 5015, 'Address 19', 'Ongoing', 'Painting', '2025-06-29 06:58:00');
+INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 20', 'Description 20', 8809, 'Address 20', 'Ongoing', 'Flooring', '2025-06-15 04:42:00');

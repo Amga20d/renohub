@@ -1,69 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { messages as initialMessages, users } from '../data/mockMessages';
+import ChatBubble from '../components/ChatBubble';
 
 const ChatPage = () => {
-  const contactName = 'Alice';  // Mock contact name
-  // Mock conversation messages
-  const messages = [
-    { id: 1, sender: 'You',   text: 'Hey Alice, how are you?', time: '10:00 AM' },
-    { id: 2, sender: 'Alice', text: 'Hi! I’m good, thanks. How about you?', time: '10:02 AM' },
-    { id: 3, sender: 'You',   text: 'Doing well. Did you see my email?', time: '10:05 AM' },
-    { id: 4, sender: 'Alice', text: 'Yes, I will reply by tomorrow.', time: '10:06 AM' },
-    { id: 5, sender: 'You',   text: 'Great, thanks!', time: '10:08 AM' }
-  ];
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const recipientId = parseInt(id, 10);
+  const senderId = 1;
 
-  // Inline style objects
-  const containerStyle = {
-    maxWidth: '600px',
-    margin: '20px auto',
-    padding: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    backgroundColor: '#fff'
+  const contact = users.find(u => u.id === recipientId);
+
+  // Copy initial messages into state so we can add new ones
+  const [chatMessages, setChatMessages] = useState(
+    initialMessages.filter(
+      m =>
+        (m.sender_id === senderId && m.recipient_id === recipientId) ||
+        (m.sender_id === recipientId && m.recipient_id === senderId)
+    )
+  );
+
+  const [newMessage, setNewMessage] = useState('');
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (!newMessage.trim()) return;
+
+    const messageObj = {
+      id: chatMessages.length + 100, // mock ID
+      sender_id: senderId,
+      recipient_id: recipientId,
+      content: newMessage,
+      created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+
+    setChatMessages([...chatMessages, messageObj]);
+    setNewMessage('');
   };
-  const headerStyle = {
-    fontWeight: 'bold',
-    fontSize: '18px',
-    paddingBottom: '10px',
-    borderBottom: '1px solid #ccc',
-    marginBottom: '10px'
-  };
-  const messageStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: '10px'
-  };
-  const bubbleBaseStyle = {
-    borderRadius: '10px',
-    padding: '8px',
-    maxWidth: '75%',
-    boxShadow: '0 1px 2px rgba(0,0,0,0.15)'
-  };
-  const infoStyle = { fontSize: '12px', color: '#666', marginBottom: '4px' };
 
   return (
-    <div style={containerStyle}>
-      <div style={headerStyle}>Chat with {contactName}</div>
-      {messages.map(msg => {
-        const isUser = msg.sender === 'You';
-        // Merge base bubble style with conditional styles
-        const bubbleStyle = {
-          ...bubbleBaseStyle,
-          backgroundColor: isUser ? '#dcf8c6' : '#f1f1f1',
-          alignSelf: isUser ? 'flex-end' : 'flex-start'
-        };
-        return (
-          <div key={msg.id} style={messageStyle}>
-            <div style={infoStyle}>
-              {msg.sender} &#8226; {msg.time}
-            </div>
-            <div style={bubbleStyle}>
-              {msg.text}
-            </div>
-          </div>
-        );
-      })}
+    <div style={{
+      maxWidth: '600px',
+      margin: '20px auto',
+      padding: '10px',
+      display: 'flex',
+      flexDirection: 'column',
+      border: '1px solid #ddd',
+      borderRadius: '5px',
+      backgroundColor: '#fff'
+    }}>
+      <div style={{
+        fontWeight: 'bold',
+        fontSize: '18px',
+        paddingBottom: '10px',
+        borderBottom: '1px solid #ccc',
+        marginBottom: '10px'
+      }}>
+        Chat with {contact?.name}
+      </div>
+
+      <button
+        onClick={() => navigate('/messages')}
+        style={{
+          alignSelf: 'flex-start',
+          marginBottom: '15px',
+          padding: '6px 12px',
+          border: 'none',
+          backgroundColor: '#007bff',
+          color: 'white',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
+      >
+        ← Back to Messages
+      </button>
+
+      {/* Chat messages */}
+      <div style={{ flexGrow: 1, overflowY: 'auto', marginBottom: '15px' }}>
+        {chatMessages.map(msg => (
+          <ChatBubble
+            key={msg.id}
+            message={msg}
+            isUser={msg.sender_id === senderId}
+          />
+        ))}
+      </div>
+
+      {/* Input form */}
+      <form onSubmit={handleSend} style={{ display: 'flex', gap: '8px' }}>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={e => setNewMessage(e.target.value)}
+          placeholder="Type your message..."
+          style={{
+            flexGrow: 1,
+            padding: '10px',
+            borderRadius: '4px',
+            border: '1px solid #ccc'
+          }}
+        />
+        <button type="submit" style={{
+          padding: '10px 16px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}>
+          Send
+        </button>
+      </form>
     </div>
   );
 };
