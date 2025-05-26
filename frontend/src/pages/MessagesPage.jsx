@@ -13,7 +13,7 @@ const MessagesPage = () => {
 
   // Inline style objects
   const containerStyle = {
-    maxWidth: '600px',
+    maxWidth: '90%',
     margin: '20px auto',
     padding: '10px'
   };
