@@ -9,26 +9,32 @@
 const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
+const bcrypt = require('bcryptjs');
+
+const salt = bcrypt.genSaltSync(10);
 
 // Create New user
 router.post('/', (req, res) => {
   const {
     name,
     email,
-    phone_number,
-    role
+    password
+    // phone_number, // uncomment when fields added
+    // role
   } = req.body;
+  const hash = bcrypt.hashSync(password, salt);
+
 
   const newUser = {
     name: name,
     email: email,
-    password_hash :'pass123',
-    phone_number : phone_number,
-    role : role,
+    password_hash :hash,
+    phone_number : '1234567890',
+    role : 'Homeowner',
     verification_status: true,
     created_at: new Date()
   };
-
+  console.log(newUser);
     const validateValues = Object.values(newUser);
   for (const value of validateValues){
     if (!value){
@@ -63,6 +69,28 @@ router.get('/', (req, res) => {
         .status(500)
         .json({ message: 'Error reading users', error: err.message });
     });
+})
+
+// get user by email (Login)
+router.post('/login', (req, res) => {
+  const {email, password} = req.body;
+  userQueries
+  .getUserByEmail(email)
+  .then((user) => {
+    if (!user) {
+      return res.status(400).json({ message: 'users not found!' });
+    }
+    if(!bcrypt.compareSync(password,user.password_hash)) {
+      return res.status(401).json({message: 'Incorrect Password. Please Try Again'})
+    }
+    console.log(email);
+    res.status(201).json({message: 'heres the user!', user});
+  })
+  .catch((err) => {
+    res
+    .status(500)
+    .json({message: 'Error reading the user', error: err.message});
+  })
 })
 
 // Read one user by user_id

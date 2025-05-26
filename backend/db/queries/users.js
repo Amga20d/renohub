@@ -23,6 +23,12 @@ const getUserById = (user_id) => {
     .then((data) => data.rows[0]);
 };
 
+const getUserByEmail = (email) => {
+  return db
+    .query('SELECT * FROM Users WHERE email = $1;', [email])
+    .then((data) => data.rows[0]);
+};
+
 const getAllUsers = () => {
   return db.query('SELECT * FROM Users;').then((data) => data.rows);
 };
@@ -48,6 +54,6 @@ const removeUser = (id) => {
     .then((data) => data.rows);
 };
 
-module.exports = { register, getUserById, getAllUsers, updateUser, removeUser };
+module.exports = { register, getUserById, getAllUsers, updateUser, removeUser, getUserByEmail };
 
 

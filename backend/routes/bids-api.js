@@ -3,7 +3,7 @@ const router = express.Router();
 const bidsQueries = require('../db/queries/bids');
 
 // Create New Bid
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { 
   const {amount, notes} = req.body;
 
   const user_id = 1;
@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
 })
 
 // Read All bids from user
-router.get('/user/id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   bidsQueries
   .getBidsByUserId(req.params.id)
   .then((bids) => {
