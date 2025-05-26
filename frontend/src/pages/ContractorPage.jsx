@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { contractors } from '../data/contractors';
 
 const ContractorPage = () => {
   const [filter, setFilter] = useState('All');
 
-  const contractors = [
-    { id: 1, name: 'John Roofing Co.', role: 'Roofing' },
-    { id: 2, name: 'Skyline Siding Ltd.', role: 'Siding' },
-    { id: 3, name: 'Elite Drywall Inc.', role: 'Drywall' },
-    { id: 4, name: 'Universal Roofing', role: 'Roofing' },
-    { id: 5, name: 'Precision Siding', role: 'Siding' },
-    { id: 6, name: 'Pro Drywall Solutions', role: 'Drywall' },
-  ];
-
-  const roles = ['All', 'Roofing', 'Siding', 'Drywall'];
+  const roles = ['All', 'Roofing', 'Siding', 'Framing', 'Painting', 'Flooring', 'HVAC', 'Plumbing', 'Electrical'];
 
   const filteredContractors =
     filter === 'All'
@@ -70,6 +63,11 @@ const ContractorPage = () => {
         <div key={contractor.id} style={cardStyle}>
           <h3>{contractor.name}</h3>
           <p>Specialization: {contractor.role}</p>
+          <Link to={`/messages/${contractor.id}`}>
+            <button style={{ ...buttonStyle, backgroundColor: '#2ecc71' }}>
+              Message Contractor
+            </button>
+          </Link>
         </div>
       ))}
     </div>
