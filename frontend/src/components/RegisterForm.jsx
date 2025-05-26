@@ -15,6 +15,7 @@ function RegisterForm() {
     }
 
     setValidated(true);
+
   };
 
   return (
