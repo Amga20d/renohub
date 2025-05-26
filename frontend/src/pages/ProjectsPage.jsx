@@ -23,11 +23,10 @@ function ProjectsPage() {
     ? projects
     : projects.filter(project => project.type === filter);
 
-    const pageStyles = {
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif'
-    };
-    
+  const pageStyles = {
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif'
+  };
 
   const headingStyle = {
     textAlign: 'center',
@@ -128,7 +127,9 @@ function ProjectsPage() {
           <p style={budgetStyle}>Budget: {project.budget}</p>
           <p style={createdAtStyle}>Posted: {getDaysAgo(project.created_at)}</p>
           <div>
-            <button style={viewButtonStyle}>View</button>
+            <Link to={`/projects/${project.id}`}>
+              <button style={viewButtonStyle}>View</button>
+            </Link>
             <Link to={`/messages/${project.user_id}`}>
               <button style={messageButtonStyle}>Message Homeowner</button>
             </Link>
