@@ -1,6 +1,26 @@
 import React from "react";
+import axios from "axios";
+import { useState } from "react";
+
 
 const RegisterPage = () => {
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      password: ''
+    })
+
+     const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData(prevState => ({...prevState, [name]:value}));
+  };
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/api/users', formData)
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  }
   return (
     <div style={{ 
       display: "flex", 
@@ -9,7 +29,7 @@ const RegisterPage = () => {
       height: "100vh", 
       backgroundColor: "#f2f2f2" 
     }}>
-      <form style={{ 
+      <form onSubmit={handleSubmit} style={{ 
         backgroundColor: "#fff", 
         padding: "20px", 
         borderRadius: "5px", 
@@ -21,6 +41,9 @@ const RegisterPage = () => {
           <label>Name: </label>
           <input 
             type="text" 
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             style={{ 
               width: "100%", 
               padding: "8px", 
@@ -34,6 +57,9 @@ const RegisterPage = () => {
           <label>Email: </label>
           <input 
             type="email" 
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             style={{ 
               width: "100%", 
               padding: "8px", 
@@ -47,6 +73,9 @@ const RegisterPage = () => {
           <label>Password: </label>
           <input 
             type="password" 
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             style={{ 
               width: "100%", 
               padding: "8px", 

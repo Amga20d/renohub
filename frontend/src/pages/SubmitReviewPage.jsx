@@ -4,11 +4,29 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Card from "react-bootstrap/Card";
+import { useState } from "react";
 
 function SubmitReviewPage() {
+  const [formData, setFormData] = useState({
+    rating: 0,
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/reviews", formData)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
-      <Card>
+      <Card onSubmit={handleSubmit}>
         <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Body>
           <Card.Text>
@@ -43,13 +61,18 @@ function SubmitReviewPage() {
         </ButtonGroup>
       </ButtonToolbar>
       <br />
-      <FloatingLabel controlId="floatingTextarea2" label="Comments">
+      <FloatingLabel controlId="floatingTextarea2">
         <Form.Control
           as="textarea"
+          type= "text"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
           placeholder="Leave a comment here"
           style={{ height: "100px" }}
         />
       </FloatingLabel>
+      <Button type="Submit">Submit</Button>
     </div>
   );
 }
