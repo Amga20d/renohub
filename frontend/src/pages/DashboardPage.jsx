@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProjectCard from '../components/ProjectCard';
 import ProgressBar from '../components/ProgressBar';
+import BidList from '../components/BidList';
 import {
   getAcceptedBid,
   getProgressPercentage,
@@ -10,6 +11,18 @@ import {
 
 const DashboardPage = () => {
   const [selectedTab, setSelectedTab] = useState('Bidding');
+  const [bids, setBids] = useState([
+    { id: 1, user_id: 6, project_id: 1, amount: 5000, status: 'Sent', notes: 'Ready to start' },
+    { id: 2, user_id: 7, project_id: 1, amount: 4800, status: 'Sent', notes: 'Warranty included' },
+    { id: 3, user_id: 6, project_id: 2, amount: 3000, status: 'Sent', notes: 'Cleanup included' },
+    { id: 4, user_id: 8, project_id: 2, amount: 3200, status: 'Sent', notes: 'Expert in drywall' },
+    { id: 5, user_id: 9, project_id: 3, amount: 4500, status: 'First Scope', notes: 'Starting soon' },
+    { id: 6, user_id: 10, project_id: 3, amount: 4700, status: 'Rejected', notes: 'N/A' },
+    { id: 7, user_id: 9, project_id: 4, amount: 3800, status: 'Final Scope', notes: 'Experienced' },
+    { id: 8, user_id: 10, project_id: 4, amount: 4000, status: 'Rejected', notes: 'N/A' },
+    { id: 9, user_id: 10, project_id: 5, amount: 5200, status: 'Completed', notes: 'Success' },
+    { id: 10, user_id: 6, project_id: 5, amount: 5300, status: 'Rejected', notes: 'N/A' }
+  ]);
 
   const users = [
     { id: 1, name: 'Alice Johnson', role: 'Homeowner' },
@@ -29,21 +42,18 @@ const DashboardPage = () => {
     { id: 2, user_id: 2, title: 'Downtown Apartment Remodel', type: 'drywall', address: '456 Oak Ave', status: 'Bidding' },
     { id: 3, user_id: 3, title: 'Suburban Siding Replacement', type: 'siding', address: '789 Pine Rd', status: 'Ongoing' },
     { id: 4, user_id: 4, title: 'Loft Roof Repair', type: 'roofing', address: '321 Elm St', status: 'Ongoing' },
-    { id: 5, user_id: 5, title: 'Home Siding Upgrade', type: 'siding', address: '654 Spruce Dr', status: 'Completed' },
+    { id: 5, user_id: 5, title: 'Home Siding Upgrade', type: 'siding', address: '654 Spruce Dr', status: 'Completed' }
   ];
 
-  const bids = [
-    { id: 1, user_id: 6, project_id: 1, amount: 5000, status: 'Sent', notes: 'Ready to start' },
-    { id: 2, user_id: 7, project_id: 1, amount: 4800, status: 'Sent', notes: 'Warranty included' },
-    { id: 3, user_id: 6, project_id: 2, amount: 3000, status: 'Sent', notes: 'Cleanup included' },
-    { id: 4, user_id: 8, project_id: 2, amount: 3200, status: 'Sent', notes: 'Expert in drywall' },
-    { id: 5, user_id: 9, project_id: 3, amount: 4500, status: 'First Scope', notes: 'Starting soon' },
-    { id: 6, user_id: 10, project_id: 3, amount: 4700, status: 'Rejected', notes: 'N/A' },
-    { id: 7, user_id: 9, project_id: 4, amount: 3800, status: 'Final Scope', notes: 'Experienced' },
-    { id: 8, user_id: 10, project_id: 4, amount: 4000, status: 'Rejected', notes: 'N/A' },
-    { id: 9, user_id: 10, project_id: 5, amount: 5200, status: 'Completed', notes: 'Success' },
-    { id: 10, user_id: 6, project_id: 5, amount: 5300, status: 'Rejected', notes: 'N/A' }
-  ];
+  const handleAcceptBid = (bidId, projectId) => {
+    setBids(prev =>
+      prev.map(b =>
+        b.project_id === projectId
+          ? { ...b, status: b.id === bidId ? 'Accepted' : 'Rejected' }
+          : b
+      )
+    );
+  };
 
   const filteredProjects = projects.filter(p => p.status === selectedTab);
   const filteredBids = filterBidsForTab(bids, selectedTab);
@@ -73,14 +83,14 @@ const DashboardPage = () => {
       </div>
 
       {filteredProjects.map((project) => {
-        const relevantBids = filteredBids.filter(b => b.project_id === project.id);
+        const projectBids = filteredBids.filter(b => b.project_id === project.id);
+        const acceptedBid = getAcceptedBid(bids, project.id);
 
         if (selectedTab === 'Ongoing') {
-          const acceptedBid = getAcceptedBid(bids, project.id);
           const progress = acceptedBid ? getProgressPercentage(acceptedBid.status) : 0;
           return (
             <div key={project.id} style={{ marginBottom: '20px' }}>
-              <ProjectCard project={project} bids={relevantBids} users={users} />
+              <ProjectCard project={project} bids={projectBids} users={users} />
               <p><strong>Progress:</strong></p>
               <ProgressBar percent={progress} />
             </div>
@@ -88,12 +98,16 @@ const DashboardPage = () => {
         }
 
         return (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            bids={relevantBids}
-            users={users}
-          />
+          <div key={project.id} style={{ border: '1px solid #ccc', padding: '15px', marginBottom: '20px' }}>
+            <ProjectCard project={project} bids={[]} users={users} />
+            <h4>Bids:</h4>
+            <BidList
+              bids={projectBids}
+              users={users}
+              onAcceptBid={(bidId) => handleAcceptBid(bidId, project.id)}
+              acceptedBidId={acceptedBid?.id}
+            />
+          </div>
         );
       })}
     </div>
