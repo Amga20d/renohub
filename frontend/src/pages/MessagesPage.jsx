@@ -19,7 +19,7 @@ const MessagesPage = () => {
   });
 
   return (
-    <div style={{ maxWidth: '600px', margin: '20px auto', padding: '10px' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <Navbar />
       {previews.map(({ recipient, lastMessage }) => (
         <MessagePreview key={recipient.id} recipient={recipient} lastMessage={lastMessage} />

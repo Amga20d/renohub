@@ -13,11 +13,11 @@ const ContractorPage = () => {
       ? contractors
       : contractors.filter((contractor) => contractor.role === filter);
 
-  const containerStyle = {
-    padding: '20px',
-    maxWidth: '800px',
-    margin: '0 auto',
-  };
+    const containerStyle = {
+      padding: '20px',
+      fontFamily: 'Arial, sans-serif'
+    };
+      
 
   const filterStyle = {
     marginBottom: '20px',
