@@ -5,7 +5,7 @@ import { getDaysAgo } from '../helpers/utils';
 import { Link } from 'react-router-dom';
 
 function ProjectsPage() {
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
   const projectTypes = [
     'All', 'Roofing', 'Siding', 'Framing', 'Painting',
@@ -22,11 +22,11 @@ function ProjectsPage() {
   };
 
   const buttonStyle = {
-    marginRight: '8px',
-    padding: '8px 12px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
+    marginRight: "8px",
+    padding: "8px 12px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
   };
 
   const viewButtonStyle = { ...buttonStyle, backgroundColor: '#007BFF', color: '#fff' };

@@ -1,0 +1,36 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  padding: 8px;
+  align-items: center;
+  height: 72px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: solid 1px rgb(179, 41, 17) ;
+}
+
+.nav-logo{
+  text-decoration: underline rgb(226, 91, 28) ;
+  font-size: 32px;
+  text-underline-position: auto;
+
+}
+
+.nav-link-group{
+  display: flex;
+  
+}
+
+.nav-link-item{
+  text-decoration: none;
+  color: rgb(226, 91, 28);
+  font-size: 26px;
+  margin: 0.5em;
+}
+
+#nav-link-item:hover{
+   color: red;
+}
