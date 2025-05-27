@@ -15,7 +15,7 @@ const BidFormPage = lazy(() => import("./pages/BidFormPage"));
 // const SubmitReviewPage = lazy(() => import("./pages/SubmitReviewPage"));
 const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 const ChatPage = lazy(() => import("./pages/ChatPage"));
-// const PaymentsPage = lazy(() => import("./pages/PaymentsPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
 // const InspectionsPage = lazy(() => import("./pages/InspectionsPage"));
 // const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
 // const AdminLogsPage = lazy(() => import("./pages/AdminLogsPage"));
@@ -40,8 +40,8 @@ function App() {
           <Route path="/bids" element={<MyBidsPage />} /> */}
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/messages/:id" element={<ChatPage />} />
-          {/* <Route path="/payments" element={<PaymentsPage />} />
-          <Route path="/inspections" element={<InspectionsPage />} />
+          <Route path="/pay/:bidId" element={<PaymentPage />} />
+          {/* <Route path="/inspections" element={<InspectionsPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/logs" element={<AdminLogsPage />} /> */}
           <Route path="/contractors" element={<ContractorPage />} />

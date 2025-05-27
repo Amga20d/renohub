@@ -1,7 +1,7 @@
 import React from 'react';
 import BidCard from './BidCard';
 
-const BidList = ({ bids, users, onAcceptBid, acceptedBidId }) => {
+const BidList = ({ bids, users, onAcceptBid, acceptedBidId, projectStatus }) => {
   return (
     <>
       {bids.map((bid) => (
@@ -11,6 +11,7 @@ const BidList = ({ bids, users, onAcceptBid, acceptedBidId }) => {
           users={users}
           onAccept={onAcceptBid}
           isAccepted={bid.id === acceptedBidId}
+          projectStatus={projectStatus}
         />
       ))}
     </>

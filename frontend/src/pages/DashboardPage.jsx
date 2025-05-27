@@ -106,6 +106,7 @@ const DashboardPage = () => {
               users={users}
               onAcceptBid={(bidId) => handleAcceptBid(bidId, project.id)}
               acceptedBidId={acceptedBid?.id}
+              projectStatus={project.status}
             />
           </div>
         );
