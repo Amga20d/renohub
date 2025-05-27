@@ -1,20 +1,36 @@
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (1, 2, 3855, 'Awaiting Approval', 'Note for bid 1', '2025-06-16 23:48:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (2, 2, 1697, 'Sent', 'Note for bid 2', '2025-06-12 12:09:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (3, 2, 4947, 'Not started', 'Note for bid 3', '2025-07-31 22:32:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (4, 2, 4648, 'Final Scope', 'Note for bid 4', '2025-07-31 11:00:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (5, 2, 1351, 'Final Scope', 'Note for bid 5', '2025-06-24 14:39:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (6, 2, 1303, 'Final Scope', 'Note for bid 6', '2025-07-08 01:11:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (7, 2, 4358, 'First Scope', 'Note for bid 7', '2025-07-09 16:07:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (8, 2, 1423, 'Completed', 'Note for bid 8', '2025-06-10 06:24:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (9, 2, 3829, 'Sent', 'Note for bid 9', '2025-07-28 12:15:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (10, 2, 3927, 'Accepted', 'Note for bid 10', '2025-06-04 17:30:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (11, 2, 3407, 'Awaiting Approval', 'Note for bid 11', '2025-06-30 08:55:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (12, 2, 2615, 'Awaiting Approval', 'Note for bid 12', '2025-07-07 00:22:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (13, 2, 1723, 'Final Scope', 'Note for bid 13', '2025-07-19 12:04:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (14, 2, 3809, 'Not started', 'Note for bid 14', '2025-07-20 14:26:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (15, 2, 3189, 'Awaiting Approval', 'Note for bid 15', '2025-07-10 08:27:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (16, 2, 1012, 'Accepted', 'Note for bid 16', '2025-06-26 14:02:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (17, 2, 3452, 'Accepted', 'Note for bid 17', '2025-06-24 16:31:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (18, 2, 801, 'Sent', 'Note for bid 18', '2025-07-27 13:00:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (19, 2, 4455, 'Final Scope', 'Note for bid 19', '2025-06-29 06:58:00');
-INSERT INTO Bids (project_id, user_id, amount, status, notes, created_at) VALUES (20, 2, 4443, 'Sent', 'Note for bid 20', '2025-06-15 04:42:00');
+INSERT INTO bids (id, project_id, user_id, amount, status, notes, created_at) VALUES
+(1, 14, 8, 7905, 'Accepted', 'Auto-generated bid notes for bid 1', '2024-01-01 00:00:00'),
+(2, 13, 1, 9984, 'Awaiting Approval', 'Auto-generated bid notes for bid 2', '2024-01-02 00:00:00'),
+(3, 11, 5, 8231, 'Final Scope', 'Auto-generated bid notes for bid 3', '2024-01-03 00:00:00'),
+(4, 12, 8, 2903, 'Completed', 'Auto-generated bid notes for bid 4', '2024-01-04 00:00:00'),
+(5, 7, 17, 3218, 'Sent', 'Auto-generated bid notes for bid 5', '2024-01-05 00:00:00'),
+(6, 6, 15, 3738, 'Completed', 'Auto-generated bid notes for bid 6', '2024-01-06 00:00:00'),
+(7, 6, 15, 11428, 'Rejected', 'Auto-generated bid notes for bid 7', '2024-01-07 00:00:00'),
+(8, 17, 5, 6791, 'Rejected', 'Auto-generated bid notes for bid 8', '2024-01-08 00:00:00'),
+(9, 7, 9, 2855, 'Completed', 'Auto-generated bid notes for bid 9', '2024-01-09 00:00:00'),
+(10, 20, 1, 7802, 'Final Scope', 'Auto-generated bid notes for bid 10', '2024-01-10 00:00:00'),
+(11, 13, 9, 5261, 'Completed', 'Auto-generated bid notes for bid 11', '2024-01-11 00:00:00'),
+(12, 9, 19, 6488, 'Completed', 'Auto-generated bid notes for bid 12', '2024-01-12 00:00:00'),
+(14, 13, 19, 9438, 'Rejected', 'Auto-generated bid notes for bid 14', '2024-01-13 00:00:00'),
+(15, 2, 19, 9146, 'Final Scope', 'Auto-generated bid notes for bid 15', '2024-01-14 00:00:00'),
+(17, 11, 3, 4719, 'Rejected', 'Auto-generated bid notes for bid 17', '2024-01-15 00:00:00'),
+(20, 2, 8, 2222, 'Rejected', 'Auto-generated bid notes for bid 20', '2024-01-16 00:00:00'),
+(21, 17, 19, 11019, 'Not Started', 'Auto-generated bid notes for bid 21', '2024-01-17 00:00:00'),
+(22, 12, 9, 2141, 'Rejected', 'Auto-generated bid notes for bid 22', '2024-01-18 00:00:00'),
+(23, 1, 17, 9770, 'Rejected', 'Auto-generated bid notes for bid 23', '2024-01-19 00:00:00'),
+(24, 5, 2, 6103, 'Not Started', 'Auto-generated bid notes for bid 24', '2024-01-20 00:00:00'),
+(25, 3, 18, 7687, 'Completed', 'Auto-generated bid notes for bid 25', '2024-01-21 00:00:00'),
+(26, 20, 1, 7107, 'Rejected', 'Auto-generated bid notes for bid 26', '2024-01-22 00:00:00'),
+(27, 3, 9, 8550, 'Rejected', 'Auto-generated bid notes for bid 27', '2024-01-23 00:00:00'),
+(28, 14, 2, 3233, 'Rejected', 'Auto-generated bid notes for bid 28', '2024-01-24 00:00:00'),
+(29, 16, 2, 7285, 'Sent', 'Auto-generated bid notes for bid 29', '2024-01-25 00:00:00'),
+(30, 3, 18, 9334, 'Rejected', 'Auto-generated bid notes for bid 30', '2024-01-26 00:00:00'),
+(31, 9, 1, 11368, 'Rejected', 'Auto-generated bid notes for bid 31', '2024-01-27 00:00:00'),
+(32, 19, 3, 3489, 'Rejected', 'Auto-generated bid notes for bid 32', '2024-01-28 00:00:00'),
+(33, 20, 11, 8247, 'Rejected', 'Auto-generated bid notes for bid 33', '2024-01-29 00:00:00'),
+(34, 18, 2, 10799, 'Completed', 'Auto-generated bid notes for bid 34', '2024-01-30 00:00:00'),
+(36, 20, 1, 4844, 'Rejected', 'Auto-generated bid notes for bid 36', '2024-01-31 00:00:00'),
+(37, 4, 17, 9641, 'Sent', 'Auto-generated bid notes for bid 37', '2024-02-01 00:00:00'),
+(38, 12, 18, 8274, 'Rejected', 'Auto-generated bid notes for bid 38', '2024-02-02 00:00:00'),
+(39, 11, 18, 5841, 'Rejected', 'Auto-generated bid notes for bid 39', '2024-02-03 00:00:00'),
+(40, 8, 2, 4157, 'Final Scope', 'Auto-generated bid notes for bid 40', '2024-02-04 00:00:00');

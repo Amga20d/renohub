@@ -1,41 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { messages as initialMessages, users } from '../data/mockMessages';
 import ChatBubble from '../components/ChatBubble';
+import axios from 'axios';
 
 const ChatPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const recipientId = parseInt(id, 10);
-  const senderId = 1;
+  const recipientId = parseInt(id);
+  const senderId = 1; // Simulated current user
 
-  const contact = users.find(u => u.id === recipientId);
-
-  // Copy initial messages into state so we can add new ones
-  const [chatMessages, setChatMessages] = useState(
-    initialMessages.filter(
-      m =>
-        (m.sender_id === senderId && m.recipient_id === recipientId) ||
-        (m.sender_id === recipientId && m.recipient_id === senderId)
-    )
-  );
-
+  const [contact, setContact] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
-  const handleSend = (e) => {
+  useEffect(() => {
+    // Load user info
+    axios.get('/api/users')
+      .then(res => {
+        const user = res.data.users.find(u => u.id === recipientId);
+        setContact(user);
+      })
+      .catch(err => console.error('Error fetching user:', err));
+
+    // Load chat log
+    axios.get(`/api/messages/${recipientId}/chat`)
+      .then(res => setChatMessages(res.data.chat))
+      .catch(err => console.error('Error fetching chat log:', err));
+  }, [recipientId]);
+
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
 
-    const messageObj = {
-      id: chatMessages.length + 100, // mock ID
-      sender_id: senderId,
-      recipient_id: recipientId,
-      content: newMessage,
-      created_at: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
+    try {
+      const res = await axios.post(`/api/messages/${recipientId}`, {
+        content: newMessage
+      });
 
-    setChatMessages([...chatMessages, messageObj]);
-    setNewMessage('');
+      setChatMessages([...chatMessages, res.data.newMessage]);
+      setNewMessage('');
+    } catch (err) {
+      console.error('Error sending message:', err.response || err.message);
+      alert('Failed to send message.');
+    }
   };
 
   return (
@@ -56,7 +63,7 @@ const ChatPage = () => {
         borderBottom: '1px solid #ccc',
         marginBottom: '10px'
       }}>
-        Chat with {contact?.name}
+        Chat with {contact?.name || 'Loading...'}
       </div>
 
       <button
@@ -75,18 +82,12 @@ const ChatPage = () => {
         ← Back to Messages
       </button>
 
-      {/* Chat messages */}
       <div style={{ flexGrow: 1, overflowY: 'auto', marginBottom: '15px' }}>
         {chatMessages.map(msg => (
-          <ChatBubble
-            key={msg.id}
-            message={msg}
-            isUser={msg.sender_id === senderId}
-          />
+          <ChatBubble key={msg.id} message={msg} isUser={msg.sender_id === senderId} />
         ))}
       </div>
 
-      {/* Input form */}
       <form onSubmit={handleSend} style={{ display: 'flex', gap: '8px' }}>
         <input
           type="text"

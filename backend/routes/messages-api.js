@@ -1,101 +1,112 @@
 const express = require('express');
 const router = express.Router();
 const messageQueries = require('../db/queries/messages');
+const db = require('../db/connection');
 
-// Create Message
+// ✅ Get all messages
+router.get('/', (req, res) => {
+  db.query('SELECT * FROM messages ORDER BY created_at DESC;')
+    .then((data) => res.status(200).json({ messages: data.rows }))
+    .catch((err) => res.status(500).json({ message: 'Error fetching messages', error: err.message }));
+});
+
+// ✅ Create a new message
 router.post('/:id', (req, res) => {
+  const user_id = 1; // Simulated logged-in user
+  const { content } = req.body;
+  const recipient_id = parseInt(req.params.id, 10);
 
-  const user_id = 1;
+  console.log('Incoming message:', { sender_id: user_id, recipient_id, content });
 
-  const {content} = req.body
+  if (!content || isNaN(recipient_id)) {
+    return res.status(400).json({ message: 'Missing or invalid content or recipient ID' });
+  }
+
   const newMessage = {
     sender_id: user_id,
-    recipient_id: req.params.id,
-    content: content,
+    recipient_id,
+    content,
     created_at: new Date()
   };
 
-  const validateValues = Object.values(newMessage);
-  for (const value of validateValues) {
-    if (!value) {
-      return res
-        .status(400)
-        .json({ message: 'All properties must be provided to create a payment' });
-    }
-  }
   messageQueries.createMessage(newMessage)
-    .then((newMessage) => {
-      res.status(201).json({ message: 'New Message Created!', newMessage })
-    })
+    .then((created) => res.status(201).json({ message: 'New message created!', newMessage: created }))
     .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error creating message', error: err.message });
+      console.error('Message creation error:', err);
+      res.status(500).json({ message: 'Error creating message', error: err.message });
     });
 });
 
-// Read messages between users
+// ✅ Get chat log between sender and recipient
 router.get('/:id/chat', (req, res) => {
+  const user_id = 1; // Simulated logged-in user
+  const recipient_id = parseInt(req.params.id, 10);
 
-  const user_id = 2;
-  messageQueries.getChatLogMessages(user_id, req.params. vid)
+  if (isNaN(recipient_id)) {
+    return res.status(400).json({ message: 'Invalid recipient ID' });
+  }
+
+  messageQueries.getChatLogMessages(user_id, recipient_id)
     .then((chat) => {
-      if (!chat) {
-        return res.status(400).json({ message: 'Chat log not found!' });
-      }
-      res.status(201).json({ message: 'Heres the chat log!', chat })
+      if (!chat) return res.status(404).json({ message: 'Chat log not found' });
+      res.status(200).json({ message: 'Here’s the chat log!', chat });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading chat logs', error: err.message });
+      console.error('Chat log error:', err);
+      res.status(500).json({ message: 'Error reading chat logs', error: err.message });
     });
-})
+});
 
-// Read message by id
+// ✅ Get single message by ID
 router.get('/:id', (req, res) => {
-  messageQueries
-    .getMessageById(req.params.id)
-    .then((message) => {
-      if (!message) {
-        return res.status(400).json({ message: 'Message not found!' });
-      }
-      res.status(201).json({ message: 'Heres the Message!', message })
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading message', error: err.message });
-    });
-})
+  const messageId = parseInt(req.params.id, 10);
 
-// Update a Message
-router.put('/:id', (req, res) => {
-  const {content} = req.body;
-  const user_id = 1;
-  const updatedMessage = { content: content };
-  messageQueries
-    .getMessageById(req.params.id)
+  if (isNaN(messageId)) {
+    return res.status(400).json({ message: 'Invalid message ID' });
+  }
+
+  messageQueries.getMessageById(messageId)
     .then((message) => {
       if (!message) {
         return res.status(404).json({ message: 'Message not found!' });
       }
-      console.log(message)
-      const messageBelongsToUser = message.sender_id === user_id;
-      if (!messageBelongsToUser) {
-        return res
-          .status(401)
-          .json({ message: 'This message does not belongs to you!' });
-      }
-      return messageQueries.updateMessage(req.params.id, updatedMessage)
-    })
-    .then((updatedMessage) => {
-      res.status(201).json({ message: 'Message updated!', note: updatedMessage });
+      res.status(200).json({ message: 'Here’s the message!', message });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error updating message', error: err.message });
+      res.status(500).json({ message: 'Error reading message', error: err.message });
     });
 });
+
+// ✅ Update a message
+router.put('/:id', (req, res) => {
+  const messageId = parseInt(req.params.id, 10);
+  const user_id = 1;
+  const { content } = req.body;
+
+  if (!content || isNaN(messageId)) {
+    return res.status(400).json({ message: 'Missing content or invalid message ID' });
+  }
+
+  const updatedMessage = { content };
+
+  messageQueries.getMessageById(messageId)
+    .then((message) => {
+      if (!message) {
+        return res.status(404).json({ message: 'Message not found!' });
+      }
+
+      if (message.sender_id !== user_id) {
+        return res.status(401).json({ message: 'This message does not belong to you!' });
+      }
+
+      return messageQueries.updateMessage(messageId, updatedMessage);
+    })
+    .then((updated) => {
+      res.status(200).json({ message: 'Message updated!', note: updated });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Error updating message', error: err.message });
+    });
+});
+
 module.exports = router;

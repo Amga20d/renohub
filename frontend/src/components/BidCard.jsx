@@ -27,16 +27,16 @@ const BidCard = ({ bid, users, onAccept, isAccepted, projectStatus }) => {
           <button onClick={() => onAccept(bid.id)}>Accept Bid</button>
         )}
 
-        {isAccepted && <span style={{ color: 'green', marginLeft: '10px' }}>✓ Accepted</span>}
+        {isAccepted && (
+          <span style={{ color: 'green', marginLeft: '10px' }}>✓ Accepted</span>
+        )}
 
         {bid.status === 'Completed' && projectStatus === 'Completed' && (
-          <a
-            href={`/payments?bidId=${bid.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button style={{ backgroundColor: '#28a745', color: '#fff' }}>Pay Now</button>
-          </a>
+          <Link to={`/pay/${bid.id}`} target="_blank" rel="noopener noreferrer">
+            <button style={{ backgroundColor: '#28a745', color: '#fff' }}>
+              Pay Now
+            </button>
+          </Link>
         )}
       </div>
     </div>

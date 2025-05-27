@@ -1,20 +1,21 @@
--- Users table seeds here (Example)
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at)
- VALUES ('John Doe', 'johnD@email.com', 'pass123','123-456-7890', 'Homeowner', True, '2025-05-15 11:30:30');
-
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at)
- VALUES ('Jane Crane', 'janeC@email.com', 'pass123', '123-456-7890','Contractor', True, '2025-05-3 12:30:30');
-
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at)
- VALUES ('Gary Larry', 'garyL@email.com', 'pass123', '123-456-7890', 'Admin', True, '2025-03-15 10:30:30');
-
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at) 
-VALUES ('Alice Smith', 'aliceS@email.com', 'pass123', '987-654-3210', 'Homeowner', True, '2025-04-20 09:15:00');
-
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at) 
-VALUES ('Bob Johnson', 'bobJ@email.com', 'pass123', '555-123-4567', 'Contractor', True, '2025-05-10 14:45:00');
-
-INSERT INTO Users (name, email, password_hash, phone_number, role, verification_status, created_at) 
-VALUES ('Clara Lee', 'claraL@email.com', 'pass123', '321-654-9870', 'Homeowner', True, '2025-05-18 08:00:00');
-
-
+INSERT INTO users (id, name, email, password_hash, phone_number, role, verification_status, created_at) VALUES
+(1, 'Rachel Smith', 'rachel.smith@yahoo.com', '123', '403-555-1001', 'Contractor', TRUE, '2024-02-27 18:01:00'),
+(2, 'Julia Davis', 'julia.davis@example.com', '123', '403-555-1002', 'Contractor', TRUE, '2024-03-20 05:25:00'),
+(3, 'Steven Brown', 'steven.brown@outlook.com', '123', '403-555-1003', 'Contractor', TRUE, '2024-03-21 23:29:00'),
+(4, 'Ethan Jackson', 'ethan.jackson@outlook.com', '123', '403-555-1004', 'Homeowner', TRUE, '2024-07-04 15:29:00'),
+(5, 'Michael Martin', 'michael.martin@outlook.com', '123', '403-555-1005', 'Contractor', TRUE, '2024-07-15 04:20:00'),
+(6, 'Fiona Moore', 'fiona.moore@gmail.com', '123', '403-555-1006', 'Homeowner', TRUE, '2024-09-18 00:50:00'),
+(7, 'Nora Wilson', 'nora.wilson@outlook.com', '123', '403-555-1007', 'Homeowner', TRUE, '2024-09-27 16:34:00'),
+(8, 'George Garcia', 'george.garcia@outlook.com', '123', '403-555-1008', 'Contractor', TRUE, '2024-10-13 08:12:00'),
+(9, 'Ian Martinez', 'ian.martinez@example.com', '123', '403-555-1009', 'Contractor', TRUE, '2024-11-20 23:01:00'),
+(10, 'Patricia Martinez', 'patricia.martinez@example.com', '123', '403-555-1010', 'Homeowner', TRUE, '2024-12-16 02:19:00'),
+(11, 'Bob Wilson', 'bob.wilson@example.com', '123', '403-555-1011', 'Contractor', TRUE, '2024-12-21 05:08:00'),
+(12, 'Charles Lopez', 'charles.lopez@mail.com', '123', '403-555-1012', 'Contractor', TRUE, '2024-12-27 10:27:00'),
+(13, 'Laura Moore', 'laura.moore@example.com', '123', '403-555-1013', 'Contractor', TRUE, '2024-12-28 08:54:00'),
+(14, 'Quinn Lopez', 'quinn.lopez@yahoo.com', '123', '403-555-1014', 'Homeowner', TRUE, '2025-01-29 05:52:00'),
+(15, 'Oscar Brown', 'oscar.brown@gmail.com', '123', '403-555-1015', 'Contractor', TRUE, '2025-01-31 08:05:00'),
+(16, 'Yvonne Davis', 'yvonne.davis@gmail.com', '123', '403-555-1016', 'Contractor', TRUE, '2025-02-27 04:54:00'),
+(17, 'Patrick Williams', 'patrick.williams@gmail.com', '123', '403-555-1017', 'Contractor', TRUE, '2025-03-15 05:33:00'),
+(18, 'Xander Taylor', 'xander.taylor@example.com', '123', '403-555-1018', 'Contractor', TRUE, '2025-04-07 04:43:00'),
+(19, 'Uma Hernandez', 'uma.hernandez@gmail.com', '123', '403-555-1019', 'Contractor', TRUE, '2025-04-22 02:55:00'),
+(20, 'Victor Johnson', 'victor.johnson@example.com', '123', '403-555-1020', 'Contractor', TRUE, '2025-05-04 21:02:00');

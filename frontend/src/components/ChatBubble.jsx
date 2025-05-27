@@ -16,7 +16,7 @@ const ChatBubble = ({ message, isUser }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={infoStyle}>
-        {isUser ? 'You' : 'Them'} • {message.created_at}
+        {isUser ? 'You' : 'Them'} • {new Date(message.created_at).toLocaleTimeString()}
       </div>
       <div style={bubbleStyle}>
         {message.content}

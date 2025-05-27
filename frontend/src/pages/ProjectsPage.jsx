@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { projects } from '../data/projects';
+import axios from 'axios';
 import { getDaysAgo } from '../helpers/utils';
 import { Link } from 'react-router-dom';
 
 function ProjectsPage() {
   const [filter, setFilter] = useState('All');
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/projects')
+      .then(res => setProjects(res.data.projects))
+      .catch(err => console.error('Error loading projects:', err));
+  }, []);
 
   const projectTypes = [
     'All', 'Roofing', 'Siding', 'Framing', 'Painting',
@@ -16,37 +23,24 @@ function ProjectsPage() {
     ? projects
     : projects.filter(project => project.type === filter);
 
-  const pageStyles = {
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif'
-  };
-
-  const buttonStyle = {
-    marginRight: '8px',
-    padding: '8px 12px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  };
-
-  const viewButtonStyle = { ...buttonStyle, backgroundColor: '#007BFF', color: '#fff' };
-  const messageButtonStyle = { ...buttonStyle, backgroundColor: '#FFC107', color: '#fff' };
-  const bidButtonStyle = { ...buttonStyle, backgroundColor: '#28A745', color: '#fff' };
-
   return (
-    <div style={pageStyles}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <Navbar />
       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Browse Projects</h1>
 
       <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        {projectTypes.map((type) => (
+        {projectTypes.map(type => (
           <button
             key={type}
             onClick={() => setFilter(type)}
             style={{
-              ...buttonStyle,
+              marginRight: '8px',
+              padding: '8px 12px',
+              border: 'none',
+              borderRadius: '4px',
               backgroundColor: filter === type ? '#0056b3' : '#007BFF',
-              color: '#fff'
+              color: '#fff',
+              cursor: 'pointer'
             }}
           >
             {type}
@@ -70,13 +64,13 @@ function ProjectsPage() {
           </p>
           <div>
             <Link to={`/projects/${project.id}`}>
-              <button style={viewButtonStyle}>View</button>
+              <button style={{ backgroundColor: '#007BFF', color: '#fff', marginRight: '8px' }}>View</button>
             </Link>
             <Link to={`/messages/${project.user_id}`}>
-              <button style={messageButtonStyle}>Message Homeowner</button>
+              <button style={{ backgroundColor: '#FFC107', color: '#fff', marginRight: '8px' }}>Message Homeowner</button>
             </Link>
             <Link to={`/projects/${project.id}/bids`}>
-              <button style={bidButtonStyle}>Bid</button>
+              <button style={{ backgroundColor: '#28A745', color: '#fff' }}>Bid</button>
             </Link>
           </div>
         </div>

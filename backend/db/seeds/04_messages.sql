@@ -1,27 +1,51 @@
-INSERT INTO messages(sender_id, recipient_id, content, created_at)
- VALUES ( 1, 2, 'Hi how are you!', '2025-03-15 10:30:30');
-
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (2, 1, 'Doing well, thanks! How about you?', '2025-03-15 10:32:10');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (3, 5, 'Welcome to the platform.', '2025-04-01 08:00:00');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (5, 3, 'Thanks! Excited to get started.', '2025-04-01 08:03:45');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (4, 2, 'Can we schedule a consultation?', '2025-04-15 09:15:00');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (2, 4, 'Sure! What time works for you?', '2025-04-15 09:20:00');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (6, 1, 'I saw your project listing—looks great!', '2025-05-01 14:00:00');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (1, 6, 'Thanks! Let me know if you’re interested.', '2025-05-01 14:02:30');
-
-INSERT INTO messages (sender_id, recipient_id, content, created_at) 
-VALUES (5, 4, 'Do you have any photos of the area?', '2025-05-10 11:25:00');
+INSERT INTO messages (id, sender_id, recipient_id, content, created_at) VALUES
+(1, 15, 7, 'I can provide references from past clients if needed.', '2024-01-07 04:38:00'),
+(2, 8, 10, 'Is the property easily accessible for our crew?', '2024-01-16 00:16:00'),
+(3, 2, 4, 'The weather is nice this week, perfect for starting work!', '2024-01-16 19:26:00'),
+(4, 5, 10, 'Do you have any preferences for working hours?', '2024-03-19 18:18:00'),
+(5, 16, 10, 'Do you have any preferences for working hours?', '2024-03-26 02:57:00'),
+(6, 1, 14, 'When would you like the project to start?', '2024-05-02 15:18:00'),
+(7, 10, 12, 'I prefer work to be done during weekdays.', '2024-05-04 16:02:00'),
+(8, 4, 8, 'I am concerned about the total cost; can it be itemized?', '2024-05-05 02:51:00'),
+(9, 6, 1, 'Hello, thank you for your message. Please tell me more about your experience.', '2024-05-06 03:13:00'),
+(10, 5, 7, 'The weather is nice this week, perfect for starting work!', '2024-05-12 22:37:00'),
+(11, 19, 6, 'Are there any permits needed for this project?', '2024-06-07 18:40:00'),
+(12, 17, 14, 'Could we schedule a call to discuss the project?', '2024-06-14 19:22:00'),
+(13, 6, 1, 'How soon can you start working on the project?', '2024-07-13 22:10:00'),
+(14, 9, 7, 'The weather is nice this week, perfect for starting work!', '2024-07-19 01:18:00'),
+(15, 14, 16, 'I prefer work to be done during weekdays.', '2024-07-22 17:46:00'),
+(16, 4, 5, 'Is there a warranty on your work?', '2024-08-01 19:02:00'),
+(17, 4, 2, 'Please ensure the crew wears masks when on site.', '2024-08-29 01:34:00'),
+(18, 14, 16, 'Thank you for reaching out. Do you have references from past projects?', '2024-09-03 04:24:00'),
+(19, 4, 20, 'I will be available at home during weekdays afternoon.', '2024-09-07 10:19:00'),
+(20, 8, 10, 'Could you provide more details on the project scope?', '2024-09-18 19:19:00'),
+(21, 2, 10, 'I have a question about the timeline and budget.', '2024-10-01 20:20:00'),
+(22, 10, 9, 'Hello, thank you for your message. Please tell me more about your experience.', '2024-10-03 14:42:00'),
+(23, 7, 18, 'I will be available at home during weekdays afternoon.', '2024-10-26 06:44:00'),
+(24, 10, 3, 'Is there a warranty on your work?', '2024-11-14 08:44:00'),
+(25, 18, 6, 'Could you provide more details on the project scope?', '2024-11-20 18:47:00'),
+(26, 9, 2, 'Thank you for reaching out. Do you have references from past projects?', '2024-12-01 12:27:00'),
+(27, 4, 19, 'I will be available at home during weekdays afternoon.', '2024-12-17 17:55:00'),
+(28, 6, 8, 'Yes, please send me a detailed proposal and timeline.', '2024-12-18 17:55:00'),
+(29, 1, 12, 'What is the estimated cost for this project?', '2024-12-25 13:21:00'),
+(30, 7, 13, 'Please ensure the crew wears masks when on site.', '2025-01-05 03:45:00'),
+(31, 5, 10, 'Hello, thank you for your message. Please tell me more about your experience.', '2025-01-11 17:15:00'),
+(32, 7, 13, 'I prefer work to be done during weekdays.', '2025-01-16 22:19:00'),
+(33, 7, 12, 'Yes, please send me a detailed proposal and timeline.', '2025-01-19 19:26:00'),
+(34, 18, 16, 'I am a licensed contractor with 10 years experience, I would love to help.', '2025-02-01 17:54:00'),
+(35, 10, 15, 'Thank you, I''ll review the information and get back to you.', '2025-02-09 07:58:00'),
+(36, 10, 12, 'How soon can you start working on the project?', '2025-02-10 04:43:00'),
+(37, 5, 14, 'Is the property easily accessible for our crew?', '2025-02-10 16:47:00'),
+(38, 14, 18, 'Yes, please send me a detailed proposal and timeline.', '2025-02-12 06:19:00'),
+(39, 19, 10, 'Could we schedule a call to discuss the project?', '2025-03-03 13:47:00'),
+(40, 16, 7, 'Hello, I saw your project and I''m interested in working with you.', '2025-03-11 01:20:00'),
+(41, 4, 20, 'I will be available at home during weekdays afternoon.', '2025-03-16 14:38:00'),
+(42, 9, 7, 'The weather is nice this week, perfect for starting work!', '2025-03-26 23:56:00'),
+(43, 4, 12, 'I prefer work to be done during weekdays.', '2025-03-30 08:29:00'),
+(44, 20, 14, 'Is the property easily accessible for our crew?', '2025-04-04 16:25:00'),
+(45, 14, 18, 'Can you adjust the schedule if the weather changes?', '2025-04-04 18:31:00'),
+(46, 19, 10, 'Do you have any specific materials or brands in mind?', '2025-04-09 06:56:00'),
+(47, 14, 13, 'Hello, thank you for your message. Please tell me more about your experience.', '2025-04-10 00:26:00'),
+(48, 4, 13, 'I have some questions about your bid. Can we discuss?', '2025-04-14 15:08:00'),
+(49, 17, 14, 'Hello, I saw your project and I''m interested in working with you.', '2025-05-02 22:56:00'),
+(50, 6, 3, 'I will be available at home during weekdays afternoon.', '2025-05-06 10:45:00');

@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
-const dummyBids = [
-  { id: 9, amount: 5200 },
-  { id: 10, amount: 5300 }
-  // Add more bids as needed
-];
+import axios from 'axios';
 
 const generateTransactionId = () => {
   return Math.random().toString(36).substring(2, 12).toUpperCase();
@@ -13,12 +8,23 @@ const generateTransactionId = () => {
 
 const PaymentPage = () => {
   const { bidId } = useParams();
-  const bid = dummyBids.find(b => b.id === parseInt(bidId));
-  const amount = bid ? bid.amount : 0;
-
+  const [amount, setAmount] = useState(0);
   const [form, setForm] = useState({ name: '', card: '', expiry: '', cvv: '' });
   const [paid, setPaid] = useState(false);
   const [txnId, setTxnId] = useState('');
+
+  useEffect(() => {
+    const fetchBid = async () => {
+      try {
+        const res = await axios.get(`/api/bids/${bidId}`);
+        setAmount(res.data.bid.amount);
+      } catch (err) {
+        console.error('Failed to load bid data:', err);
+      }
+    };
+
+    fetchBid();
+  }, [bidId]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

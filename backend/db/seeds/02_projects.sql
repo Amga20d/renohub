@@ -1,20 +1,21 @@
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 1', 'Description 1', 6804, 'Address 1', 'Completed', 'Painting', '2025-06-16 23:48:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 2', 'Description 2', 5085, 'Address 2', 'Completed', 'Roofing', '2025-06-12 12:09:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 3', 'Description 3', 1867, 'Address 3', 'Bidding', 'Flooring', '2025-07-31 22:32:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 4', 'Description 4', 5047, 'Address 4', 'Ongoing', 'Plumbing', '2025-07-31 11:00:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 5', 'Description 5', 8558, 'Address 5', 'Ongoing', 'Framing', '2025-06-24 14:39:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 6', 'Description 6', 5276, 'Address 6', 'Ongoing', 'HVAC', '2025-07-08 01:11:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 7', 'Description 7', 9865, 'Address 7', 'Bidding', 'Siding', '2025-07-09 16:07:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 8', 'Description 8', 1623, 'Address 8', 'Completed', 'Plumbing', '2025-06-10 06:24:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 9', 'Description 9', 3629, 'Address 9', 'Ongoing', 'HVAC', '2025-07-28 12:15:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 10', 'Description 10', 1023, 'Address 10', 'Completed', 'Plumbing', '2025-06-04 17:30:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 11', 'Description 11', 2686, 'Address 11', 'Ongoing', 'Electrical', '2025-06-30 08:55:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 12', 'Description 12', 6892, 'Address 12', 'Bidding', 'Flooring', '2025-07-07 00:22:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 13', 'Description 13', 1283, 'Address 13', 'Completed', 'Plumbing', '2025-07-19 12:04:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 14', 'Description 14', 1319, 'Address 14', 'Bidding', 'Roofing', '2025-07-20 14:26:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 15', 'Description 15', 7581, 'Address 15', 'Bidding', 'Painting', '2025-07-10 08:27:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 16', 'Description 16', 2849, 'Address 16', 'Completed', 'Electrical', '2025-06-26 14:02:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 17', 'Description 17', 5705, 'Address 17', 'Bidding', 'Framing', '2025-06-24 16:31:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 18', 'Description 18', 4527, 'Address 18', 'Bidding', 'Siding', '2025-07-27 13:00:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 19', 'Description 19', 5015, 'Address 19', 'Ongoing', 'Painting', '2025-06-29 06:58:00');
-INSERT INTO Projects (user_id, title, description, budget, address, status, type, created_at) VALUES (1, 'Project 20', 'Description 20', 8809, 'Address 20', 'Ongoing', 'Flooring', '2025-06-15 04:42:00');
+INSERT INTO projects (id, user_id, title, description, budget, address, status, type, created_at) VALUES
+(1, 4, 'Kitchen Remodel', 'Improve and modernize this area.', 6854, '123 Maple Street', 'Bidding', 'Roofing', '2024-01-01 09:00:00'),
+(2, 7, 'Bathroom Upgrade', 'Replace old fixtures.', 1566, '456 Oak Avenue', 'Ongoing', 'Siding', '2024-01-11 09:00:00'),
+(3, 14, 'Garage Makeover', 'Install new functional space.', 6333, '789 Pine Road', 'Completed', 'Framing', '2024-01-21 09:00:00'),
+(4, 14, 'Basement Finishing', 'Enhance insulation and energy efficiency.', 7898, '321 Birch Lane', 'Bidding', 'Painting', '2024-01-31 09:00:00'),
+(5, 4, 'Attic Insulation', 'Add new features for usability.', 9042, '654 Spruce Blvd', 'Ongoing', 'Flooring', '2024-02-10 09:00:00'),
+(6, 7, 'Backyard Deck', 'Fix structural damage.', 6090, '202 Cedar Ct', 'Completed', 'HVAC', '2024-02-20 09:00:00'),
+(7, 4, 'New Driveway', 'Add better security systems.', 5467, '404 Aspen Dr', 'Bidding', 'Plumbing', '2024-03-01 09:00:00'),
+(8, 14, 'Window Replacement', 'Improve curb appeal.', 5049, '303 Redwood Rd', 'Ongoing', 'Electrical', '2024-03-11 09:00:00'),
+(9, 4, 'Door Installation', 'Modern upgrade.', 9091, '707 Sycamore Way', 'Completed', 'Roofing', '2024-03-21 09:00:00'),
+(10, 6, 'Home Painting', 'Replace outdated equipment.', 5578, '606 Willow Pkwy', 'Bidding', 'Siding', '2024-03-31 09:00:00'),
+(11, 14, 'Tile Flooring', 'Improve and modernize this area.', 1593, '123 Maple Street', 'Ongoing', 'Framing', '2024-04-10 09:00:00'),
+(12, 10, 'Shed Construction', 'Replace old fixtures.', 9840, '456 Oak Avenue', 'Completed', 'Painting', '2024-04-20 09:00:00'),
+(13, 14, 'Pool Renovation', 'Install new functional space.', 8829, '789 Pine Road', 'Bidding', 'Flooring', '2024-04-30 09:00:00'),
+(14, 6, 'Fence Repair', 'Enhance insulation and energy efficiency.', 6443, '321 Birch Lane', 'Ongoing', 'HVAC', '2024-05-10 09:00:00'),
+(15, 10, 'Porch Extension', 'Add new features for usability.', 3193, '654 Spruce Blvd', 'Completed', 'Plumbing', '2024-05-20 09:00:00'),
+(16, 6, 'Lighting Setup', 'Fix structural damage.', 7162, '202 Cedar Ct', 'Bidding', 'Electrical', '2024-05-30 09:00:00'),
+(17, 6, 'Smart Home Wiring', 'Add better security systems.', 1791, '404 Aspen Dr', 'Ongoing', 'Roofing', '2024-06-09 09:00:00'),
+(18, 4, 'Boiler Replacement', 'Improve curb appeal.', 8826, '303 Redwood Rd', 'Completed', 'Siding', '2024-06-19 09:00:00'),
+(19, 10, 'Roof Shingles', 'Modern upgrade.', 9254, '707 Sycamore Way', 'Bidding', 'Framing', '2024-06-29 09:00:00'),
+(20, 6, 'Ceiling Patching', 'Replace outdated equipment.', 1728, '606 Willow Pkwy', 'Ongoing', 'Painting', '2024-07-09 09:00:00');

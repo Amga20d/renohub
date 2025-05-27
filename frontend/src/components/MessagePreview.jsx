@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MessagePreview = ({ recipient, lastMessage }) => {
+  if (!recipient || !lastMessage) return null;
+
   return (
     <Link to={`/messages/${recipient.id}`} style={{ textDecoration: 'none' }}>
       <div style={{
@@ -14,7 +16,7 @@ const MessagePreview = ({ recipient, lastMessage }) => {
       }}>
         <div style={{ fontWeight: 'bold' }}>{recipient.name}</div>
         <div style={{ color: '#555' }}>{lastMessage.content}</div>
-        <div style={{ fontSize: '12px', color: '#888', textAlign: 'right' }}>{lastMessage.created_at}</div>
+        <div style={{ fontSize: '12px', color: '#888', textAlign: 'right' }}>{new Date(lastMessage.created_at).toLocaleTimeString()}</div>
       </div>
     </Link>
   );

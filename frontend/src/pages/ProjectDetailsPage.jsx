@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { projects } from '../data/projects';
+import axios from 'axios';
 import { getDaysAgo } from '../helpers/utils';
 
 const ProjectDetailsPage = () => {
   const { id } = useParams();
-  const project = projects.find(p => p.id === parseInt(id));
+  const [project, setProject] = useState(null);
+
+  useEffect(() => {
+    axios.get(`/api/projects/${id}`)
+      .then(res => setProject(res.data.project))
+      .catch(err => console.error('Error fetching project:', err));
+  }, [id]);
 
   if (!project) {
     return (
