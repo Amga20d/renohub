@@ -4,19 +4,11 @@ import '../styles/MessagePreview.scss'
 
 const MessagePreview = ({ recipient, lastMessage }) => {
   return (
-    <Link to={`/messages/${recipient.id}`} style={{ textDecoration: 'none' }}>
-      <div className='message' style={{
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        padding: '10px',
-        marginBottom: '10px',
-        backgroundColor: '#f9f9f9',
-        color: '#000'
-      }}>
-        <div style={{ fontWeight: 'bold' }}>{recipient.name}</div>
-        <div style={{ color: '#555' }}>{lastMessage.content}</div>
-        <div style={{ fontSize: '12px', color: '#888', textAlign: 'right' }}>{lastMessage.created_at}</div>
-      </div>
+    
+      <Link to={`/messages/${recipient.id}`} className='card'>   
+        <div className='card-info name'>{recipient.name}</div>
+        <div className='card-info text'>{lastMessage.content}</div>
+        <div className='card-info created'><em>{lastMessage.created_at}</em></div>
     </Link>
   );
 };

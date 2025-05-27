@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { messages as initialMessages, users } from '../data/mockMessages';
 import ChatBubble from '../components/ChatBubble';
+import '../styles/ChatPage.scss';
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -61,15 +62,10 @@ const ChatPage = () => {
 
       <button
         onClick={() => navigate('/messages')}
+        className='btn'
         style={{
           alignSelf: 'flex-start',
           marginBottom: '15px',
-          padding: '6px 12px',
-          border: 'none',
-          backgroundColor: '#007bff',
-          color: 'white',
-          borderRadius: '4px',
-          cursor: 'pointer'
         }}
       >
         ← Back to Messages
@@ -100,14 +96,7 @@ const ChatPage = () => {
             border: '1px solid #ccc'
           }}
         />
-        <button type="submit" style={{
-          padding: '10px 16px',
-          backgroundColor: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer'
-        }}>
+        <button type="submit" className='btn'>
           Send
         </button>
       </form>
