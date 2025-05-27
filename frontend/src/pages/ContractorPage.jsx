@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { contractors } from '../data/contractors';
+import '../styles/ContractorPage.scss'
 
 const ContractorPage = () => {
   const [filter, setFilter] = useState('All');
@@ -15,7 +16,6 @@ const ContractorPage = () => {
 
     const containerStyle = {
       padding: '20px',
-      fontFamily: 'Arial, sans-serif'
     };
       
 
@@ -44,32 +44,34 @@ const ContractorPage = () => {
   return (
     <div style={containerStyle}>
       <Navbar />
-      <h2>Contractors</h2>
-      <div style={filterStyle}>
+      <h1>Contractors</h1>
+      <div className='btn-tab'>
         {roles.map((role) => (
           <button
             key={role}
             onClick={() => setFilter(role)}
             style={{
               ...buttonStyle,
-              backgroundColor: filter === role ? '#2980b9' : '#3498db',
+              backgroundColor: filter === role ?  "rgb(179, 41, 17)" : "rgb(226, 91, 28)",
             }}
           >
             {role}
           </button>
         ))}
       </div>
-      {filteredContractors.map((contractor) => (
+      <div className='cards-container'>
+        {filteredContractors.map((contractor) => (
         <div key={contractor.id} style={cardStyle}>
           <h3>{contractor.name}</h3>
           <p>Specialization: {contractor.role}</p>
           <Link to={`/messages/${contractor.id}`}>
-            <button style={{ ...buttonStyle, backgroundColor: '#2ecc71' }}>
+            <button className='btn'>
               Message Contractor
             </button>
           </Link>
         </div>
       ))}
+      </div>
     </div>
   );
 };

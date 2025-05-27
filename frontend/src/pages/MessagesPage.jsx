@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { messages, users } from '../data/mockMessages';
 import MessagePreview from '../components/MessagePreview';
+import '../styles/MessagePage.scss';
 
 const MessagesPage = () => {
   const senderId = 1; // current user is sender
@@ -19,10 +20,11 @@ const MessagesPage = () => {
   });
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div className='page'>
+      <h1>Messages</h1>
       <Navbar />
       {previews.map(({ recipient, lastMessage }) => (
-        <MessagePreview key={recipient.id} recipient={recipient} lastMessage={lastMessage} />
+        <MessagePreview key={recipient.id} recipient={recipient} lastMessage={lastMessage} className='message' />
       ))}
     </div>
   );

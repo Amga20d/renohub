@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 
+
 // Lazy-loaded page components
 const HomePage = lazy(() => import("./pages/HomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));

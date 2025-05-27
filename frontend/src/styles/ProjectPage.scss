@@ -23,14 +23,12 @@
 
 .cards-container{
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 
 .card{
   display: flex;
-  flex: 1;
-  flex-grow: 0;
   flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 8px;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/MessagePreview.scss'
 
 const MessagePreview = ({ recipient, lastMessage }) => {
   return (
     <Link to={`/messages/${recipient.id}`} style={{ textDecoration: 'none' }}>
-      <div style={{
+      <div className='message' style={{
         border: '1px solid #ccc',
         borderRadius: '5px',
         padding: '10px',
