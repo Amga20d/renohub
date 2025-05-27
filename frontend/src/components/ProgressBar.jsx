@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ProgressBarBoot from 'react-bootstrap/ProgressBar';
 const ProgressBar = ({ percent }) => (
   <div style={{ backgroundColor: '#e0e0e0', borderRadius: '4px', height: '20px', overflow: 'hidden' }}>
     <div style={{

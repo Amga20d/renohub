@@ -36,10 +36,10 @@ function ProjectsPage() {
           <button
             key={type}
             onClick={() => setFilter(type)}
-            className="btn"
+            className="filter-btn"
             style={{
               backgroundColor:
-                filter === type ? "rgb(179, 41, 17)" : "rgb(226, 91, 28)",
+                filter === type ? "rgb(179, 41, 17)" : "rgb(226, 91, 28)"
             }}
           >
             {type}
@@ -72,14 +72,14 @@ function ProjectsPage() {
             <div className="card-btn-group">
               <div>
                 <Link to={`/projects/${project.id}`}>
-                  <button className="card-btn">View</button>
+                  <button className="btn">View</button>
                 </Link>
                 <Link to={`/projects/${project.id}/bids`}>
-                  <button className="card-btn">Bid</button>
+                  <button className="btn">Bid</button>
                 </Link>
               </div>
               <Link to={`/messages/${project.user_id}`}>
-                <button className="card-btn">Message</button>
+                <button className="btn">Message</button>
               </Link>
             </div>
           </Card>
