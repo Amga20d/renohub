@@ -1,4 +1,4 @@
-.page{
+.page-project{
   max-width: 90%;
   margin: 0 auto;
   margin-top:4%;
@@ -22,20 +22,21 @@
   text-align: center;
 }
 
-.cards-container{
+.cards-container-project{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
 
-.card{
-  display: flex;
-  flex-direction: column;
+.card-project{
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
   background-color: #f9f9f9;
+}
+.card-img-project{
+  width: 100%;
 }
 
 .card-body{
@@ -48,7 +49,7 @@
   flex: 1;
 }
 
-.card-info {
+.card-info-project {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

@@ -1,4 +1,4 @@
-.btn{
+.btn-bid{
   margin-right: 8px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
@@ -8,11 +8,11 @@
   color: #fff;
 }
 
-.btn {
+.btn-bid{
   transition-duration: 0.4s;
 }
 
-.btn:hover{
+.btn-bid:hover{
   background-color: #fff; 
   color:rgb(226, 91, 28); ;
 }

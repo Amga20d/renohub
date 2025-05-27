@@ -2,7 +2,7 @@ body{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.card{
+.card-message{
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -17,9 +17,7 @@ body{
   text-decoration: none;
 }
 
-.card-info{
- 
-}
+
 .name{
   font-weight: bold;
 }

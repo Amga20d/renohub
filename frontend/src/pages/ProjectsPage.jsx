@@ -27,7 +27,7 @@ function ProjectsPage() {
       : projects.filter((project) => project.type === filter);
 
   return (
-    <div className="page">
+    <div className="page-project">
       <Navbar />
       <h1>Browse Projects</h1>
 
@@ -46,20 +46,23 @@ function ProjectsPage() {
           </button>
         ))}
       </div>
-      <div className="cards-container">
+      <div className="cards-container-project">
         {filteredProjects.map((project) => (
-          <Card className="card" key={project.id}>
-            <Card.Img
+          <Card className="card-project" key={project.id}>
+            <div>
+              <Card.Img
               variant="top"
+              className="card-img-project"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVg0ALmeHYkiOh8LiA1oJrJM9B6mXhtPBIeg&s"
             />
-            <Card.Body className="card-body">
+            </div>
+            <Card.Body className="card-body-project">
               <Card.Title><h3>{project.title}</h3></Card.Title>
-              <Card.Text className="card-text">
+              <Card.Text className="card-text-project">
                 <span>{project.description}</span>
               </Card.Text>
             </Card.Body>
-            <div className="card-info">
+            <div className="card-info-project">
               <span>
                 <strong>Budget: </strong>
                 {project.budget}

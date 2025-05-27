@@ -1,4 +1,4 @@
-.page{
+.page-profile{
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -10,7 +10,7 @@
 h1{
   color: rgb(226, 91, 28)
 }
-.card-container{
+.card-container-profile{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@ h1{
   border-radius: 16px;
   background-color: #f9f9f9;
 }
-.card-info{
+.card-info-profile{
   border-top: solid 1px rgb(226, 91, 28) ;
 }
 

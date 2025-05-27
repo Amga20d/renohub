@@ -24,12 +24,12 @@ const ProfilePage = (props) => {
   // } = props; Uncomment when connected
 
   return (
-    <div className="page">
+    <div className="page-profile">
       <Navbar />
       <h1>My Profile</h1>
-      <div className="card-container">
+      <div className="card-container-profile">
         <h1><strong>Account Details</strong></h1>
-        <div className="card-info">
+        <div className="card-info-profile">
           <ol>
             <li><strong>Name: </strong>{profile.name}</li>
             <li><strong>Email: </strong>{profile.email}</li>
@@ -46,30 +46,3 @@ const ProfilePage = (props) => {
 };
 
 export default ProfilePage;
-
-{/* <table>
-            <tr>
-              <th>Name</th>
-              <td>{profile.name}</td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td>{profile.email}</td>
-            </tr>
-            <tr>
-              <th>Phone Number </th>
-              <td>{profile.phone_number}</td>
-            </tr>
-            <tr>
-              <th>Account Type</th>
-              <th>{profile.role}</th>
-            </tr>
-            <tr>
-              <th>Account Staus</th>
-              <th>{profile.status === true ? 'Active' : 'Disabled'}</th>
-            </tr>
-            <tr>
-              <th>Created</th>
-              <th>{getDaysAgo(profile.created_at)}</th>
-            </tr>
-          </table> */}

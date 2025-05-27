@@ -16,11 +16,11 @@ const BidCard = ({ bid, users, onAccept, isAccepted }) => {
       </p>
       <div style={{ display: 'flex', gap: '10px' }}>
         <Link to={`/messages/${bid.user_id}`}>
-          <button className='btn'>Message Contractor</button>
+          <button className='btn-bid'>Message Contractor</button>
         </Link>
 
         {bid.status === 'Sent' && (
-          <button className='btn' onClick={() => onAccept(bid.id)}>Accept Bid</button>
+          <button className='btn-bid' onClick={() => onAccept(bid.id)}>Accept Bid</button>
         )}
         {isAccepted && <span style={{ color: 'green', marginLeft: '10px' }}>✓ Accepted</span>}
       </div>

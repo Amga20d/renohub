@@ -1,22 +1,23 @@
-.page{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   max-width: 80%;
   margin: 0 auto;
-  margin-top:4%;
+  margin-top: 4%;
   padding: 10px;
 }
 
-h1{
-    text-align: center;
-    margin-bottom: 20px;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
   color: rgb(226, 91, 28);
 }
 
-.main-container{
+.main-container {
   display: grid;
 }
 
-.btn, .tab-btn{
+.btn,
+.tab-btn {
   margin-right: 8px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
@@ -25,29 +26,26 @@ h1{
   background-color: rgb(226, 91, 28);
   color: #fff;
 }
-.tab-btn{
+.tab-btn {
   flex: 1;
 }
 
-.tab-btn-group{
+.tab-btn-group {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
-
 }
 
 .btn {
   transition-duration: 0.4s;
 }
 
-.btn:hover{
-  background-color: #fff; 
-  color:rgb(226, 91, 28); ;
+.btn:hover {
+  background-color: #fff;
+  color: rgb(226, 91, 28);
 }
 
-p{
+p {
   font-size: 24px;
 }
-
-
