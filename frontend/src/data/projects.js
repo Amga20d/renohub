@@ -3,7 +3,7 @@ export const projects = [
       id: 1,
       user_id: 5,
       title: "Kitchen Remodel",
-      description: "Enhance visual appeal.",
+      description: "Looking to enhance visual appeal of kitchen.",
       budget: "$7594",
       type: "Siding",
       created_at: "2025-05-27T00:00:00"

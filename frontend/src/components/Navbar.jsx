@@ -3,20 +3,6 @@ import "../styles/Navbar.scss";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const navStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#2c3e50",
-    padding: "10px 20px",
-    color: "#ecf0f1",
-  };
-
-  const linkStyle = {
-    color: "#ecf0f1",
-    textDecoration: "none",
-    margin: "0 10px",
-  };
 
   return (
     <nav className="nav-bar">
