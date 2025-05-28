@@ -98,7 +98,7 @@ const DashboardPage = () => {
 
         return (
           <div className='main-container'>
-            <div key={project.id} style={{ border: '1px solid #ccc', padding: '15px', marginBottom: '20px' }}>
+            <div key={project.id} className='project-card-container'>
             <ProjectCard project={project} bids={[]} users={users} />
             <BidList
               bids={projectBids}
