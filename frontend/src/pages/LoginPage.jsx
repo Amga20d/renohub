@@ -5,21 +5,22 @@ import { Link } from "react-router-dom";
 const LoginPage = () => {
   return (
   <div className="login-body">
-      <div>
-        <Link to="/" className="btn-back">Back</Link>
-      </div>
-      <form className="form">
+   
+      <form className="login-form">
         <h1>Login</h1>
-        <div className="form-inputs">
-          <div className="form-input-fields">
-            <label>email: </label>
+        <div className="login-form-inputs">
+          <div className="login-form-input-fields">
+            <label>Email: </label>
             <input type="email" />
           </div>
-          <div className="form-input-fields">
+          <div className="login-form-input-fields">
             <label>Password: </label>
             <input type="password" />
           </div>
-          <button type="submit" className="form-btn">Login</button>
+          <div className="login-btn-group">
+            <button type="submit" className="login-form-btn">Login</button>
+          <Link to="/" >←Back</Link>
+          </div>
         </div>
       </form>
     </div>
@@ -27,21 +28,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-
-//     <div>
-//       <h1>Login</h1>
-//       <form>
-//         <div>
-//           <label>Email:</label>
-//           <input type="email" placeholder="Email" />
-//         </div>
-//         <div>
-//           <label>Password:</label>
-//           <input type="password" placeholder="Password" />
-//         </div>
-//         <button type="submit">Sign In</button>
-//       </form>
-//     </div>
-//   );
-// };

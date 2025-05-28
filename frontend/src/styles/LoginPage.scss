@@ -13,7 +13,7 @@ h1{
 color:rgb(226, 91, 28);
 }
 
-.form{
+.login-form{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,12 +24,12 @@ color:rgb(226, 91, 28);
    background-color: #f9f9f9;
 
 }
-.form-inputs{
+.login-form-inputs{
   font-size: 28px;
   width: 80%;
   height: 80%;
 }
-.form-input-fields{
+.login-form-input-fields{
   border: solid 1px rgb(179, 41, 17);
   padding: 6px;
   border-radius: 8px;
@@ -37,17 +37,12 @@ color:rgb(226, 91, 28);
   background-color: #eaf0d1
 }
 
-.form-input-fields:hover{
+.login-form-input-fields:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }
 
 .btn-back{
-  position: absolute;
-  top:0;
-  left: 0;
   font-size: 28px;
-  margin-top: 16px;
-  margin-left: 16px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
   border-radius: 4px;
@@ -57,11 +52,17 @@ color:rgb(226, 91, 28);
   text-decoration: none;
 
 }
-.form-btn{
+
+.login-btn-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form-btn{
   display: flex;
   justify-self: center;
   justify-content: center;
-  width: 30%;
+  width: 60%;
   font-size: 28px;
   margin-right: 8px;
   padding: 8px 12px;
@@ -73,10 +74,11 @@ color:rgb(226, 91, 28);
   text-decoration: none;
 }
 input{
-  width:65%;
-  height: 30px;
+  font-size: 28px;
+  width: 80%;
+  height: 80%;
 }
-.form-btn{
+.login-form-btn{
   transition-duration: 0.4s;
 }
 

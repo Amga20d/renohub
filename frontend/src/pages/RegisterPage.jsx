@@ -1,15 +1,13 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-import'../styles/RegisterPage.scss'
+import "../styles/RegisterPage.scss";
 
 const RegisterPage = () => {
   return (
     // <Link to="/" className="nav-link-item">RenoHub <i class="fa-solid fa-house-chimney"></i></Link>
     <div className="register-body">
-      <div>
-        <Link to="/" className="btn-back">Back</Link>
-      </div>
+
       <form className="form">
         <h1>Register</h1>
         <div className="form-inputs">
@@ -33,9 +31,11 @@ const RegisterPage = () => {
             <label>Postal/Zip</label>
             <input type="text" />
           </div>
-          <div className="input-role">
-          </div>
+          <div className="input-role"></div>
+          <div className="login-btn-group">
           <button type="submit" className="form-btn">Register</button>
+            <Link to="/" >←Back</Link>
+          </div>
         </div>
       </form>
     </div>
