@@ -1,4 +1,4 @@
-.login-body{
+.project-body{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,40 +13,51 @@ h1{
 color:rgb(226, 91, 28);
 }
 
-.login-form{
+.project-form{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 55%;
+  height: 70%;
   width: 50%;
   border: solid 2px rgb(179, 41, 17);
   border-radius: 8px;
-   background-color: #f9f9f9;
+  background-color: #f9f9f9;
 
 }
-.login-form-inputs{
+.project-form-inputs{
   font-size: 28px;
   width: 80%;
   height: 80%;
 }
-.login-form-input-fields{
+.project-form-input-fields{
   display: flex;
+  font-size: 24px;
   gap: 15px;
   width: 100%;
+  height: 30px;
   border: solid 1px rgb(179, 41, 17);
   padding: 6px;
   border-radius: 8px;
-  margin: 30px 10px;
+  margin: 20px 10px;
   background-color: #eaf0d1
-
+}
+.input-text{
+  height: 25%;
 }
 
-.login-form-input-fields:hover{
+.project-form-input-fields:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }
 
-.btn-back{
+
+.project-form-btn{
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  width: 60%;
+  height: 10%;
   font-size: 28px;
+  margin-bottom: 15px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
   border-radius: 4px;
@@ -54,20 +65,44 @@ color:rgb(226, 91, 28);
   background-color: rgb(226, 91, 28);
   color: #fff;
   text-decoration: none;
-
 }
 
+textarea{
+  font-size: 22px;
+}
+.project-form-btn{
+  transition-duration: 0.4s;
+}
 .login-btn-group{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.login-form-btn{
+
+.project-form-btn:hover{
+  background-color: #fff; 
+  color:rgb(226, 91, 28); ;
+}
+
+.project-form-drop{
   display: flex;
   justify-self: center;
-  justify-content: center;
-  width: 60%;
-  margin-top: 15px;
+  align-items: center;
+  width: 70%;
+  height: 10%;
+  border: solid 1px rgb(179, 41, 17);
+  padding: 6px;
+  border-radius: 8px;
+  margin: 5px 10px;
+  background-color: #eaf0d1;
+  font-size: 28px;
+}
+.project-form-drop-list{
+  display: flex;
+  justify-self: center;
+  text-align: center;
+  width: 80%;
+  height: 15%;
   font-size: 28px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
@@ -77,16 +112,7 @@ color:rgb(226, 91, 28);
   color: #fff;
   text-decoration: none;
 }
-input{
-  font-size: 28px;
-  width: 80%;
-  height: 80%;
-}
-.login-form-btn{
-  transition-duration: 0.4s;
-}
 
-.login-form-btn:hover{
-  background-color: #fff; 
-  color:rgb(226, 91, 28); ;
+.project-form-drop:hover{
+   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }

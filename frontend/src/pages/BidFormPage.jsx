@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import axios from 'axios';
-import Navbar from '../components/Navbar';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Navbar from "../components/Navbar";
+import "../styles/BidFormPage.scss";
 
 const BidFormPage = () => {
   const { id } = useParams(); // project ID from URL
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    amount: '',
-    notes: ''
+    amount: "",
+    notes: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user) {
-      alert('You must be logged in to submit a bid.');
+      alert("You must be logged in to submit a bid.");
       return;
     }
 
@@ -35,29 +32,70 @@ const BidFormPage = () => {
       user_id: user.id,
       amount: parseFloat(formData.amount),
       notes: formData.notes,
-      status: 'Sent', // ✅ use a valid string status
-      created_at: new Date()
+      status: "Sent", // ✅ use a valid string status
+      created_at: new Date(),
     };
 
     try {
-      const res = await axios.post('/api/bids', bidData);
-      alert('Bid submitted!');
-      navigate('/dashboard');
+      const res = await axios.post("/api/bids", bidData);
+      alert("Bid submitted!");
+      navigate("/dashboard");
     } catch (err) {
-      console.error('Bid submission error:', err.response?.data || err);
-      alert('Error submitting bid');
+      console.error("Bid submission error:", err.response?.data || err);
+      alert("Error submitting bid");
     }
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+    <div className="bid-body">
       <Navbar />
-      <h1>Submit a Bid</h1>
-      <form onSubmit={handleSubmit}>
-        <h3>Project ID: {id}</h3>
-        <div>
+      <form className="bid-form" onSubmit={handleSubmit}>
+        <h1>Submit a Bid</h1>
+        <h2>Project ID: {id}</h2>
+        <div className="bid-form-inputs">
+          <div className="bid-form-input-fields">
+            <label>Budget Proposal: </label>
+            <input
+              type="number"
+              name="amount"
+              placeholder="Bid Amount"
+              value={formData.amount}
+              onChange={handleChange}
+              className="input-area"
+              required
+            />
+          </div>
+          <div className="bid-form-input-fields bid-text">
+            <label>Addtional Notes: </label>
+            <textarea
+              as="textarea"
+              name="notes"
+              placeholder="Extra details for Homeowner"
+              value={formData.notes}
+              onChange={handleChange}
+              className="input-area bid text"
+              required
+            />
+          </div>
+          <div className="bid-btn-group">
+            <button type="submit" className="bid-form-btn">
+              Submit
+            </button>
+            <button onClick={() => navigate("/projects")} className="bid-form-btn">
+              ←Back
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default BidFormPage;
+{
+  /* <div>
           <label>Budget Proposal</label>
-          <InputGroup className="mb-3">
+          <InputGroup >
             <InputGroup.Text>$</InputGroup.Text>
             <Form.Control
               type="number"
@@ -82,10 +120,5 @@ const BidFormPage = () => {
             />
           </FloatingLabel>
         </div>
-        <Button type="submit" className="mt-3">Submit Bid</Button>
-      </form>
-    </div>
-  );
-};
-
-export default BidFormPage;
+        <Button type="submit" className="mt-3">Submit Bid</Button> */
+}

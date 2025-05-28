@@ -10,7 +10,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
     phone_number: "",
-    role: "Homeowner"
+    role: "Homeowner",
   });
 
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const RegisterPage = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -29,7 +29,7 @@ const RegisterPage = () => {
       const res = await axios.post("/api/users", formData);
       alert("Registration successful!");
       console.log(res.data);
-      navigate("/"); // ✅ Redirect to homepage
+      navigate("/");
     } catch (err) {
       console.error("Registration failed:", err.response?.data || err.message);
       alert("Failed to register. Please try again.");
@@ -44,71 +44,72 @@ const RegisterPage = () => {
           <div className="form-input-fields">
             <label>Name: </label>
             <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-input-fields">
             <label>Email: </label>
             <input
-            type="email"
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
+              type="email"
+              name="email"
+              placeholder="Email@email.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-input-fields">
             <label>Password: </label>
             <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
             />
           </div>
           <div className="form-input-fields">
             <label>Phone: </label>
             <input
-            name="phone_number"
-            placeholder="Phone Number"
-            value={formData.phone_number}
-            onChange={handleChange}
-            required
+              name="phone_number"
+              placeholder="(888) 888-8888"
+              value={formData.phone_number}
+              onChange={handleChange}
+              required
             />
           </div>
 
-           <select
-          name="role"
-          value={formData.role}
-          onChange={handleChange}
-          style={{ ...inputStyle, cursor: "pointer" }}
-        >
-          <option value="Homeowner">Homeowner</option>
-          <option value="Contractor">Contractor</option>
-        </select>
+          <div className="form-drop">
+            <p>Account Type:</p>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="form-drop-list"
+            >
+              <option value="Homeowner">Homeowner</option>
+              <option value="Contractor">Contractor</option>
+            </select>
+          </div>
 
-          <div className="input-role"></div>
           <div className="login-btn-group">
-          <button type="submit" className="form-btn">Register</button>
-            <Link to="/" >←Back</Link>
-
-            {/* <button type="button" onClick={() => navigate("/")} style={{ ...buttonStyle, backgroundColor: "#888", marginTop: "10px" }}>
-          Back to Homepage
-        </button> */}
-            
-            
+            <button type="submit" className="form-btn">
+              Register
+            </button>
+            <button onClick={() => navigate("/")} className="form-btn">
+              ←Back
+            </button>
           </div>
         </div>
       </form>
     </div>
   );
 };
+
+export default RegisterPage;

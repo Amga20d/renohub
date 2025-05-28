@@ -1,4 +1,4 @@
-.login-body{
+.bid-body{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,23 +13,31 @@ h1{
 color:rgb(226, 91, 28);
 }
 
-.login-form{
+.bid-form{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 55%;
+  height: 75%;
   width: 50%;
   border: solid 2px rgb(179, 41, 17);
   border-radius: 8px;
-   background-color: #f9f9f9;
+  background-color: #f9f9f9;
 
 }
-.login-form-inputs{
+.bid-form-inputs{
   font-size: 28px;
   width: 80%;
   height: 80%;
 }
-.login-form-input-fields{
+
+.input-area{
+  width: 100%;
+  font-size: 24px;
+}
+.bid-text{
+  height: 30%;
+}
+.bid-form-input-fields{
   display: flex;
   gap: 15px;
   width: 100%;
@@ -38,37 +46,21 @@ color:rgb(226, 91, 28);
   border-radius: 8px;
   margin: 30px 10px;
   background-color: #eaf0d1
-
 }
 
-.login-form-input-fields:hover{
+.bid-form-input-fields:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }
 
-.btn-back{
-  font-size: 28px;
-  padding: 8px 12px;
-  border: solid 1px rgb(226, 91, 28);
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: rgb(226, 91, 28);
-  color: #fff;
-  text-decoration: none;
-
-}
-
-.login-btn-group{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.login-form-btn{
+.bid-form-btn{
   display: flex;
   justify-self: center;
   justify-content: center;
   width: 60%;
-  margin-top: 15px;
+  height: 10%;
   font-size: 28px;
+  margin-top: 15px;
+  margin-right: 8px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
   border-radius: 4px;
@@ -77,16 +69,17 @@ color:rgb(226, 91, 28);
   color: #fff;
   text-decoration: none;
 }
-input{
-  font-size: 28px;
-  width: 80%;
-  height: 80%;
-}
-.login-form-btn{
+
+.bid-form-btn{
   transition-duration: 0.4s;
 }
+.bid-btn-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.login-form-btn:hover{
+.bid-form-btn:hover{
   background-color: #fff; 
   color:rgb(226, 91, 28); ;
 }

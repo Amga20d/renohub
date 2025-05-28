@@ -17,11 +17,11 @@ color:rgb(226, 91, 28);
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90%;
-  width: 70%;
+  height: 80%;
+  width: 50%;
   border: solid 2px rgb(179, 41, 17);
   border-radius: 8px;
-   background-color: #f9f9f9;
+  background-color: #f9f9f9;
 
 }
 .form-inputs{
@@ -30,10 +30,13 @@ color:rgb(226, 91, 28);
   height: 80%;
 }
 .form-input-fields{
+  display: flex;
+  gap: 15px;
+  width: 100%;
   border: solid 1px rgb(179, 41, 17);
   padding: 6px;
   border-radius: 8px;
-  margin: 40px 10px;
+  margin: 30px 10px;
   background-color: #eaf0d1
 }
 
@@ -64,6 +67,7 @@ color:rgb(226, 91, 28);
   width: 60%;
   height: 10%;
   font-size: 28px;
+  margin-top: 15px;
   margin-right: 8px;
   padding: 8px 12px;
   border: solid 1px rgb(226, 91, 28);
@@ -74,6 +78,7 @@ color:rgb(226, 91, 28);
   text-decoration: none;
 }
 input{
+  font-size: 20px;
   width:90%;
   height: 30px;
 }
@@ -89,4 +94,36 @@ input{
 .form-btn:hover{
   background-color: #fff; 
   color:rgb(226, 91, 28); ;
+}
+
+.form-drop{
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  gap: 15px;
+  width: 70%;
+  height: 10%;
+  border: solid 1px rgb(179, 41, 17);
+  padding: 6px;
+  border-radius: 8px;
+  margin: 20px 10px;
+  background-color: #eaf0d1;
+  font-size: 28px;
+}
+.form-drop-list{
+  display: flex;
+  width: 60%;
+  height: 80%;
+  font-size: 28px;
+  padding: 8px 12px;
+  border: solid 1px rgb(226, 91, 28);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(226, 91, 28);
+  color: #fff;
+  text-decoration: none;
+}
+
+.form-drop:hover{
+   box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
 }

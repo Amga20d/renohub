@@ -1,6 +1,6 @@
-import React from "react";
 import "../styles/LoginPage.scss";
 import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -57,7 +57,9 @@ const LoginPage = () => {
             <button type="submit" className="login-form-btn">
               Login
             </button>
-            <Link to="/">←Back</Link>
+            <button onClick={() => navigate("/")} className="login-form-btn">
+              ←Back
+            </button>
           </div>
         </div>
       </form>

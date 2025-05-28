@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Navbar.scss'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ const Navbar = () => {
         <span><Link to="/projects" className="nav-link-item">Projects</Link></span>
         <span><Link to="/contractors" className="nav-link-item">Contractors</Link></span>
         <span><Link to="/messages" className="nav-link-item">Messages</Link></span>
-        <span><Link to="/profile" className="nav-link-item">Profile</Link></span>
         <span><Link to="/profile" className="nav-link-item">Profile</Link></span>
         {user ? (
           <>

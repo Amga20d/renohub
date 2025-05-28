@@ -78,7 +78,7 @@ const DashboardPage = () => {
             {tab}
           </button>
         ))}
-        <button onClick={() => navigate('/projects/new')}> + Create New Project</button>
+        <button className='tab-btn' onClick={() => navigate('/projects/new')}> + Create New Project</button>
       </div>
 
       {filteredProjects.map(project => {
