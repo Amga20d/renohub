@@ -29,13 +29,9 @@ router.put('/:id/accept', async (req, res) => {
   }
 
   try {
-    // 1. Reject all bids and accept the selected one
     await bidsQueries.updateStatusByProject(projectId, bidId);
-
-    // 2. Update the project status
     const updatedProject = await projectQueries.updateStatus(projectId, 'Ongoing');
 
-    // 3. Send safe response
     return res.status(200).json({
       message: 'Bid accepted and project updated',
       project: updatedProject
