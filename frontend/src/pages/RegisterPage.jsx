@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const RegisterPage = () => {
@@ -9,6 +10,8 @@ const RegisterPage = () => {
     phone_number: "",
     role: "Homeowner"
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,7 @@ const RegisterPage = () => {
       const res = await axios.post("/api/users", formData);
       alert("Registration successful!");
       console.log(res.data);
+      navigate("/"); // ✅ Redirect to homepage
     } catch (err) {
       console.error("Registration failed:", err.response?.data || err.message);
       alert("Failed to register. Please try again.");
@@ -31,20 +35,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      backgroundColor: "#f2f2f2"
-    }}>
-      <form onSubmit={handleSubmit} style={{
-        backgroundColor: "#fff",
-        padding: "20px",
-        borderRadius: "5px",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-        width: "300px"
-      }}>
+    <div style={containerStyle}>
+      <form onSubmit={handleSubmit} style={formStyle}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Register</h2>
 
         <input
@@ -96,9 +88,28 @@ const RegisterPage = () => {
         </select>
 
         <button type="submit" style={buttonStyle}>Register</button>
+        <button type="button" onClick={() => navigate("/")} style={{ ...buttonStyle, backgroundColor: "#888", marginTop: "10px" }}>
+          Back to Homepage
+        </button>
       </form>
     </div>
   );
+};
+
+const containerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  backgroundColor: "#f2f2f2"
+};
+
+const formStyle = {
+  backgroundColor: "#fff",
+  padding: "20px",
+  borderRadius: "5px",
+  boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+  width: "300px"
 };
 
 const inputStyle = {
