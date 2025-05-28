@@ -13,7 +13,7 @@ const BidCard = ({ bid, users, onAccept, isAccepted, projectStatus }) => {
         <strong> Notes:</strong> {bid.notes}
         {projectStatus !== 'Bidding' && (
           <>
-            | <strong> Status:</strong> {bid.status}
+            | <strong>Status:</strong> {bid.status}
           </>
         )}
       </p>

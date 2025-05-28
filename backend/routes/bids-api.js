@@ -1,30 +1,49 @@
 const express = require('express');
 const router = express.Router();
 const bidsQueries = require('../db/queries/bids');
+const projectQueries = require('../db/queries/projects');
 
 // ✅ Create New Bid
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { user_id, project_id, amount, status, notes, created_at } = req.body;
 
   if (!user_id || !project_id || !amount || !status || !notes || !created_at) {
     return res.status(400).json({ message: 'All fields are required to create a bid' });
   }
 
-  const newBid = {
-    project_id,
-    amount,
-    status,
-    notes,
-    created_at
-  };
+  try {
+    const newBid = { project_id, amount, status, notes, created_at };
+    const bid = await bidsQueries.createBid(user_id, newBid);
+    res.status(201).json({ message: 'Bid Created!', bid });
+  } catch (err) {
+    res.status(500).json({ message: 'Error creating bid', error: err.message });
+  }
+});
 
-  bidsQueries.createBid(user_id, newBid)
-    .then(bid => {
-      res.status(201).json({ message: 'Bid Created!', bid });
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Error creating bid', error: err.message });
+// Accept a Bid and update others as Rejected
+router.put('/:id/accept', async (req, res) => {
+  const { bidId, projectId } = req.body;
+
+  if (!bidId || !projectId) {
+    return res.status(400).json({ message: 'bidId and projectId are required' });
+  }
+
+  try {
+    // 1. Reject all bids and accept the selected one
+    await bidsQueries.updateStatusByProject(projectId, bidId);
+
+    // 2. Update the project status
+    const updatedProject = await projectQueries.updateStatus(projectId, 'Ongoing');
+
+    // 3. Send safe response
+    return res.status(200).json({
+      message: 'Bid accepted and project updated',
+      project: updatedProject
     });
+  } catch (err) {
+    console.error('Error accepting bid:', err);
+    return res.status(500).json({ message: 'Error accepting bid', error: err.message });
+  }
 });
 
 // ✅ Read All Bids

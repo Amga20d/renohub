@@ -19,12 +19,11 @@ router.post('/', (req, res) => {
     description,
     budget,
     address,
-    status: "Bidding", // Correct status type
+    status: "Bidding",
     type,
     created_at: new Date()
   };
 
-  // Validate fields
   const validateValues = Object.values(newProject);
   for (const value of validateValues) {
     if (!value) {
@@ -101,7 +100,7 @@ router.put('/:id', (req, res) => {
     type
   } = req.body;
 
-  const user_id = req.body.user_id || 1; // Replace this with auth-based ID check
+  const user_id = req.body.user_id || 1;
 
   const updatedProject = {
     title,
@@ -128,18 +127,25 @@ router.put('/:id', (req, res) => {
       return projectQueries.updateProject(req.params.id, updatedProject);
     })
     .then((updatedProject) => {
-      res.status(200).json({ message: 'Project updated!', project: updatedProject });
+      if (updatedProject) {
+        return res
+          .status(200)
+          .json({ message: 'Project updated!', project: updatedProject });
+      }
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error updating project', error: err.message });
+      console.error(err);
+      if (!res.headersSent) {
+        res
+          .status(500)
+          .json({ message: 'Error updating project', error: err.message });
+      }
     });
 });
 
 // ✅ Delete a Project
 router.delete('/:id', (req, res) => {
-  const user_id = req.body.user_id || 1; // Replace with auth check
+  const user_id = req.body.user_id || 1;
 
   projectQueries
     .getProjectById(req.params.id)

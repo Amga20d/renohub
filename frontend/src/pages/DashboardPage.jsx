@@ -38,14 +38,23 @@ const DashboardPage = () => {
     fetchData();
   }, []);
 
-  const handleAcceptBid = (bidId, projectId) => {
-    setBids(prev =>
-      prev.map(b =>
-        b.project_id === projectId
-          ? { ...b, status: b.id === bidId ? 'Accepted' : 'Rejected' }
-          : b
-      )
-    );
+  const handleAcceptBid = async (bidId, projectId) => {
+    try {
+      await axios.put(`/api/bids/${bidId}/accept`, {
+        bidId,
+        projectId
+      });
+
+      const [projectsRes, bidsRes] = await Promise.all([
+        axios.get('/api/projects'),
+        axios.get('/api/bids'),
+      ]);
+      setProjects(projectsRes.data.projects);
+      setBids(bidsRes.data.bids);
+    } catch (err) {
+      console.error('Error accepting bid:', err);
+      alert('Failed to accept bid.');
+    }
   };
 
   const filteredProjects = projects.filter(p => p.status === selectedTab);
@@ -55,7 +64,12 @@ const DashboardPage = () => {
     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
       <Navbar />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: '20px 0'
+      }}>
         <h1 style={{ margin: 0 }}>Dashboard</h1>
         <button
           onClick={() => navigate('/projects/new')}
@@ -72,7 +86,12 @@ const DashboardPage = () => {
         </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '10px',
+        marginBottom: '20px'
+      }}>
         {['Bidding', 'Ongoing', 'Completed'].map(tab => (
           <button
             key={tab}
@@ -91,7 +110,7 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      {filteredProjects.map((project) => {
+      {filteredProjects.map(project => {
         const projectBids = filteredBids.filter(b => b.project_id === project.id);
         const acceptedBid = getAcceptedBid(bids, project.id);
 
@@ -107,7 +126,11 @@ const DashboardPage = () => {
         }
 
         return (
-          <div key={project.id} style={{ border: '1px solid #ccc', padding: '15px', marginBottom: '20px' }}>
+          <div key={project.id} style={{
+            border: '1px solid #ccc',
+            padding: '15px',
+            marginBottom: '20px'
+          }}>
             <ProjectCard project={project} bids={[]} users={users} />
             <h4>Bids:</h4>
             <BidList
