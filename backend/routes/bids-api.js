@@ -2,151 +2,132 @@ const express = require('express');
 const router = express.Router();
 const bidsQueries = require('../db/queries/bids');
 
-// Create New Bid
-router.post('/', (req, res) => { 
-  const {amount, notes} = req.body;
+// ✅ Create New Bid
+router.post('/', (req, res) => {
+  const { user_id, project_id, amount, status, notes, created_at } = req.body;
 
-  const user_id = 1;
-  const newBid = {
-    project_id: 1,
-    amount: amount,
-    status: true,
-    notes: notes,
-    created_at: new Date()
-  };
-    
-   const validateValues = Object.values(newBid);
-  for (const value of validateValues){
-    if (!value){
-      return res
-      .status(400)
-      .json({ message: 'All properties must be provided to create a payment' });
-    }
+  if (!user_id || !project_id || !amount || !status || !notes || !created_at) {
+    return res.status(400).json({ message: 'All fields are required to create a bid' });
   }
+
+  const newBid = {
+    project_id,
+    amount,
+    status,
+    notes,
+    created_at
+  };
+
   bidsQueries.createBid(user_id, newBid)
-  .then((bid) => {
-    res.status(201).json({message: 'Bid Created!', bid})
-  })
-  .catch((err) => {
-    res
-    .status(500)
-    .json({message:'Error creating Bid', error: err.message});
-  });
+    .then(bid => {
+      res.status(201).json({ message: 'Bid Created!', bid });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error creating bid', error: err.message });
+    });
 });
 
-// Read All bids
+// ✅ Read All Bids
 router.get('/', (req, res) => {
-  bidsQueries
-  .getAllBids()
-  .then((bids) => {
-    if (!bids) {
-      return res.status(400).json({ message: 'bid not found!' });
-    }
-    res.status(201).json({ message: 'Heres all the bids!', bids })
-  })
-  .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading bid', error: err.message });
+  bidsQueries.getAllBids()
+    .then(bids => {
+      if (!bids || bids.length === 0) {
+        return res.status(404).json({ message: 'No bids found' });
+      }
+      res.status(200).json({ message: 'Here are all the bids', bids });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error reading bids', error: err.message });
     });
-})
+});
 
-// Read one by id
+// ✅ Read One Bid by ID
 router.get('/:id', (req, res) => {
-  bidsQueries
-  .getBidById(req.params.id)
-  .then((bid) => {
-    if (!bid) {
-      return res.status(400).json({ message: 'bid not found!' });
-    }
-    res.status(201).json({ message: 'Heres the bid!', bid })
-  })
-  .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading bid', error: err.message });
+  bidsQueries.getBidById(req.params.id)
+    .then(bid => {
+      if (!bid) {
+        return res.status(404).json({ message: 'Bid not found' });
+      }
+      res.status(200).json({ message: 'Here is the bid', bid });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error reading bid', error: err.message });
     });
-})
+});
 
-// Read All bids from user
+// ✅ Read All Bids from a User
 router.get('/user/:id', (req, res) => {
-  bidsQueries
-  .getBidsByUserId(req.params.id)
-  .then((bids) => {
-    if (!bids) {
-      return res.status(400).json({ message: 'bid not found!' });
-    }
-    res.status(201).json({ message: 'Heres all the bids!', bids })
-  })
-  .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading bid', error: err.message });
+  bidsQueries.getBidsByUserId(req.params.id)
+    .then(bids => {
+      if (!bids || bids.length === 0) {
+        return res.status(404).json({ message: 'No bids found for this user' });
+      }
+      res.status(200).json({ message: 'Here are the user\'s bids', bids });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error reading user bids', error: err.message });
     });
-})
+});
 
-// Update a bid
+// ✅ Update a Bid
 router.put('/:id', (req, res) => {
-  const {amount, notes} = req.body;
-  const user_id = 2;
+  const { user_id, amount, notes, status } = req.body;
+
+  if (!user_id || !amount || !notes || !status) {
+    return res.status(400).json({ message: 'All fields are required to update a bid' });
+  }
+
   const updatedBid = {
-    project_id: 1,
-    amount: amount,
-    notes: notes,
-    created_at :'2025-07-29 07:35:40'
+    amount,
+    notes,
+    status
   };
-bidsQueries
-.getBidById(req.params.id)
-.then((bid) => {
-  if (!bid) {
-    return res.status(404).json({ message: 'Bid not found!' });
-  }
 
-  console.log(bid)
-  const bidBelongsToUser = bid.user_id === user_id;
-  if (!bidBelongsToUser) {
-     return res
-          .status(401)
-          .json({ message: 'Bid does not belongs to you!' });
-  }
-  return bidsQueries.updateBid(req.params.id, updatedBid)
-})
- .then((updatedBid) => {
-      res.status(201).json({ message: 'Bid updated!', note: updatedBid });
+  bidsQueries.getBidById(req.params.id)
+    .then(bid => {
+      if (!bid) {
+        return res.status(404).json({ message: 'Bid not found' });
+      }
+
+      if (bid.user_id !== user_id) {
+        return res.status(401).json({ message: 'Unauthorized to update this bid' });
+      }
+
+      return bidsQueries.updateBid(req.params.id, updatedBid);
     })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error updating Bid', error: err.message });
+    .then(updated => {
+      res.status(200).json({ message: 'Bid updated', bid: updated });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error updating bid', error: err.message });
     });
-}); 
+});
 
-// Remove a Bid
+// ✅ Delete a Bid
 router.delete('/:id', (req, res) => {
-const user_id = 2;
-bidsQueries
-.getBidById(req.params.id)
-.then((bid) => {
-  if (!bid) {
-    return res.status(404).json({ message: 'Bid not found!' });
+  const { user_id } = req.body;
+
+  if (!user_id) {
+    return res.status(400).json({ message: 'User ID required to delete bid' });
   }
 
-  console.log(bid)
-  const bidBelongsToUser = bid.user_id === user_id;
-  if (!bidBelongsToUser) {
-     return res
-          .status(401)
-          .json({ message: 'Bid does not belongs to you!' });
-  }
-  return bidsQueries.removeBid(req.params.id)
-})
- .then(() => {
-      res.status(204).json();
+  bidsQueries.getBidById(req.params.id)
+    .then(bid => {
+      if (!bid) {
+        return res.status(404).json({ message: 'Bid not found' });
+      }
+
+      if (bid.user_id !== user_id) {
+        return res.status(401).json({ message: 'Unauthorized to delete this bid' });
+      }
+
+      return bidsQueries.removeBid(req.params.id);
     })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error deleting bid', error: err.message });
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error deleting bid', error: err.message });
     });
 });
 

@@ -1,177 +1,144 @@
-/* eslint-disable camelcase */
-/*
- * All routes for User Data are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /api/users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
+// routes/users.js
 
 const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const salt = bcrypt.genSaltSync(10);
+const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key';
 
-// Create New user
+// ✅ Register new user
 router.post('/', (req, res) => {
-  const {
-    name,
-    email,
-    password
-    // phone_number, // uncomment when fields added
-    // role
-  } = req.body;
+  const { name, email, password, phone_number, role } = req.body;
+
+  if (!name || !email || !password || !phone_number || !role) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
   const hash = bcrypt.hashSync(password, salt);
 
-
   const newUser = {
-    name: name,
-    email: email,
-    password_hash :hash,
-    phone_number : '1234567890',
-    role : 'Homeowner',
+    name,
+    email,
+    password_hash: hash,
+    phone_number,
+    role,
     verification_status: true,
     created_at: new Date()
   };
-  console.log(newUser);
-    const validateValues = Object.values(newUser);
-  for (const value of validateValues){
-    if (!value){
-      return res
-      .status(400)
-      .json({ message: 'All properties must be provided to create a payment' });
-    }
-  }
+
   userQueries.register(newUser)
-  .then((user) => {
-    res.status(201).json({message: 'User Created!', user})
-  })
-  .catch((err) => {
-    res
-    .status(500)
-    .json({message:'Error creating User', error: err.message});
-  });
+    .then(user => {
+      res.status(201).json({ message: 'User created successfully', user });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error creating user', error: err.message });
+    });
 });
 
-// Read All users
-router.get('/', (req, res) => {
-  userQueries
-  .getAllUsers()
-  .then((users) => {
-    if (!users) {
-      return res.status(400).json({ message: 'users not found!' });
-    }
-    res.status(201).json({ message: 'Heres all the users!', users })
-  })
-  .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading users', error: err.message });
-    });
-})
-
-// get user by email (Login)
+// ✅ Login with email + password
 router.post('/login', (req, res) => {
-  const {email, password} = req.body;
-  userQueries
-  .getUserByEmail(email)
-  .then((user) => {
-    if (!user) {
-      return res.status(400).json({ message: 'users not found!' });
-    }
-    if(!bcrypt.compareSync(password,user.password_hash)) {
-      return res.status(401).json({message: 'Incorrect Password. Please Try Again'})
-    }
-    console.log(email);
-    res.status(201).json({message: 'heres the user!', user});
-  })
-  .catch((err) => {
-    res
-    .status(500)
-    .json({message: 'Error reading the user', error: err.message});
-  })
-})
+  const { email, password } = req.body;
 
-// Read one user by user_id
-router.get('/:id', (req, res) => {
-  userQueries
-  .getUserById(req.params.user_id)
-  .then((user) => {
-    if (!user) {
-      return res.status(400).json({ message: 'User not found!' });
-    }
-    res.status(201).json({ message: 'Heres the user!', user })
-  })
-  .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error reading user', error: err.message });
+  userQueries.getUserByEmail(email)
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({ message: 'User not found' });
+      }
+
+      const isPasswordValid = bcrypt.compareSync(password, user.password_hash);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Invalid password' });
+      }
+
+      const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+        expiresIn: '2h'
+      });
+
+      res.status(200).json({
+        message: 'Login successful',
+        user: { id: user.id, name: user.name, email: user.email, role: user.role },
+        token
+      });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error logging in', error: err.message });
     });
-})
+});
 
-// Update a User
+// ✅ Get all users
+router.get('/', (req, res) => {
+  userQueries.getAllUsers()
+    .then(users => res.status(200).json({ users }))
+    .catch(err => res.status(500).json({ message: 'Error fetching users', error: err.message }));
+});
+
+// ✅ Get user by ID
+router.get('/:id', (req, res) => {
+  userQueries.getUserById(req.params.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json({ user });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error fetching user', error: err.message });
+    });
+});
+
+// ✅ Update user
 router.put('/:id', (req, res) => {
-  const {
+  const { name, email, phone_number, role } = req.body;
+
+  const updatedUser = {
     name,
     email,
     phone_number,
-    role
-  } = req.body
-  const updatedUser = {
-    name: name,
-    email: email,
-    password_hash :'pass123',
-    phone_number : phone_number,
-    role : role,
-    verification_status: true,
+    role,
+    password_hash: 'unchanged',
+    verification_status: true
   };
 
-  for (const field in updatedUser){
-    if (!updatedUser[field]){
-      return res
-      .status(400)
-      .json({ message: 'All properties must be provided to create a account' });
+  for (const field in updatedUser) {
+    if (!updatedUser[field]) {
+      return res.status(400).json({ message: 'All fields are required' });
     }
   }
-userQueries
-.getUserById(req.params.id)
-.then((user) => {
-  if (!user) {
-    return res.status(404).json({ message: 'User not found!' });
-  }
 
-  return userQueries.updateUser(req.params.id, updatedUser)
-})
- .then((updatedUser) => {
-      res.status(201).json({ message: 'User updated!', note: updatedUser });
+  userQueries.getUserById(req.params.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      return userQueries.updateUser(req.params.id, updatedUser);
     })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ message: 'Error updating user', error: err.message });
+    .then(updated => {
+      res.status(200).json({ message: 'User updated', user: updated });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error updating user', error: err.message });
     });
-}); 
+});
 
- // Remove a user
- router.delete('/:id', (req, res) => {
- userQueries
- .getUserById(req.params.id)
- .then((user) => {
-   if (!user) {
-     return res.status(404).json({ message: 'User not found!' });
-   } 
-   console.log(user)
-   return userQueries.removeUser(req.params.id)
- })
-  .then(() => {
-       res.status(204).json();
-     })
-     .catch((err) => {
-       res
-         .status(500)
-         .json({ message: 'Error deleting user', error: err.message });
-     });
- });
+// ✅ Delete user
+router.delete('/:id', (req, res) => {
+  userQueries.getUserById(req.params.id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      return userQueries.removeUser(req.params.id);
+    })
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error deleting user', error: err.message });
+    });
+});
 
 module.exports = router;

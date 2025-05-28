@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ProjectCard from '../components/ProjectCard';
 import ProgressBar from '../components/ProgressBar';
@@ -15,6 +16,8 @@ const DashboardPage = () => {
   const [projects, setProjects] = useState([]);
   const [bids, setBids] = useState([]);
   const [users, setUsers] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +54,23 @@ const DashboardPage = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
       <Navbar />
-      <h1 style={{ textAlign: 'center' }}>Dashboard</h1>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0' }}>
+        <h1 style={{ margin: 0 }}>Dashboard</h1>
+        <button
+          onClick={() => navigate('/projects/new')}
+          style={{
+            padding: '10px 15px',
+            backgroundColor: '#28a745',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          + Create New Project
+        </button>
+      </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
         {['Bidding', 'Ongoing', 'Completed'].map(tab => (

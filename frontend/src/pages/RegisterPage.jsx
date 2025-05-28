@@ -1,78 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 const RegisterPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone_number: "",
+    role: "Homeowner"
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/users", formData);
+      alert("Registration successful!");
+      console.log(res.data);
+    } catch (err) {
+      console.error("Registration failed:", err.response?.data || err.message);
+      alert("Failed to register. Please try again.");
+    }
+  };
+
   return (
-    <div style={{ 
-      display: "flex", 
-      justifyContent: "center", 
-      alignItems: "center", 
-      height: "100vh", 
-      backgroundColor: "#f2f2f2" 
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      backgroundColor: "#f2f2f2"
     }}>
-      <form style={{ 
-        backgroundColor: "#fff", 
-        padding: "20px", 
-        borderRadius: "5px", 
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" 
+      <form onSubmit={handleSubmit} style={{
+        backgroundColor: "#fff",
+        padding: "20px",
+        borderRadius: "5px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        width: "300px"
       }}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Register</h2>
-        
-        <div style={{ marginBottom: "10px" }}>
-          <label>Name: </label>
-          <input 
-            type="text" 
-            style={{ 
-              width: "100%", 
-              padding: "8px", 
-              borderRadius: "3px", 
-              border: "1px solid #ccc" 
-            }} 
-          />
-        </div>
-        
-        <div style={{ marginBottom: "10px" }}>
-          <label>Email: </label>
-          <input 
-            type="email" 
-            style={{ 
-              width: "100%", 
-              padding: "8px", 
-              borderRadius: "3px", 
-              border: "1px solid #ccc" 
-            }} 
-          />
-        </div>
-        
-        <div style={{ marginBottom: "20px" }}>
-          <label>Password: </label>
-          <input 
-            type="password" 
-            style={{ 
-              width: "100%", 
-              padding: "8px", 
-              borderRadius: "3px", 
-              border: "1px solid #ccc" 
-            }} 
-          />
-        </div>
-        
-        <button 
-          type="submit" 
-          style={{ 
-            width: "100%", 
-            padding: "10px", 
-            backgroundColor: "#4CAF50", 
-            color: "#fff", 
-            border: "none", 
-            borderRadius: "3px", 
-            cursor: "pointer" 
-          }}
+
+        <input
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        />
+
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        />
+
+        <input
+          name="phone_number"
+          placeholder="Phone Number"
+          value={formData.phone_number}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        />
+
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          style={{ ...inputStyle, cursor: "pointer" }}
         >
-          Register
-        </button>
+          <option value="Homeowner">Homeowner</option>
+          <option value="Contractor">Contractor</option>
+        </select>
+
+        <button type="submit" style={buttonStyle}>Register</button>
       </form>
     </div>
   );
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "8px",
+  marginBottom: "10px",
+  borderRadius: "3px",
+  border: "1px solid #ccc",
+  boxSizing: "border-box"
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "10px",
+  backgroundColor: "#4CAF50",
+  color: "#fff",
+  border: "none",
+  borderRadius: "3px",
+  cursor: "pointer"
 };
 
 export default RegisterPage;
