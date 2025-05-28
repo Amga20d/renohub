@@ -1,0 +1,42 @@
+.pay-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.pay-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 40%;
+  width: 30%;
+  border: solid 2px rgb(179, 41, 17);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.pay-inputs{
+display: flex;
+flex-direction: column;
+font-size: 24px;
+}
+
+.pay-input-field{
+
+}
+
+.pay-btn{
+  flex: 1;
+  margin-top: 10px;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: solid 1px rgb(226, 91, 28);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(226, 91, 28);
+  color: #fff;
+}

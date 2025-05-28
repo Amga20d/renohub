@@ -1,27 +1,23 @@
 import React, { Profiler } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/ProfilePage.scss";
 import { getDaysAgo } from "../helpers/utils";
+import { useParams} from "react-router-dom";
 
 // Mock Data - Remove once connected
-const profile = {
-  name: "John Doe",
-  email: "JohnD@email.com",
-  phone_number: "555 777 855",
-  role: "Homeowner",
-  status: true,
-  created_at: "2025-03-15 10:30:30",
-};
+
 
 const ProfilePage = (props) => {
-  // const {
-  //   name,
-  //   email,
-  //   phone_number,
-  //   role,
-  //  status,
-  //   created_at
-  // } = props; Uncomment when connected
+  const { id } = useParams();
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${id}`)
+      .then((res) => setProfile(res.data.user))
+      .catch((err) => console.error("Error fetching project:", err));
+  }, [id]);
 
   return (
     <div className="page-profile">

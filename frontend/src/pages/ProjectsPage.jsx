@@ -55,13 +55,7 @@ function ProjectsPage() {
       <div className="cards-container-project">
         {filteredProjects.map((project) => (
           <Card className="card-project" key={project.id}>
-            <div>
-              <Card.Img
-              variant="top"
-              className="card-img-project"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVg0ALmeHYkiOh8LiA1oJrJM9B6mXhtPBIeg&s"
-            />
-            </div>
+
             <Card.Body className="card-body-project">
               <Card.Title><h3>{project.title}</h3></Card.Title>
               <Card.Text className="card-text-project">
