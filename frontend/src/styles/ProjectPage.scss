@@ -1,0 +1,81 @@
+.page-project{
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top:4%;
+  padding: 10px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn, .filter-btn{
+  flex: 1;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: solid 1px rgb(226, 91, 28);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(226, 91, 28);
+  color: #fff;
+}
+
+.filter-container{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cards-container-project{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+.card-project{
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  background-color: #f9f9f9;
+}
+.card-img-project{
+  width: 100%;
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-text{
+  display: flex;
+  flex: 1;
+}
+
+.card-info-project {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+}
+
+.card-btn-group{
+  display: flex;
+  justify-content:space-between;
+}
+
+span {
+  font-size: 20x;
+}
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+  color: rgb(226, 91, 28);
+}
+
+
+.btn {
+  transition-duration: 0.4s;
+}
+
+.btn:hover{
+  background-color: #fff; 
+  color:rgb(226, 91, 28); ;
+}

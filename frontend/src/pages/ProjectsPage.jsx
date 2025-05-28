@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import axios from 'axios';
 import { getDaysAgo } from '../helpers/utils';
 import { Link } from 'react-router-dom';
+import "../styles/ProjectPage.scss";
+import Card from "react-bootstrap/Card";
 
 function ProjectsPage() {
   const [filter, setFilter] = useState('All');
@@ -15,8 +17,15 @@ function ProjectsPage() {
   }, []);
 
   const projectTypes = [
-    'All', 'Roofing', 'Siding', 'Framing', 'Painting',
-    'Flooring', 'HVAC', 'Plumbing', 'Electrical'
+    "All",
+    "Roofing",
+    "Siding",
+    "Framing",
+    "Painting",
+    "Flooring",
+    "HVAC",
+    "Plumbing",
+    "Electrical",
   ];
 
   const filteredProjects = filter === 'All'
@@ -24,57 +33,67 @@ function ProjectsPage() {
     : projects.filter(project => project.type === filter);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div className="page-project">
       <Navbar />
-      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Browse Projects</h1>
+      <h1>Browse Projects</h1>
 
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        {projectTypes.map(type => (
+      <div className="filter-container">
+        {projectTypes.map((type) => (
           <button
             key={type}
             onClick={() => setFilter(type)}
+            className="filter-btn"
             style={{
-              marginRight: '8px',
-              padding: '8px 12px',
-              border: 'none',
-              borderRadius: '4px',
-              backgroundColor: filter === type ? '#0056b3' : '#007BFF',
-              color: '#fff',
-              cursor: 'pointer'
+              backgroundColor:
+                filter === type ? "rgb(179, 41, 17)" : "rgb(226, 91, 28)"
             }}
           >
             {type}
           </button>
         ))}
       </div>
-
-      {filteredProjects.map(project => (
-        <div key={project.id} style={{
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-          padding: '16px',
-          marginBottom: '16px',
-          backgroundColor: '#f9f9f9'
-        }}>
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
-          <p><strong>Budget:</strong> {project.budget}</p>
-          <p style={{ fontStyle: 'italic', color: '#555' }}>
-            Posted: {getDaysAgo(project.created_at)}
-          </p>
-          <div>
-            <Link to={`/projects/${project.id}`}>
-              <button style={{ backgroundColor: '#007BFF', color: '#fff', marginRight: '8px' }}>View</button>
-            </Link>
-            <Link to={`/messages/${project.user_id}`}>
-              <button style={{ backgroundColor: '#FFC107', color: '#fff', marginRight: '8px' }}>Message Homeowner</button>
-            </Link>
-            <Link to={`/projects/${project.id}/bids`}>
-              <button style={{ backgroundColor: '#28A745', color: '#fff' }}>Bid</button>
-            </Link>
-          </div>
-        </div>
-      ))}
+      <div className="cards-container-project">
+        {filteredProjects.map((project) => (
+          <Card className="card-project" key={project.id}>
+            <div>
+              <Card.Img
+              variant="top"
+              className="card-img-project"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVg0ALmeHYkiOh8LiA1oJrJM9B6mXhtPBIeg&s"
+            />
+            </div>
+            <Card.Body className="card-body-project">
+              <Card.Title><h3>{project.title}</h3></Card.Title>
+              <Card.Text className="card-text-project">
+                <span>{project.description}</span>
+              </Card.Text>
+            </Card.Body>
+            <div className="card-info-project">
+              <span>
+                <strong>Budget: </strong>
+                {project.budget}
+              </span>
+              <span>
+                <strong>Posted: </strong>
+                {getDaysAgo(project.created_at)}
+              </span>
+            </div>
+            <div className="card-btn-group">
+              <div>
+                <Link to={`/projects/${project.id}`}>
+                  <button className="btn">View</button>
+                </Link>
+                <Link to={`/projects/${project.id}/bids`}>
+                  <button className="btn">Bid</button>
+                </Link>
+              </div>
+              <Link to={`/messages/${project.user_id}`}>
+                <button className="btn">Message</button>
+              </Link>
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import MessagePreview from '../components/MessagePreview';
 import axios from 'axios';
+import "../styles/MessagePage.scss";
 
 const MessagesPage = () => {
   const [users, setUsers] = useState([]);
@@ -31,13 +32,20 @@ const MessagesPage = () => {
   });
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div className="page">
+      <h1>Messages</h1>
       <Navbar />
-      {previews.map(({ recipient, lastMessage }) => (
-        <MessagePreview key={recipient.id} recipient={recipient} lastMessage={lastMessage} />
-      ))}
+        {previews.map(({ recipient, lastMessage }) => (
+          <MessagePreview
+            key={recipient.id}
+            recipient={recipient}
+            lastMessage={lastMessage}
+          />
+        ))}
     </div>
   );
 };
 
 export default MessagesPage;
+
+

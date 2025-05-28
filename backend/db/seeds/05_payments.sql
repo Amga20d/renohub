@@ -1,4 +1,4 @@
-INSERT INTO payments (id, bid_id, status, created_at) VALUES
+INSERT INTO Payments (id, bid_id, status, created_at) VALUES
 (1, 4, FALSE, '2024-03-03 22:36:00'),
 (2, 2, FALSE, '2024-03-05 02:52:00'),
 (3, 1, FALSE, '2024-03-05 05:57:00'),

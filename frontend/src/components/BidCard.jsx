@@ -1,6 +1,7 @@
 import React from 'react';
 import { getUserName } from '../helpers/utils';
 import { Link } from 'react-router-dom';
+import '../styles/BidCard.scss';
 
 const BidCard = ({ bid, users, onAccept, isAccepted, projectStatus }) => {
   const contractor = getUserName(bid.user_id, users);
@@ -20,7 +21,7 @@ const BidCard = ({ bid, users, onAccept, isAccepted, projectStatus }) => {
 
       <div style={{ display: 'flex', gap: '10px' }}>
         <Link to={`/messages/${bid.user_id}`}>
-          <button>Message Contractor</button>
+          <button className='btn-bid'>Message Contractor</button>
         </Link>
 
         {bid.status === 'Sent' && projectStatus === 'Bidding' && (

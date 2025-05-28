@@ -1,6 +1,7 @@
-import React from 'react';
-import { getUserName, getBidsByProject } from '../helpers/utils';
-import BidList from './BidList';
+import React from "react";
+import { getUserName, getBidsByProject } from "../helpers/utils";
+import BidList from "./BidList";
+import '../styles/ProjectCard.scss'
 
 const ProjectCard = ({ project, bids, users }) => {
   const clientName = getUserName(project.user_id, users);
@@ -9,9 +10,17 @@ const ProjectCard = ({ project, bids, users }) => {
   return (
     <div style={styles.card}>
       <h2>{project.title}</h2>
-      <p><strong>Client:</strong> {clientName}</p>
-      <p><strong>Type:</strong> {project.type}</p>
-      <p><strong>Address:</strong> {project.address}</p>
+      <div className="card-info">
+        <p>
+          <strong>Client:</strong> {clientName}
+        </p>
+        <p>
+          <strong>Type:</strong> {project.type}
+        </p>
+        <p>
+          <strong>Address:</strong> {project.address}
+        </p>
+      </div>
       {projectBids.length > 0 && (
         <>
           <h4>Bids:</h4>
@@ -24,11 +33,11 @@ const ProjectCard = ({ project, bids, users }) => {
 
 const styles = {
   card: {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '15px',
-    marginBottom: '20px'
-  }
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "15px",
+    marginBottom: "20px",
+  },
 };
 
 export default ProjectCard;

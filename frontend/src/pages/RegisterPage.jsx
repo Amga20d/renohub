@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "../styles/RegisterPage.scss";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -35,49 +37,56 @@ const RegisterPage = () => {
   };
 
   return (
-    <div style={containerStyle}>
-      <form onSubmit={handleSubmit} style={formStyle}>
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Register</h2>
+    <div className="register-body">
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        <div className="form-inputs">
+          <div className="form-input-fields">
+            <label>Name: </label>
+            <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            />
+          </div>
+          <div className="form-input-fields">
+            <label>Email: </label>
+            <input
+            type="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            />
+          </div>
+          <div className="form-input-fields">
+            <label>Password: </label>
+            <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            />
+          </div>
+          <div className="form-input-fields">
+            <label>Phone: </label>
+            <input
+            name="phone_number"
+            placeholder="Phone Number"
+            value={formData.phone_number}
+            onChange={handleChange}
+            required
+            />
+          </div>
 
-        <input
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
-
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
-
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
-
-        <input
-          name="phone_number"
-          placeholder="Phone Number"
-          value={formData.phone_number}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
-
-        <select
+           <select
           name="role"
           value={formData.role}
           onChange={handleChange}
@@ -87,48 +96,19 @@ const RegisterPage = () => {
           <option value="Contractor">Contractor</option>
         </select>
 
-        <button type="submit" style={buttonStyle}>Register</button>
-        <button type="button" onClick={() => navigate("/")} style={{ ...buttonStyle, backgroundColor: "#888", marginTop: "10px" }}>
+          <div className="input-role"></div>
+          <div className="login-btn-group">
+          <button type="submit" className="form-btn">Register</button>
+            <Link to="/" >←Back</Link>
+
+            {/* <button type="button" onClick={() => navigate("/")} style={{ ...buttonStyle, backgroundColor: "#888", marginTop: "10px" }}>
           Back to Homepage
-        </button>
+        </button> */}
+            
+            
+          </div>
+        </div>
       </form>
     </div>
   );
 };
-
-const containerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  backgroundColor: "#f2f2f2"
-};
-
-const formStyle = {
-  backgroundColor: "#fff",
-  padding: "20px",
-  borderRadius: "5px",
-  boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-  width: "300px"
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "8px",
-  marginBottom: "10px",
-  borderRadius: "3px",
-  border: "1px solid #ccc",
-  boxSizing: "border-box"
-};
-
-const buttonStyle = {
-  width: "100%",
-  padding: "10px",
-  backgroundColor: "#4CAF50",
-  color: "#fff",
-  border: "none",
-  borderRadius: "3px",
-  cursor: "pointer"
-};
-
-export default RegisterPage;

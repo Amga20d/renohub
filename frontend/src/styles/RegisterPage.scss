@@ -1,0 +1,92 @@
+.register-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+  text-decoration: underline;
+  font-size: 40px;
+color:rgb(226, 91, 28);
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90%;
+  width: 70%;
+  border: solid 2px rgb(179, 41, 17);
+  border-radius: 8px;
+   background-color: #f9f9f9;
+
+}
+.form-inputs{
+  font-size: 28px;
+  width: 80%;
+  height: 80%;
+}
+.form-input-fields{
+  border: solid 1px rgb(179, 41, 17);
+  padding: 6px;
+  border-radius: 8px;
+  margin: 40px 10px;
+  background-color: #eaf0d1
+}
+
+.form-input-fields:hover{
+  box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
+}
+
+.btn-back{
+  position: absolute;
+  top:0;
+  left: 0;
+  font-size: 28px;
+  margin-top: 16px;
+  margin-left: 16px;
+  padding: 8px 12px;
+  border: solid 1px rgb(226, 91, 28);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(226, 91, 28);
+  color: #fff;
+  text-decoration: none;
+
+}
+.form-btn{
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  width: 60%;
+  height: 10%;
+  font-size: 28px;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: solid 1px rgb(226, 91, 28);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(226, 91, 28);
+  color: #fff;
+  text-decoration: none;
+}
+input{
+  width:90%;
+  height: 30px;
+}
+.form-btn{
+  transition-duration: 0.4s;
+}
+.login-btn-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-btn:hover{
+  background-color: #fff; 
+  color:rgb(226, 91, 28); ;
+}

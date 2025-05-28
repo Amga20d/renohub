@@ -12,25 +12,25 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#2c3e50', padding: '10px 20px', color: '#ecf0f1' }}>
-      <div>
-        <Link to="/" style={{ color: '#ecf0f1', textDecoration: 'none', fontWeight: 'bold' }}>
-          RenoHub
-        </Link>
+     <nav className="nav-bar">
+      <div className="nav-logo">
+        <Link to="/" className="nav-link-item">RenoHub <i class="fa-solid fa-house-chimney"></i></Link>
       </div>
-      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-        <Link to="/dashboard" style={{ color: '#ecf0f1' }}>Dashboard</Link>
-        <Link to="/projects" style={{ color: '#ecf0f1' }}>Projects</Link>
-        <Link to="/contractors" style={{ color: '#ecf0f1' }}>Contractors</Link>
-        <Link to="/messages" style={{ color: '#ecf0f1' }}>Messages</Link>
-        <Link to="/profile" style={{ color: '#ecf0f1' }}>Profile</Link>
+      <div className="nav-link-group">
+        <span><Link to="/dashboard" className="nav-link-item">Dashboard</Link></span>
+        <span><Link to="/projects" className="nav-link-item">Projects</Link></span>
+        <span><Link to="/contractors" className="nav-link-item">Contractors</Link></span>
+        <span><Link to="/messages" className="nav-link-item">Messages</Link></span>
+        <span><Link to="/profile" className="nav-link-item">Profile</Link></span>
+        <span><Link to="/profile" className="nav-link-item">Profile</Link></span>
         {user ? (
           <>
-            <span>Welcome, {user.name}</span>
-            <button onClick={handleLogout} style={{ background: "transparent", color: "#ecf0f1", border: "none", cursor: "pointer" }}>Sign Out</button>
+            <span className='nav-link-item'>Welcome, {user.name}</span>
+            <span><button onClick={handleLogout}>Sign Out</button></span>
+            {/* { background: "transparent", color: "#ecf0f1", border: "none", cursor: "pointer" } */}
           </>
         ) : (
-          <Link to="/login" style={{ color: '#ecf0f1' }}>Login</Link>
+          <span><Link to="/login" className='nav-link-item'>Login</Link></span>
         )}
       </div>
     </nav>

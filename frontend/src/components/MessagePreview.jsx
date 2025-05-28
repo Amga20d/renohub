@@ -1,23 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/MessagePreview.scss'
 
 const MessagePreview = ({ recipient, lastMessage }) => {
   if (!recipient || !lastMessage) return null;
 
   return (
-    <Link to={`/messages/${recipient.id}`} style={{ textDecoration: 'none' }}>
-      <div style={{
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        padding: '10px',
-        marginBottom: '10px',
-        backgroundColor: '#f9f9f9',
-        color: '#000'
-      }}>
-        <div style={{ fontWeight: 'bold' }}>{recipient.name}</div>
-        <div style={{ color: '#555' }}>{lastMessage.content}</div>
-        <div style={{ fontSize: '12px', color: '#888', textAlign: 'right' }}>{new Date(lastMessage.created_at).toLocaleTimeString()}</div>
-      </div>
+    
+      <Link to={`/messages/${recipient.id}`} className='card-message'>   
+        <div className='card-info-message name'>{recipient.name}</div>
+        <div className='card-info-message text'>{lastMessage.content}</div>
+        <div className='card-info-message created'><em>{new Date(lastMessage.created_at).toLocaleTimeString()}</em></div>
     </Link>
   );
 };
